@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="transaction.list">交易列表</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title" i18n="transaction.list">交易列表</li>
+                </ol>
+            </div>
+
+            <div class="row blockList">
+                <div class="blockList-inner">
+                    #if(totalpage > 1)
+					<div class="blockList-cal">
+						#@paginate(currpage, totalpage, "/transaction?page=")
+                    </div>
+                    #end
+                    <div class="indexBlockList">
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center" i18n="transaction.type">交易类型</th>
+								<th class="text-center" i18n="delegate.blockHeight">区块高度</th>
+                                <th class="text-center" i18n="transaction.sender">发送者</th>
+                                <th class="text-center" i18n="transaction.receiver">接收者</th>
+                                <th class="text-center" i18n="transaction.amount">金额</th>
+                            </tr>
+							#for(order : transactions)
+                                <tr data-id="479937">
+                                    <td class="text-center">#(order.desc)
+                                    </td>
+                                    <td class="text-center">                                        
+                                        <div class="cell-blockid indexGray"><a href="/block/detail?height=#(order.blockHeight)#(append)">#(order.blockHeight)</a></div>
+                                    </td>
+                                    <td class="text-center indexGray" ><a href="/account/detail?address=#(order.sender)">#(order.sender)</a></td>
+                                    <td class="text-center indexGray"><a href="/account/detail?address=#(order.recipient)">#(order.recipient)</a></td>
+                                    <td class="text-center indexGray">
+										#(order.amount)
+                                    </td>
+                                    
+                                </tr>
+								#end
+                        </table>
+                        #if(count <= 0)
+                        	<div class="noresultDiv"><h3 i18n="transaction.notransfound">暂无相关交易信息</h3></div>
+                        #end
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	
+	#@foot()
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="market.title">市场行情</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title" i18n="market.market">行情</li>
+                </ol>
+            </div>              
+			
+            <div class="row blockList">
+            	 <div class="blockList-inner">
+            	 	<div class="market_head">
+	                	<div class="service-logo col-md-2 col-xs-12" >
+							<img src="../images/tron.png">
+							<span class="stack-name">
+							Tron
+							</span>
+						</div>
+						
+					<div class="col-md-10 col-xs-12">
+						<div class="row">
+	                	<div class="group col-md-2 col-xs-3">
+							<div class="stat-amount" id="tronprice">
+							--
+							</div>
+							<div class="stat-name" i18n="market.price">价格（$）</div>
+					     </div>
+					     <div class="group col-md-2 col-xs-3">
+							<div class="stat-amount" id="tron1rate">
+							--
+							</div>
+							<div class="stat-name" i18n="market.1hourRate">1H 涨跌幅</div>
+					     </div>
+					     <div class="group col-md-2 col-xs-3">
+							<div class="stat-amount" id="tron24rate">
+							--
+							</div>
+							<div class="stat-name" i18n="market.24hourRate">24H 涨跌幅</div>
+					     </div>
+					     <div class="group col-md-2 col-xs-3">
+							<div class="stat-amount" id="tron24volume">
+							--
+							</div>
+							<div class="stat-name" i18n="market.24hourVolumn">24H 成交量（$）</div>
+					     </div>
+					     <div class="group col-md-2 col-xs-3">
+							<div class="stat-amount" id="tronrate">
+							--
+							</div>
+							<div class="stat-name" i18n="market.rank">市值排名</div>
+					     </div>
+					    </div>
+					</div>
+                </div>
+            </div>
+            
+            <div class="blockList-inner">
+             <div id="container" style="min-width:400px;height:400px"></div>
+            </div>
+             
+                <div class="blockList-inner">
+                    <div class="indexBlockList">
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="market-title" i18n="market.exchange">交易所</th>
+								<th class="text-center" i18n="market.pair">交易对</th>
+								<th class="text-center" i18n="market.price">价格($)</th>
+                                <th class="text-center" i18n="market.volumn">24H交易量($)</th>
+								<th class="text-center" i18n="market.percent">交易占比(%)</th>
+                            </tr>
+							
+							<!-- upbit -->
+							<tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/upbit.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://upbit.com" target="_blank"><span class="currency">Upbit</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://upbit.com/exchange?code=CRIX.UPBIT.KRW-TRX" target="_blank">TRX/KRW</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="UpbitTRX/KRW_price">--</td>
+                                   <td class="text-center indexGray" id="UpbitTRX/KRW_volumn">--</td>
+                                   <td class="text-center indexGray" id="UpbitTRX/KRW_rate">--</td>
+                              </tr>
+							 <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/binance.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.binance.com" target="_blank"><span class="currency">Binance</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.binance.com/trade.html?symbol=TRX_BTC" target="_blank">TRX/BTC</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="BinanceTRX/BTC_price">--</td>
+                                   <td class="text-center indexGray" id="BinanceTRX/BTC_volumn">--</td>
+                                   <td class="text-center indexGray" id="BinanceTRX/BTC_rate">--</td>
+                              </tr> 
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/bithumb.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.bithumb.com/" target="_blank"><span class="currency">Bithumb</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.bithumb.com/" target="_blank">TRX/KRW</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="BithumbTRX/KRW_price">--</td>
+                                   <td class="text-center indexGray" id="BithumbTRX/KRW_volumn">--</td>
+                                   <td class="text-center indexGray" id="BithumbTRX/KRW_rate">--</td>
+                              </tr> 
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/bit-z.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.bit-z.com" target="_blank"><span class="currency">Bit-Z</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.bit-z.com/trade/trx_btc" target="_blank">TRX/BTC</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="Bit-ZTRX/BTC_price">--</td>
+                                   <td class="text-center indexGray" id="Bit-ZTRX/BTC_volumn">--</td>
+                                   <td class="text-center indexGray" id="Bit-ZTRX/BTC_rate">--</td>
+                              </tr> 
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/okex.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.okex.com" target="_blank"><span class="currency">OKEx</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.okex.com/spot/trade/index.do#trx_btc" target="_blank">TRX/BTC</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="OKExTRX/BTC_price">--</td>
+                                   <td class="text-center indexGray" id="OKExTRX/BTC_volumn">--</td>
+                                   <td class="text-center indexGray" id="OKExTRX/BTC_rate">--</td>
+                              </tr> 
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/huobipro.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.huobi.pro" target="_blank"><span class="currency">Huobi</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.huobi.pro/ko-kr/trx_eth/exchange/" target="_blank">TRX/ETH</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="HuobiTRX/ETH_price">--</td>
+                                   <td class="text-center indexGray" id="HuobiTRX/ETH_volumn">--</td>
+                                   <td class="text-center indexGray" id="HuobiTRX/ETH_rate">--</td>
+                              </tr>
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/okex.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.okex.com" target="_blank"><span class="currency">OKEx</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.okex.com/spot/trade/index.do#trx_eth" target="_blank">TRX/ETH</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="OKExTRX/ETH_price">--</td>
+                                   <td class="text-center indexGray" id="OKExTRX/ETH_volumn">--</td>
+                                   <td class="text-center indexGray" id="OKExTRX/ETH_rate">--</td>
+                              </tr>
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/bittrex.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://bittrex.com" target="_blank"><span class="currency">Bittrex</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://bittrex.com/Market/Index?MarketName=BTC-TRX" target="_blank">TRX/BTC</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="BittrexTRX/BTC_price">--</td>
+                                   <td class="text-center indexGray" id="BittrexTRX/BTC_volumn">--</td>
+                                   <td class="text-center indexGray" id="BittrexTRX/BTC_rate">--</td>
+                              </tr>
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/huobipro.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.huobi.pro" target="_blank"><span class="currency">Huobi</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.huobi.pro/ko-kr/trx_btc/exchange/" target="_blank">TRX/BTC</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="HuobiTRX/BTC_price">--</td>
+                                   <td class="text-center indexGray" id="HuobiTRX/BTC_volumn">--</td>
+                                   <td class="text-center indexGray" id="HuobiTRX/BTC_rate">--</td>
+                              </tr>
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/upbit.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://upbit.com" target="_blank"><span class="currency">Upbit</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://upbit.com/exchange?code=CRIX.UPBIT.BTC-TRX" target="_blank">TRX/BTC</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="UpbitTRX/BTC_price">--</td>
+                                   <td class="text-center indexGray" id="UpbitTRX/BTC_volumn">--</td>
+                                   <td class="text-center indexGray" id="UpbitTRX/BTC_rate">--</td>
+                              </tr>
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/okex.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.okex.com" target="_blank"><span class="currency">OKEx</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.okex.com/spot/trade/index.do#trx_usdt" target="_blank">TRX/USDT</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="OKExTRX/USDT_price">--</td>
+                                   <td class="text-center indexGray" id="OKExTRX/USDT_volumn">--</td>
+                                   <td class="text-center indexGray" id="OKExTRX/USDT_rate">--</td>
+                              </tr>
+                              
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/binance.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.binance.com" target="_blank"><span class="currency">Binance</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.binance.com/trade.html?symbol=TRX_ETH" target="_blank">TRX/ETH</a></div>
+                                   </td>
+                                   <td class="text-center indexGray" id="BinanceTRX/ETH_price">--</td>
+                                   <td class="text-center indexGray" id="BinanceTRX/ETH_volumn">--</td>
+                                   <td class="text-center indexGray" id="BinanceTRX/ETH_rate">--</td>
+                              </tr>
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/huobipro.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://www.huobi.pro" target="_blank"><span class="currency">Huobi</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://www.huobi.pro/ko-kr/trx_usdt/exchange/" target="_blank">TRX/USDT</a></div>
+                                   </td>
+                                    <td class="text-center indexGray" id="HuobiTRX/USDT_price">--</td>
+                                   <td class="text-center indexGray" id="HuobiTRX/USDT_volumn">--</td>
+                                   <td class="text-center indexGray" id="HuobiTRX/USDT_rate">--</td>
+                              </tr>
+                              <tr>
+                                   <td class="market-title">
+                                   	<span class="col-1 column6 overflow breakline" style="padding-left: 0px;">
+                                   	<img src="../images/exchange/gate-io.png" alt="" style="border-radius: 50%;width:20px;height:20px;">
+                                   	<a href="https://gateio.io" target="_blank"><span class="currency">Gate.io</span></a></span>
+                                   </td>
+                                   <td class="text-center">                                        
+                                       <div class="cell-blockid indexGray"><a href="https://gateio.io/trade/trx_usdt" target="_blank">TRX/USDT</a></div>
+                                   </td>
+                                    <td class="text-center indexGray" id="Gate.ioTRX/USDT_price">--</td>
+                                   <td class="text-center indexGray" id="Gate.ioTRX/USDT_volumn">--</td>
+                                   <td class="text-center indexGray" id="Gate.ioTRX/USDT_rate">--</td>
+                              </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	
+	#@foot()
+	<script src="../js/intervalFlushPrice.js"></script>
+	<script src="../js/chart.js"></script>
+    <script src="https://img.hcharts.cn/highstock/highstock.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/modules/drag-panes.js"></script>
+</body>
+</html>

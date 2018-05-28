@@ -1,0 +1,79 @@
+#define head()
+	<!--[if lte IE 8]>
+	<style>.browserupgrade{background:#ccc;color:#000;padding:.2em;text-align:center;font-size:16px;line-height:1.6}.browserupgrade p{margin:10px 0}</style>
+	<div class="browserupgrade">
+		<p>您正在使用的浏览器版本过低。请更新浏览器，以获取最佳体验。</p>
+	</div>
+	<![endif]-->
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="logo">
+					<div class="logo-inner">
+						<a href="/" class="text-hide logo-link" i18n="common.title">波场区块浏览器</a>
+					</div>
+				</div>
+				<nav class="nav" style="margin-left:-30px;">
+					<ul>
+						<li class="dropdown nav-item-language" id="accountmenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:#bbb"><span id="lanDesc"></span><b class="caret"></b></a>
+                        <ul class="dropdown-menu" style="min-width:50px;">
+                        	<li><a href="#" class="cn">CN</a></li>
+                            <li><a href="#" class="en">EN</a></li>
+	                        </ul>
+	                    </li>
+	                  </ul>
+	             </nav>
+				<nav class="nav">
+					<ul>
+						<li class="nav-item">
+							<a href="/" i18n="head.index">首页</a>
+						</li>
+						<li class="nav-item">
+							<a href="/block" i18n="head.block">区块</a>
+						</li>
+						<li class="nav-item">
+							<a href="/transaction" i18n="head.transaction">交易</a>
+						</li>
+						<li class="nav-item">
+							<a href="/market" i18n="head.market">行情</a>
+						</li>
+						<li class="nav-item">
+							<a href="/delegate" i18n="head.delegate">受托人</a>
+						</li>
+						<li class="nav-item">
+							<a href="/account" i18n="head.people">用户</a>
+						</li>
+						<li class="nav-item">
+							<a href="/asset" i18n="head.asset">资产</a>
+						</li>
+						<li class="nav-item">
+							<a href="/node" i18n="head.node">节点</a>
+						</li>
+						<li class="nav-item">
+							<a href="/wallet" target="_blank" i18n="head.wallet">钱包</a>
+						</li>
+					</ul>
+				</nav>
+
+				<div class="searchbar">
+					<div class="searchbar-inner">
+						<form action="/search" method="GET" class="searchbar-form clearfix"
+							  onsubmit="this.q.value = this.q.value.trim()">
+							<button class="searchbar-submit" type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+							<div class="searchbar-input-container">
+								<input i18n="head.search" type="search" class="searchbar-input" name="q"
+									   placeholder="区块高度、用户地址..."
+									   autocomplete="off"
+									   onfocus="$(this).addClass('active')"
+									   onblur="this.value.length > 1 || $(this).removeClass('active')"/>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+#end

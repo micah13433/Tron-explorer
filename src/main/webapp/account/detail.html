@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="account.detail">用户详情</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title" i18n="account.detail">用户详情</li>
+                </ol>
+            </div>
+			
+			#if(account.address != null)
+			<div class="row">
+                
+                <div>				
+                    <div class="panel panel-bm indexNetworkStats">
+                        <div class="panel-heading">
+                            <div class="panel-heading-title" i18n="account.summary">摘要</div>
+                        </div>
+                        <div class="panel-body" style="color:#777">
+                            <ul>
+                                <li>
+                                    <dl>
+                                        <dt i18n="account.address">用户地址</dt>
+                                        <dd>#(account.address)
+                                        </dd>
+                                    </dl>
+                                </li>
+                                 <li>
+                                    <dl>
+                                        <dt i18n="account.balance">用户余额</dt>
+                                        <dd>#(account.getBalance()) TRX</dd>
+                                    </dl>
+                                </li> 
+                                <li>
+                                    <dl>
+                                        <dt i18n="account.bandwidth">带宽</dt>
+                                        <dd>#(account.getBandWidth())</dd>
+                                    </dl>
+                                </li> 
+                                <li>
+                                    <dl>
+                                        <dt i18n="account.power">能量</dt>
+                                        <dd>#(account.getFrozenAmount())</dd>
+                                    </dl>
+                                </li>                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+			<div class="row blockList">
+				<div class="panel-bm indexNetworkStats">
+					<div class="panel-heading">
+						<div class="panel-heading-title" i18n="account.frozenhistory">冻结记录</div>
+					</div>
+				</div>
+                <div class="blockList-inner">
+                    <div class="indexBlockList" style="min-height:0px;">
+					    #if(frozenList == null || frozenList.size() == 0)
+							<span class="emptyTip" i18n="account.nofrozenfound">暂无此用户冻结记录.</span>
+						#else
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center width_2">#</th>
+								<th class="text-center width_4" i18n="account.frozennum">数量</th>
+                                <th class="text-center " i18n="account.expiretime">到期时间</th>
+                            </tr>
+                            #for(i=0; i< frozenList.size();i++)
+							#setLocal(frozen = frozenList.get(i))
+							<tr>
+								<td class="text-center">#(i+1)
+								</td>
+								<td class="text-center">                                        
+									<div class="cell-blockid indexGray">#(frozen.getCount())</div>
+								</td>
+								<td class="text-center indexGray" >#(frozen.expireTime)</td>
+							</tr>
+							#end
+                        </table>
+						#end
+                    </div>
+                </div>
+            </div>
+			
+            <div class="row blockList">
+				<div class="panel-bm indexNetworkStats">
+					<div class="panel-heading">
+						<div class="panel-heading-title" i18n="account.voteHistory">投票记录</div>
+					</div>
+				</div>
+                <div class="blockList-inner">
+                    <div class="indexBlockList" style="min-height:0px;">
+					    #if(voteList == null || voteList.size() == 0)
+							<span class="emptyTip" i18n="account.novotefound">暂无此用户投票记录.</span>
+						#else
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center width_2">#</th>
+								<th class="text-center width_4" i18n="account.address">地址</th>
+                                <th class="text-center" i18n="account.votes">投票数</th>
+                            </tr>
+                            #for(i=0; i< voteList.size();i++)
+							#setLocal(vote = voteList.get(i))
+							<tr>
+								<td class="text-center">#(i+1)
+								</td>
+								<td class="text-center">                                        
+									<div class="cell-blockid indexGray">#(vote.address)</div>
+								</td>
+								<td class="text-center indexGray" >#(vote.count)</td>
+							</tr>
+							#end
+                        </table>
+						#end
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row blockList">
+				<div class="panel-bm indexNetworkStats">
+					<div class="panel-heading">
+						<div class="panel-heading-title" i18n="account.assetBalance">资产余额</div>
+					</div>
+				</div>
+                
+                <div class="blockList-inner">
+                    <div class="indexBlockList" style="min-height:0px;">
+					    #if(assetCount== 0)
+					    	<span class="emptyTip" i18n="asset.nofound">暂无此用户资产记录.</span>
+						#else
+                        <table class="table table-hover">
+                            <tr id="append2">
+                                <th class="text-center width_2">#</th>
+								<th class="text-center width_4" i18n="asset.name">名称</th>
+                                <th class="text-center" i18n="account.balance">余额</th>
+                            </tr>
+                            #setLocal(i = 0)
+                           #for(item : assertMap)
+                           #setLocal(i = i+1)
+							<tr>
+								<td class="text-center">#(i)
+								</td>
+								<td class="text-center">                                        
+									<div class="cell-blockid indexGray">#(item.key)</div>
+								</td>
+								<td class="text-center indexGray" >#(item.value)</td>
+							</tr>
+							#end
+                        </table>
+						#end
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row blockList">
+				<div class="panel-bm indexNetworkStats">
+					<div class="panel-heading">
+						<div class="panel-heading-title" i18n="index.recenttransactions">最近交易记录</div>
+					</div>
+				</div>
+                
+                <div class="blockList-inner">
+                     #if(transcount> 0 && totalpage > 1)
+					<div class="blockList-cal">
+						#@paginate(currpage, totalpage, "/account/detail?address=" + account.address + "&page=")
+                    </div>
+                    #end
+                    <div class="indexBlockList" style="min-height:0px;">
+					    #if(transcount== 0)
+					    	<span class="emptyTip" i18n="account.notransactionfound">无此用户最近交易记录.</span>
+						#else
+                        <table class="table table-hover">
+                            <tr id="append2">
+                                <th class="text-center">#</th>
+								<th class="text-center" i18n="delegate.blockHeight">区块高度</th>
+                                <th class="text-center" i18n="transaction.sender">发送者</th>
+                                <th class="text-center" i18n="transaction.receiver">接收者</th>
+                                <th class="text-center" i18n="transaction.amount">金额</th>
+                            </tr>
+                            #setLocal(i = 0)
+                           #for(order : tranactions)
+                           #setLocal(i = i+1)
+							<tr>
+								<td class="text-center">#(i + (currpage-1)*20)
+								</td>
+								<td class="text-center">                                        
+                                        <div class="cell-blockid indexGray"><a href="/block/detail?height=#(order.blockHeight)#(append)">#(order.blockHeight)</a></div>
+                                    </td>
+                                    <td class="text-center indexGray" ><a href="/account/detail?address=#(order.sender)">#(order.sender)</a></td>
+                                    <td class="text-center indexGray"><a href="/account/detail?address=#(order.recipient)">#(order.recipient)</a></td>
+                                    <td class="text-center indexGray">
+										#(order.amount)
+										#if(order.type == 1 || order.type == 1)
+										&nbsp;#(order.asset)
+										#end
+                                    </td>
+							</tr>
+							#end
+                        </table>
+						#end
+                    </div>
+                </div>
+            </div>
+			#else
+				#@empty()	
+			#end
+        </div>
+    </div>
+	
+	#@foot()
+	
+</body>
+</html>

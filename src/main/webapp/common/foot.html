@@ -1,0 +1,78 @@
+#define foot()
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="../js/jquery.i18n.min.js"></script>
+	<footer class="footer">
+		<div class="container">
+			<div style="padding-right: 0;">
+				<div class="links-column">
+                    <div class="links-category" i18n="foot.link">链接</div>
+                    <ul class="links-list">
+                        <li class="links-list-item"><a target="_blank" href="https://tron.network" i18n="foot.website">官网</a></li>
+                        <li class="links-list-item"><a target="_blank" href="https://tronsr.org/" i18n="foot.bbs">社区</a></li>
+                        <li class="links-list-item"><a target="_blank" href="https://github.com/tronprotocol" i18n="foot.github">Github</a></li>
+                    </ul>
+                </div>
+                <div class="links-column">
+                    <div class="links-category" i18n="foot.document">文档</div>
+                    <ul class="links-list">
+                        <li class="links-list-item"><a target="_blank" href="https://dn-peiwo-web.qbox.me/%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%84%BF%E6%99%AF1.3.pdf" i18n="foot.summary">简介与愿景</a></li>
+                        <li class="links-list-item"><a target="_blank" href="https://dn-peiwo-web.qbox.me/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B9%A6_%E6%96%B0%E7%89%88.pdf" i18n="foot.design">架构设计</a></li>
+                        <li class="links-list-item"><a target="_blank" href="https://dn-peiwo-web.qbox.me/TRON%20Protobuf%E5%8D%8F%E8%AE%AE%E6%96%87%E6%A1%A3.pdf" i18n="foot.protocol">protobuf协议</a></li>
+                   	</ul>
+                </div>
+                <div class="links-column">
+                    <div class="links-category" i18n="foot.contact">联系</div>
+                    <ul class="links-list">
+                        <li class="links-list-item"><a target="_blank" href="#" i18n="foot.qq">QQ群：474776572</a></li>
+                        <li class="links-list-item"><a target="_blank" href="#" i18n="foot.develper">开发者群：tronfoundation.slack.com/</a></li>
+                        <li class="links-list-item"><a target="_blank" href="#" i18n="foot.email">邮箱：program@tron.network</a></li>
+                    </ul>
+                </div>
+             </div>
+		</div>
+	</footer>
+	<script>
+		/*切换为中文 - 按钮*/
+	    $(".cn").click(function() {
+	    	$.cookie("tron_lan", "cn",{path:"/"});
+	    	$("#lanDesc").html("CN");
+	    	$("[i18n]").i18n({
+                defaultLang: "cn",
+            });
+	    	$("div.searchbar").css("margin-right","0px");
+	    });
+	    /*切换为英文 - 按钮*/
+	    $(".en").click(function() {
+	    	$.cookie("tron_lan", "en",{path:"/"});
+	    	$("#lanDesc").html("EN");
+	    	$("[i18n]").i18n({
+                defaultLang: "en",
+            });
+	    	$("div.searchbar").css("margin-right","-80px");
+	    });
+	    var lan = $.cookie("tron_lan");
+	    if(!lan){
+	    	lan = "cn";
+	    	$.cookie("tron_lan", lan,{path:"/"});
+	    	$("#lanDesc").html("CN");
+	    }
+	    if(lan == "cn"){
+	    	$("#lanDesc").html("CN");
+	    	$("div.searchbar").css("margin-right","0px");
+	    }else{
+	    	$("#lanDesc").html("EN");
+	    	$("div.searchbar").css("margin-right","-80px");
+	    }
+		$("[i18n]").i18n({
+		    defaultLang: lan,
+		    filePath: "../i18n/", 
+		    filePrefix: "i18n_",
+		    fileSuffix: "",
+		    forever: true,
+		    callback: function() {
+		    }
+		});
+	</script>
+#end

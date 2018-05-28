@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="delegate.list">见证人列表</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title" i18n="delegate.list">见证人列表</li>
+                </ol>
+            </div>
+
+            <div class="row blockList">
+                <div class="blockList-inner">
+                	 #if(count > 0 && totalpage > 1)
+					<div class="blockList-cal">
+						#@paginate(currpage, totalpage, "/delegate?page=")
+                    </div>
+                    #end
+                    <div class="indexBlockList">
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center" i18n="delegate.rank">排名</th>
+								<th class="text-center" i18n="delegate.delegate">见证人</th>
+                                <th class="text-center" i18n="delegate.votes">得票数</th>
+                                <th class="text-center" i18n="delegate.blockHeight">最新产出区块</th>
+								<th class="text-center" i18n="delegate.produceBlockNum">生产块数</th>
+								<th class="text-center" i18n="delegate.lostBlockNum">丢失块数</th>
+                            </tr>
+                            #if(count > 0)
+                            #setLocal(i = 0)							
+							#for(delegate : delegates)
+							#setLocal(i = i+1)
+							<tr>
+								<td class="text-center">#(i+(currpage-1)*20)
+								</td>
+								<td class="text-center">                                        
+									<div class="cell-blockid indexGray"><a href="/account/detail?address=#(delegate.address)" target="_blank">#(delegate.address)</a></div>
+								</td>
+								<td class="text-center indexGray" >#(delegate.votes) TRX</td>
+								<td class="text-center indexGray">#(delegate.latestBlockNumber)</td>
+								<td class="text-center indexGray">#(delegate.producedTotal)</td>
+								<td class="text-center indexGray">#(delegate.missedTotal)</td>
+							</tr>
+							#end
+							#end
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	
+	#@foot()
+
+</body>
+</html>

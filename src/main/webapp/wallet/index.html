@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en" ng-app="walletApp" ng-controller="myCtrl">
+  <head>
+    <meta charset="utf-8">
+    <title>波场区块链网页钱包</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800") />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link href="http://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
+    <script src="http://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../css/wallet.css" />
+  </head>
+  <body class="app">
+    <nav class="navbar navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header navbar-brand">
+			<p style="float:left;margin:0 5px;"><img src="https://blockchains.oss-cn-shanghai.aliyuncs.com/static/coinInfo/tron.png" alt="" class="icon pull-left icon_coin" ></p><span >波场</span><span >( TRX )</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div>
+		  <div class="col-sm-3 menu menu-sidebar" >
+			<div class="menu-item" ng-class='{active : isActive("/mywallet")}'>
+			  <div class="menu-item-content" ng-click='toggle("mywallet")'>
+				<i class="material-icons">account_balance_wallet</i> 我的钱包
+			  </div>
+			</div>
+			<div class="menu-item" ng-class='{active : isActive("/send")}' >
+			  <div class="menu-item-content" ng-click='toggle("send")'>
+				<i class="material-icons">subdirectory_arrow_left</i> 发送
+			  </div>
+			</div>
+			<div class="menu-item" ng-class='{active : isActive("/receive")}'>
+			  <div class="menu-item-content"  ng-click='toggle("receive")'>
+				<i class="material-icons">subdirectory_arrow_right</i> 接收
+			  </div>
+			</div>
+			<div class="menu-item" ng-class='{active : isActive("/vote")}'>
+			  <div class="menu-item-content" ng-click='toggle("vote")'>
+				<i class="material-icons">language</i> 投票
+			  </div>
+			</div>
+			<div class="menu-item" ng-class='{active : isActive("/asset")}'>
+			  <div class="menu-item-content" ng-click='toggle("asset")'>
+				<i class="material-icons">attach_money</i> 资产
+			  </div>
+			</div>
+			<!--<div class="menu-item" >
+			  <div class="menu-item-content" ng-click="toggle(addStudent)">
+				<i class="material-icons">settings</i> 设置
+			  </div>
+			</div>-->
+			<div class="menu-item" >
+			  <div class="menu-item-content" ng-click="logout()">
+				<i class="mdui-icon material-icons">last_page</i> 登出
+			  </div>
+			</div>
+		  </div>
+		</div>
+        <div class="col-sm-9">
+          <div class="main" ng-view>
+			<script type="text/ng-template" id="receive.html">
+				<div class="section">
+					<div class="row">
+						<div class="col-sm-12">
+							<header>接收</header>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										<label class="control-label" for="recipient">
+											<span class="sentence-case ng-binding">地址</span>
+										</label>
+										<input class="form-control input-readonly" type="text" autocomplete="off" required="" ng-model="address" ng-focus="resetError('recipient')" readonly="readonly">
+									</div>										
+								</div>		
+
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										<label class="control-label" for="recipient">
+											<span class="sentence-case ng-binding">选择资产</span>
+										</label>
+										<select class="form-control form-select" ng-model="selectedAsset"  ng-options="asset.value as asset.value for asset in assetMap" ng-change="genQrCode()">
+										</select>
+									</div>										
+								</div>
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										<label class="control-label ng-binding" for="amount">金额</label>
+										<div class="input-group input-group-lg">
+											<input class="form-control" type="number" placeholder="0.00000000" autocomplete="off" required="" ng-model="receiveAmount" ng-change="genQrCode()">
+										</div>
+										<span class="help help-block text-danger">
+										</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12" class="form-group" >
+										<label class="control-label ng-binding">二维码</label>
+										<div style="padding-top:15px;padding-left:50px;"><qrcode data="{{qrData}}" id="qrcode" size="200" ></qrcode></div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		   </script>
+			<script type="text/ng-template" id="mywallet.html">
+    			<div class="section">
+					<div class="row">
+						<div class="col-sm-12">
+							<header>资产列表<span class="title_label" ng-click="getFreeTRX()" id="getFreeTRX">获取测试TRX</span></header>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										<table class="table table-hover">
+											<tr id="append2">
+											<th class="text-center width_2">#</th>
+											<th class="text-center width_4">名称</th>
+											<th class="text-center">余额</th>
+											</tr>
+											#setLocal(i = 0)
+											#for(item : assertMap)
+											#setLocal(i = i+1)
+											<tr>
+												<td class="text-center">#(i)
+												</td>
+												<td class="text-center">                                        
+													<div class="cell-blockid indexGray">#(item.key)</div>
+												</td>
+												<td class="text-center indexGray" >#(item.value)</td>
+											</tr>
+											#end
+										</table>
+									</div>										
+								</div>		
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<header>冻结记录<span class="title_label" ng-click="freeze()">冻结</span><span class="title_label" ng-click="unfreeze()">解冻</span></header>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+									    <div class="freezenContainer" ng-show="visible">
+											<div class="alert alert-warning"><span>注意：冻结最短有效期是3天。</span></div>
+											<div class="row">
+												<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+													<label class="control-label ng-binding" for="amount">金额</label>
+													<div class="input-group input-group-lg">
+														<input class="form-control" type="number" placeholder="0" autocomplete="off" required="" ng-model="freezenAmount" ng-change="freezencheck()">
+													</div>
+													<span class="help help-block text-danger">
+													</span>
+												</div>
+												<button ng-click="ok()" class="btn col-md"><span id="freeze_ok">确定</span></button>
+												<button ng-click="cancel()" class="btn col-md"><span>取消</span></button>
+											</div>
+
+										</div>
+										#if(frozenList == null || frozenList.size() == 0)
+											<div class="emptyTip">暂无此用户冻结记录.</div>
+										#else
+										<table class="table table-hover">
+											<tr id="append">
+												<th class="text-center width_2">#</th>
+												<th class="text-center width_4" >数量</th>
+												<th class="text-center " >到期时间</th>
+											</tr>
+											#for(i=0; i< frozenList.size();i++)
+											#setLocal(frozen = frozenList.get(i))
+											<tr>
+												<td class="text-center">#(i+1)
+												</td>
+												<td class="text-center">                                        
+													<div class="cell-blockid indexGray">#(frozen.getCount())</div>
+												</td>
+												<td class="text-center indexGray" >#(frozen.expireTime)</td>
+											</tr>
+											#end
+										</table>
+										#end
+									</div>										
+								</div>		
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<header>投票记录</header>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										#if(voteList == null || voteList.size() == 0)
+											<div class="emptyTip" >暂无此用户投票记录.</div>
+										#else
+										<table class="table table-hover">
+											<tr id="append">
+												<th class="text-center width_2">#</th>
+												<th class="text-center width_4" >地址</th>
+												<th class="text-center">投票数</th>
+											</tr>
+											#for(i=0; i< voteList.size();i++)
+											#setLocal(vote = voteList.get(i))
+											<tr>
+												<td class="text-center">#(i+1)
+												</td>
+												<td class="text-center">                                        
+													<div class="cell-blockid indexGray">#(vote.address)</div>
+												</td>
+												<td class="text-center indexGray" >#(vote.count)</td>
+											</tr>
+											#end
+										</table>
+										#end
+									</div>										
+								</div>		
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<header>最近交易记录<span class="title_label" ng-click="refresh()">刷新</span></header>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										#if(transcount== 0)
+											<div class="emptyTip" >暂无此用户交易记录.</div>
+										#else
+										<table class="table table-hover">
+											<tr id="append2">
+												<th class="text-center">#</th>
+												<th class="text-center" >区块高度</th>
+												<th class="text-center">发送者</th>
+												<th class="text-center" >接收者</th>
+												<th class="text-center" >金额</th>
+											</tr>
+											#setLocal(i = 0)
+										   #for(order : tranactions)
+										   #setLocal(i = i+1)
+											<tr>
+												<td class="text-center">#(i + (currpage-1)*20)
+												</td>
+												<td class="text-center">                                        
+														<div class="cell-blockid indexGray">#(order.blockHeight)</div>
+													</td>
+													<td class="text-center indexGray" >#(order.sender)</td>
+													<td class="text-center indexGray">#(order.recipient)</td>
+													<td class="text-center indexGray">
+														#(order.amount)
+														#if(order.type == 1 || order.type == 1)
+															&nbsp;#(order.asset)
+														#end
+													</td>
+											</tr>
+											#end
+										</table>
+										#end
+									</div>										
+								</div>		
+							</div>
+						</div>
+					</div>
+				</div>
+            </script>
+			<script type="text/ng-template" id="send.html">
+				 <div class="section">
+					<div class="row">
+						<div class="col-sm-12">
+							<header>发送</header>
+							<div class="alert alert-warning"><span>请确认地址正确，错误地址转账将导致你的财产丢失。</span></div>
+							<form name="sendForm" ng-submit="send()" novalidate>
+							<div class="form-body">
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										<label class="control-label" for="recipient">
+											<span class="sentence-case ng-binding">接收地址</span>
+										</label>
+										<input id="recipient" name="recipient" class="form-control" type="text" placeholder="地址" autocomplete="off" required="" ng-model="recipient" >
+									</div>										
+								</div>		
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										<label class="control-label" for="recipient">
+											<span class="sentence-case ng-binding">选择资产</span>
+										</label>
+										<select class="form-control form-select" id="type" ng-model="selectedAsset"  ng-options="asset.value as asset.name for asset in assetMap">
+										</select>
+									</div>										
+								</div>
+								<div class="row">
+									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+										<label class="control-label ng-binding" for="amount">金额</label>
+										<div class="input-group input-group-lg">
+											<input id="amount" name="amount" class="form-control" type="number" placeholder="0.00000000" autocomplete="off" required="" ng-model="acceptAmount" ng-change="checkAmount()">
+										</div>
+									</div>
+									<button type="submit" ng-disabled="{{isDisabled}}"  class="btn col-md"><span id="send_ok">确定</span></button>
+								</div>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
+		   </script>
+		   <script type="text/ng-template" id="vote.html">
+			<div class="section">
+				<div class="row">
+					<div class="col-sm-12">
+						<header>申请人列表</header>
+						<p class="voteDesc">剩余<span class="voteRemain">{{frozenAmount}}</span>票<button class="voteButton" ng-class="{disable : disablevote()}" ng-disabled="disablevote()" ng-click="vote()" id="vote_ok">投票</button></p>
+						<div class="form-body">
+							<div class="row">
+								<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+									<table class="table table-hover">
+										<tr id="append2">
+										<th class="text-center">#</th>
+										<th class="text-center" >地址</th>
+										<th class="text-center" >票数</th>
+										<th class="text-center" >投票</th>
+										</tr>
+										<tr ng-repeat="delegate in delegates">
+											<td class="text-center" ng-bind="$index+1">
+											</td>
+											<td class="text-center">                                        
+												<div class="cell-blockid indexGray" title="{{delegate.address}}">{{delegate.url}}</div>
+											</td>
+											<td class="text-center indexGray" >{{delegate.votes}}</td>
+											<td class="text-center indexGray" >
+												<input name="voteInput" class="form-control form-control-sm text-center" address="{{delegate.address}}" placeholder="0" type="number" ng-model="voteIndex" ng-change="recheck()" ng-blur="sum()">
+											</td>
+										</tr>
+									</table>
+								</div>										
+							</div>		
+						</div>
+					</div>
+				</div>		
+			</div>
+		   </script>
+
+		   <script type="text/ng-template" id="asset.html">
+		   <link href="http://apps.bdimg.com/libs/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+			<div class="section">
+				<div class="row">
+					<div class="col-sm-12">
+						<header>资产列表</header>
+						<div class="form-body">
+							<div class="row">
+								<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
+									<table class="table table-hover">
+										<tr id="append2">
+										<th class="text-center">名称</th>
+										<th class="text-center" >发起人</th>
+										<th class="text-center" >总额</th>
+										<th class="text-center" >起止时间</th>
+										<th class="text-center" ></th>
+										</tr>
+										<tr ng-repeat="asset in assets">
+											<td class="text-center">                               
+												<div class="cell-blockid indexGray" >{{asset.name}}</div>
+											</td>
+											<td class="text-center indexGray" >{{asset.ownerAddress}}</td>
+											<td class="text-center indexGray" >
+												{{asset.totalSupply}}
+											</td>
+											<td class="text-center indexGray" >
+												{{asset.startTime}}<br/>
+												{{asset.endTime}}
+											</td>
+											<td class="text-center indexGray width_15" >
+												<button ng-click="open(asset.name,asset.decodeName,asset.price,asset.ownerAddress)"  type="button" class="assetButton" ng-class="{disable : disableasset({{asset.startTimeOfLong}},{{asset.endTimeOfLong}})}" ng-disabled="disableasset({{asset.startTimeOfLong}},{{asset.endTimeOfLong}})"><span>购买</span></button>
+											</td>
+										</tr>
+									</table>
+								</div>										
+							</div>		
+						</div>
+					</div>
+				</div>		
+			</div>
+		   </script>
+
+		   <script type="text/ng-template" id="assetBuy.html">
+			<div class="modal-header">
+				<h3 class="modal-title">资产购买</h3>
+			</div>
+			<div class="modal-body">
+				<div class="asset_label">名称: <b>{{ name }}</b></div>
+				<div class="asset_label">单价: <b>{{ price }} TRX</b></div>
+				<div class="asset_label">数量: <input type="number" value="0" class="asset_btn"  ng-model="assetBuyNum"></div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+				<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+			</div>
+		   </script>
+<!-- </div> -->
+
+		  </div>
+        </div>
+      </div>
+    </div>
+	
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-route.min.js"></script>
+  <script src="../js/ui-bootstrap-tpls.min.js"></script>
+  <script src="../js/qrcode.js"></script>
+  <script src="../js/qrcode_UTF8.js"></script>
+  <script src="../js/angular-qrcode.min.js"></script>
+  <script>
+   var mainApp = angular.module("walletApp", ['ngRoute','monospaced.qrcode','ui.bootstrap']);
+   mainApp.constant("address","#(account.address)");
+   mainApp.constant("qrData","http://tron123.top/wallet#/send?toAddress=");
+   mainApp.constant("assetMap",#(assertJson));
+   mainApp.config(['$routeProvider',
+     function($routeProvider) {
+      $routeProvider.
+        when('/receive', {
+         templateUrl: 'receive.html',
+         controller: 'myCtrl'
+        }).
+		when('/send', {
+         templateUrl: 'send.html',
+         controller: 'myCtrl'
+        }).
+		when('/vote', {
+         templateUrl: 'vote.html',
+         controller: 'voteCtrl'
+        }).
+		when('/asset', {
+         templateUrl: 'asset.html',
+         controller: 'assetCtrl'
+        }).
+        when('/mywallet', {
+          templateUrl: 'mywallet.html',
+          controller: 'myCtrl'
+         }).
+        otherwise({
+         redirectTo: '/mywallet'
+        });
+     }]);
+
+	mainApp.controller('myCtrl', function($scope,$http,address,assetMap,qrData,$location) {
+		$scope.qrData = qrData;
+		$scope.address = address;
+		$scope.assetMap = assetMap;
+		$scope.selectedAsset = $location.search().asset;
+		$scope.recipient = $location.search().toAddress;
+		$scope.isDisabled = false;
+		$scope.canGetFreeTRX = true;
+		if($location.search().asset == null){
+			$scope.selectedAsset = "TRX";
+		}
+		$scope.acceptAmount = Number($location.search().amount);
+		$scope.toggle = function(url) {
+			window.location="#" + url;
+		};
+		 $scope.isActive = function(url) {
+			return window.location.href.indexOf(url) >= 0;
+		};
+		 $scope.logout = function() {
+			 $http.get("/wallet/logout").then(function successFunction(a){
+				 window.location.reload();
+             })
+		};
+		 $scope.genQrCode = function() {
+			 $scope.qrData = "http://tron123.top/wallet/send?toAddress=" + $scope.address + "&amount=" + $scope.receiveAmount + "&asset=" + $scope.selectedAsset;
+		 };
+		 $scope.send = function() {
+			 $scope.isDisabled = true;
+			 var recipient = document.getElementById("recipient");
+			 if(recipient.value.length != 35){
+				 recipient.focus();
+				 return;
+			 }
+			 var amount = document.getElementById("amount");
+			 if(amount.value <= 0){
+				 amount.focus();
+				 return;
+			 }			 
+			 document.getElementById("send_ok").innerHTML = "发送中...";
+			 if($scope.selectedAsset != "TRX"){
+				 amount.value = parseInt(amount.value);
+			 }
+			 $http.get("/wallet/send",{  
+				    params: {  
+				        "toAddress":recipient.value,
+				        "amount":amount.value,
+				        "asset":$scope.selectedAsset
+				    }  
+				}).then(function successFunction(res){
+				 if(res.data && res.data.code && res.data.code == 1){
+					 swal("Success!", "","success");
+					 document.getElementById("send_ok").innerHTML = "同步中...";
+					 setTimeout(function(){location.href="/wallet";}, 1000);
+					 
+				 }else{
+					 sweetAlert("Oops...", "出错了~", "error");
+					 document.getElementById("send_ok").innerHTML = "确定";
+					 $scope.isDisabled = false;
+				 }
+             })
+			 
+		};
+		$scope.checkAmount = function(){
+		};
+		$scope.visible = false;
+		$scope.freeze = function(){
+			$scope.visible = !$scope.visible;			
+		};
+		$scope.freezencheck = function(){
+			$scope.freezenAmount = parseInt($scope.freezenAmount);
+			if($scope.freezenAmount < 0){
+				$scope.freezenAmount = 0;
+			}
+		};
+		
+		$scope.getFreeTRX = function(){
+			if(!$scope.canGetFreeTRX) return;
+			$scope.canGetFreeTRX = false;			
+			document.getElementById("getFreeTRX").innerHTML = "获取中...";
+			$http.get("/wallet/getFreeTRX",{  
+			    params: {
+			    }  
+			}).then(function successFunction(res){
+				if(res.data && res.data.code && res.data.code == 1){
+					 swal("Success!", "","success");
+					 document.getElementById("getFreeTRX").innerHTML = "获取测试TRX";
+					 setTimeout(function(){location.href="/wallet";}, 1000);  
+				 }else{
+					 sweetAlert("Oops...", "出错了~", "error");
+					 $scope.canGetFreeTRX = true;
+					 document.getElementById("getFreeTRX").innerHTML = "获取测试TRX";
+				 }
+			});
+		};
+		$scope.refresh = function(){
+			location.href = "/wallet";
+		}
+		$scope.unfreeze = function(){
+			$scope.visible = false;
+			if(confirm("确定要解冻吗？")){
+				$http.get("/wallet/unfreeze",{  
+				    params: {}  
+				}).then(function successFunction(res){
+					if(res.data && res.data.code && res.data.code == 1){
+						 swal("Success!", "","success");
+						 setTimeout(function(){location.href="/wallet";}, 1000);  
+					 }else{
+						 sweetAlert("Oops...", "出错了~", "error");
+					 }
+				});
+			}
+		};
+		$scope.cancel = function(){
+			$scope.visible = false;
+		};
+		$scope.ok = function(){			
+			document.getElementById("freeze_ok").innerHTML = "冻结中...";
+			$http.get("/wallet/freeze",{  
+			    params: {  
+			        "frozenBalance":$scope.freezenAmount
+			    }  
+			}).then(function successFunction(res){
+				if(res.data && res.data.code && res.data.code == 1){
+					swal("Success!", "","success");
+					setTimeout(function(){location.href="/wallet";}, 1000); 
+				 }else{
+					 sweetAlert("Oops...", "出错了~", "error");
+					 document.getElementById("freeze_ok").innerHTML = "确定";
+				 }
+         })
+			
+		};
+		
+	});
+
+	mainApp.controller('voteCtrl', function($scope,$http,$location) {
+		$http.get("/delegate/list").then(function successFunction(res){
+			$scope.delegates = res.data.delegates;
+			$scope.frozenAmount = res.data.frozenAmount;
+			$scope.totalAmount = res.data.frozenAmount;
+        });       
+        $scope.recheck = function(){
+        	var voteInputs = document.getElementsByName("voteInput");
+        	$scope.temp = 0;
+        	$scope.total = $scope.frozenAmount;
+        	for(var i=0;i< voteInputs.length;i++){
+        		voteInputs[i].value = parseInt(voteInputs[i].value);
+        		if(voteInputs[i].value < 0){
+        			voteInputs[i].value = 0;
+        		}
+        	}
+			
+		}
+        $scope.sum = function(){
+        	var voteInputs = document.getElementsByName("voteInput");
+        	var temp = 0;
+        	for(var i=0;i< voteInputs.length;i++){
+        		voteInputs[i].value = parseInt(voteInputs[i].value);
+        		temp = Number(temp) +  Number(voteInputs[i].value);
+        		
+        	}
+        	$scope.frozenAmount = Number($scope.totalAmount) - temp;
+			
+		}
+        $scope.disablevote = function(){
+        	if($scope.frozenAmount > 0 && $scope.frozenAmount != $scope.totalAmount){
+        		return false;
+        	}
+        	return true;
+			
+		}
+        $scope.vote = function(){
+        	var voteInputs = document.getElementsByName("voteInput");
+        	var addressList = new Array();
+        	var amountList = new Array();
+        	var index = 0;
+        	for(var i=0;i< voteInputs.length;i++){
+        		voteInputs[i].value = parseInt(voteInputs[i].value);
+        		if(voteInputs[i].value > 0){
+        			addressList[index] = (voteInputs[i].getAttribute("address"));
+        			amountList[index] = (voteInputs[i].value);
+        			index++;
+
+        		}       		
+        	}
+        	
+        	document.getElementById("vote_ok").innerHTML = "投票中...";
+        	$http.get("/wallet/vote",{  
+			    params: {  
+			        "addressList":addressList.join(","),
+			        "amountList":amountList.join(",")
+			    }  
+			}).then(function successFunction(res){
+			 if(res.data && res.data.code && res.data.code == 1){
+				 swal("Success!", "","success");
+				 setTimeout(function(){location.href="/wallet";}, 1000);
+			 }else{
+				 sweetAlert("Oops...", "出错了~", "error");
+				 document.getElementById("vote_ok").innerHTML = "投票";
+			 }
+         })
+        	
+		}
+	});
+
+	mainApp.controller('assetCtrl', function($scope,$http,$location,$uibModal) {
+		$http.get("/asset/list").then(function successFunction(res){
+			$scope.assets = res.data.assets;
+        }); 
+		$scope.disableasset = function(start,end){
+			var now = new Date().getTime();
+			if(now > end || now < start){
+				return true;
+			}
+			return false;
+		}
+		$scope.open = function (assetname,decodename,assetprice,assetaddress) {
+		  var modalInstance = $uibModal.open({
+			templateUrl: 'assetBuy.html',
+			controller : ModalInstanceCtrl,
+			size: 'sm',
+			resolve: {
+				name: function () {
+			          return assetname;
+		        },
+		        decodename : function () {
+			          return decodename;
+		        },
+		        price: function () {
+			          return assetprice;
+		        },
+		        assetaddress: function () {
+			          return assetaddress;
+		        }
+			  }
+		  });
+
+
+		};
+	});
+
+	var ModalInstanceCtrl = function($scope, $uibModalInstance,name,decodename,price,assetaddress,$http) {
+		        $scope.name = name;
+		        $scope.decodename = decodename;
+		        $scope.price = price;
+		        $scope.assetaddress = assetaddress;
+		       
+                $scope.ok = function() {
+                	$http.get("/wallet/assetBuy",{  
+        			    params: {  
+        			        "assetname":$scope.decodename,
+        			        "toaddress":$scope.assetaddress,
+        			        "amount":Number($scope.assetBuyNum) * Number($scope.price)
+        			    }  
+        			}).then(function successFunction(res){
+        			 if(res.data && res.data.code && res.data.code == 1){
+        				
+        				 $uibModalInstance.close();  
+        				 swal("Success!", "","success");
+        				 setTimeout(function(){location.href="/wallet";}, 1000);
+        			 }else{
+        				 sweetAlert("Oops...", "出错了~", "error");
+        			 }
+        			});
+                };  
+                $scope.cancel = function() {  
+                    $uibModalInstance.dismiss();  
+                };  
+            };  
+  </script>
+  </body>
+</html>

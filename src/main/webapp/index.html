@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="common.title">波场区块浏览器</title>
+    <link rel="icon" href="../images/favicon.ico">>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/main.css"/>    
+</head>
+<body>
+	#@head()
+	
+    <div class="main-body">		
+        <div class="container">
+						
+			<div class="row">              
+                <div class="row text-center">
+					<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="index.height">区块高度 </strong></div>
+							<div class="panel-body"><label id="blockHeight">#(maxBlockHeight)</label></div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="index.transactons">交易数</strong></div>
+							<div class="panel-body"><label id="transactionNum">--</label></div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="index.nodes">节点数</strong></div>
+							<div class="panel-body"><label id="nodeNum">--</label></div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="index.delegates">候选人个数</strong></div>
+							<div class="panel-body"><label id="delegateNum">--</label></div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="index.accounts">持币人数</strong></div>
+							<div class="panel-body"><label id="accountNum">--</label></div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="index.assets">资产数</strong></div>
+							<div class="panel-body"><label id="assetNum">--</label></div>
+						</div>
+					</div>
+				</div>
+            </div>
+
+			<div class="row">
+                <div class="panel panel-bm indexBlockList">
+                    <div class="panel-heading">
+					<div class="panel-heading-corner">
+						<a href="/transaction"><span i18n="index.more">更多</span><i
+							class="icon-arrow-right"></i></a>
+					</div>
+					<div class="panel-heading-title" i18n="index.recenttransactions">最新交易信息</div>						
+                    </div>
+                    <div class="panel-body" style="padding-top:2px;height:571px;">
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center" i18n="transaction.type">交易类型</th>
+								<th class="text-center" i18n="delegate.blockHeight">区块高度</th>
+                                <th class="text-center" i18n="transaction.sender">发送者</th>
+                                <th class="text-center" i18n="transaction.receiver">接收者</th>
+                                <th class="text-center" i18n="transaction.amount">金额</th>
+                            </tr>
+                                #if(transCount > 0)
+								#for(order : transactions)
+                                <tr data-id="479937">
+                                    <td class="text-center">#(order.desc)
+                                    </td>
+                                    <td class="text-center">                                        
+                                        <div class="cell-blockid indexGray"><a href="/block/detail?height=#(order.blockHeight)#(append)">#(order.blockHeight)</a></div>
+                                    </td>
+                                    <td class="text-center indexGray"><a href="/account/detail?address=#(order.sender)">#(order.sender)</a></td>
+                                    <td class="text-center indexGray"><a href="/account/detail?address=#(order.recipient)">#(order.recipient)</a></td>
+                                    <td class="text-center indexGray">
+										#(order.amount)
+										#if(order.type == 1 || order.type == 1)
+										&nbsp;#(order.asset)
+										#end
+                                    </td>
+                                    
+                                </tr>
+								#end
+								#end
+                            </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="panel panel-bm indexBlockList">
+                    <div class="panel-heading">
+					<div class="panel-heading-corner">
+						<a href="/block"><span i18n="index.more">更多</span><i
+							class="icon-arrow-right"></i></a>
+					</div>
+					<div class="panel-heading-title" i18n="index.recentblocks">最新区块信息</div>						
+                    </div>
+                    <div class="panel-body" style="padding-top:2px;">
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center" i18n="block.height">高度</th>
+								<th class="text-center" i18n="block.generator">生产者</th>
+                                <th class="text-center" i18n="block.generatetime">产生时间</th>
+								<th class="text-center" i18n="block.size">区块大小</th>
+								<th class="text-center" i18n="block.transactionnum">交易数</th>
+                            </tr>
+								#for(block : blocks)
+                                <tr>
+								<td class="text-center"><a href="/block/detail?height=#(block.height)">#(block.height)</a>
+								</td>
+								<td class="text-center">                                        
+									<div class="cell-blockid indexGray"><a href="/account/detail?address=#(block.generatorAddress)">#(block.generatorAddress)</a></div>
+								</td>
+								<td class="text-center indexGray">#(block.generateTime)</td>
+								<td class="text-center indexGray">#(block.size) Bytes</td>
+								<td class="text-center indexGray">#(block.numberOfTransactions)</td>
+								</tr>
+								#end
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	#@foot()
+	<script src="js/intervalFlush.js"></script>
+</body>
+</html>

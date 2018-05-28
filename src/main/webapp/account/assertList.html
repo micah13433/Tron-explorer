@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="asset.list">资产列表</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title"><span i18n="account.user">用户</span> [ #(address) ]</li>
+                    <li class="head-title" i18n="asset.list">资产余额列表</li>
+                </ol>
+            </div>
+
+            <div class="row blockList">
+                <div class="blockList-inner">
+                    <div class="indexBlockList">
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center">#</th>
+								<th class="text-center" i18n="asset.name">名称</th>
+                                <th class="text-center" i18n="account.balance">余额</th>
+                            </tr>
+                           #setLocal(i = 0)
+                           #for(item : assertMap)
+                           #setLocal(i = i+1)
+							<tr>
+								<td class="text-center">#(i)
+								</td>
+								<td class="text-center">                                        
+									<div class="cell-blockid indexGray">#(item.key)</div>
+								</td>
+								<td class="text-center indexGray" >#(item.value)</td>
+							</tr>
+							#end
+                        </table>
+						 #if(count <= 0)
+                          	<div class="noresultDiv" ><h3 i18n="asset.nofound">暂无此用户资产记录</h3></div>
+                          #end
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	
+	#@foot()
+
+</body>
+</html>

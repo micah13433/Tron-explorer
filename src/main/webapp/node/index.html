@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="node.list">节点列表</title>
+   <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title" i18n="node.list">节点列表</li>
+                </ol>
+            </div>
+			
+			<div class="row blockList">
+				<div class="blockList-inner" style="width:50%;float:left;">
+					<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+					
+            	</div>
+            	<div class="blockList-inner" style="width:50%;float:left">
+            		<div id="container2" style="min-width:200px;height:400px"></div>
+            	</div>
+           	</div>
+            
+            <div class="row blockList">
+                <div class="blockList-inner">
+                	 #if(count > 0 && totalpage > 1)
+					<div class="blockList-cal">
+						#@paginate(currpage, totalpage, "/node?page=")
+                    </div>
+                    #end
+                    <div class="indexBlockList">
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center">#</th>
+								<th class="text-center" i18n="node.country">国家</th>
+                                <th class="text-center" i18n="node.city">城市</th>
+								<th class="text-center" i18n="node.count">节点数</th>
+								<th class="text-center" i18n="node.longitude">精度</th>
+								<th class="text-center" i18n="node.latitude">维度</th>
+                            </tr>
+							#if(count > 0)
+                            #setLocal(i = 0)	
+							#for(node : nodes)
+							#setLocal(i = i+1)
+							<tr>
+								<td class="text-center">#(i+(currpage-1)*20)
+								</td>
+								<td class="text-center">                                        
+									<div class="cell-blockid indexGray">#(node.country)</div>
+								</td>
+								<td class="text-center indexGray" >#(node.city)</td>
+								<td class="text-center indexGray" >#(node.count)</td>
+								<td class="text-center indexGray" >#(node.longitude)</td>
+								<td class="text-center indexGray" >#(node.latitude)</td>
+							</tr>
+							#end
+							#end
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	
+	#@foot()
+	 <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+     <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+     <script src="https://img.hcharts.cn/highcharts/modules/data.js"></script>
+     <script src="https://img.hcharts.cn/highcharts/modules/drilldown.js"></script>
+     <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+	<script src="../js/nodeChart.js"></script>
+</body>
+</html>

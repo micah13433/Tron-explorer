@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="block.detail">区块详情</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title" i18n="block.detail">区块详情</li>
+                </ol>
+            </div>
+			
+			#if(block.height != null)
+			<div class="row">
+                
+                <div>				
+                    <div class="panel panel-bm indexNetworkStats">
+                        <div class="panel-heading">
+                            <div class="panel-heading-title" i18n="account.summary">摘要</div>
+                        </div>
+                        <div class="panel-body" style="color:#777">
+                            <ul>
+                                <li>
+                                    <dl>
+                                        <dt i18n="delegate.blockHeight">区块高度</dt>
+                                        <dd>#(block.height)
+                                        </dd>
+                                    </dl>
+                                </li>
+                                 <li>
+                                    <dl>
+                                        <dt i18n="block.size">区块大小</dt>
+                                        <dd>#(block.size) Bytes</dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <dl>
+                                        <dt i18n="block.generatetime">
+                                            产生时间
+                                        </dt>
+                                        <dd>#(block.generateTime) <span i18n="block.timeegao">(#(block.generateTimeAgoDesc))</span>
+                                        </dd>
+                                    </dl>
+                                </li>
+								<li>
+                                    <dl>
+                                        <dt i18n="block.generator">
+                                            生产者
+                                        </dt>
+                                        <dd>#(block.generatorAddress)
+                                        </dd>
+                                    </dl>
+                                </li>
+                                
+                            </ul>
+
+                            <ul>
+                                <li>
+                                    <dl>
+                                        <dt i18n="block.transactionnum">交易数</dt>
+                                        <dd>#(block.numberOfTransactions)</dd>
+                                    </dl>
+                                </li>
+
+								<li>
+                                    <dl>
+                                        <dt i18n="block.parentHash">父区块Hash</dt>
+                                        <dd>#(block.previousHash)
+                                        </dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <dl>
+                                    	<dt>
+                                            #if(block.height != 1)
+                                            #setLocal(nextHeight = block.height - 1)
+                                           <a href="/block/detail?height=#(nextHeight)"><span class="leftImageDesc" i18n="block.preblock">前一个区块</span><img src="../images/left.png"/ class="leftImage"></a>
+                                        	#end
+                                        </dt>
+                                        <dt style="float:right;">
+                                        	 #setLocal(preHeight = block.height + 1)
+                                            <a href="/block/detail?height=#(preHeight)"><img src="../images/right.png"/ class="leftImage"><span class="leftImageDesc" i18n="block.nextblock">后一个区块</span></a>
+                                        </dt>
+                                        
+                                    </dl>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+			
+            <div class="row blockList">
+				<div class="panel-bm indexNetworkStats">
+					<div class="panel-heading">
+						<div class="panel-heading-title" i18n="head.transaction">交易</div>
+					</div>
+				</div>
+                <div class="blockList-inner">
+                    <div class="indexBlockList">
+					    #if(transactions == null || transactions.size() == 0)
+							<span class="emptyTip" i18n="block.notransactionfound">该区块没有发生交易.</span>
+						#else
+                        <table class="table table-hover">
+                            <tr id="append">
+                                <th class="text-center" i18n="transaction.type">交易类型</th>
+								<th class="text-center" i18n="block.transactiontime">交易时间</th>
+                                <th class="text-center" i18n="transaction.sender">发送者</th>
+                                <th class="text-center" i18n="transaction.receiver">接受者</th>
+                                <th class="text-center" i18n="transaction.amount">金额</th>
+                            </tr>
+							#for(order : transactions)
+							<tr >
+								<td class="text-center">#(order.desc)
+								</td>
+								<td class="text-center">                                        
+									<div class="cell-blockid indexGray">#(order.time)</div>
+								</td>
+								<td class="text-center indexGray" ><a href="/account/detail?address=#(order.sender)">#(order.sender)</a></td>
+								<td class="text-center indexGray"><a href="/account/detail?address=#(order.recipient)">#(order.recipient)</a></td>
+								<td class="text-center indexGray">
+									#(order.amount)
+								</td>
+								
+							</tr>
+							#end
+                        </table>
+						#end
+                    </div>
+                </div>
+            </div>
+			#else
+				#@empty()	
+			#end
+        </div>
+    </div>
+	
+	#@foot()
+	
+</body>
+</html>
