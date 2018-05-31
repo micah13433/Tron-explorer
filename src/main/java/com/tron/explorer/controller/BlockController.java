@@ -1,10 +1,7 @@
 package com.tron.explorer.controller;
 
 
-import java.util.List;
-
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.ehcache.CacheKit;
 import com.tron.explorer.Constrain;
 import com.tron.explorer.model.BaseQuery;
 import com.tron.explorer.model.Block;
@@ -52,7 +49,8 @@ public class BlockController extends Controller {
 	}
 	
 	public void blockheight() throws TronException {
-		renderText(String.valueOf(CacheKit.get("persistedList", "maxBlockHeight")));
+		long maxBlockHeight = BlockService.getLatestBlockNumber();
+		renderText(String.valueOf(maxBlockHeight));
 	}
 }
  

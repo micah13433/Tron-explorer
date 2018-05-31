@@ -73,4 +73,30 @@ public interface Utils {
 	  DecimalFormat df = new DecimalFormat("###.######");
 	  return df.format(Double.valueOf(amount)/Constrain.ONE_TRX);
   }
+  
+  public static boolean isNewVersion(String localVersion, String onlineVersion) {
+      if (localVersion == null || onlineVersion == null) {
+          throw new IllegalArgumentException("argument may not be null !");
+      }
+      if (localVersion.equals(onlineVersion)) {
+          return false;
+      }
+      String[] localArray = localVersion.replaceAll("[^0-9.]", "").split("[.]");
+      String[] onlineArray = onlineVersion.replaceAll("[^0-9.]", "").split("[.]");
+      int length = localArray.length < onlineArray.length ? localArray.length : onlineArray.length;
+      for (int i = 0; i < length; i++) {
+          if (Integer.parseInt(onlineArray[i]) > Integer.parseInt(localArray[i])) {
+              return true;
+          } else if (Integer.parseInt(onlineArray[i]) < Integer.parseInt(localArray[i])) {
+              return false;
+          }
+      }
+      //比较最后差异组数值
+      if (localArray.length < onlineArray.length) {
+          return Integer.parseInt(onlineArray[onlineArray.length - 1]) > 0;
+      } else if (localArray.length > onlineArray.length) {
+          return 0 > Integer.parseInt(localArray[localArray.length - 1]);
+      }
+      return true;
+  }
 }

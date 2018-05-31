@@ -10,19 +10,24 @@ import java.util.Map.Entry;
 import org.jsoup.helper.StringUtil;
 import org.tron.common.crypto.ECKey;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.tron.explorer.Constrain;
 import com.tron.explorer.encrypt.Base58;
 import com.tron.explorer.interceptor.AuthInterceptor;
 import com.tron.explorer.model.Account;
 import com.tron.explorer.model.BaseQuery;
+import com.tron.explorer.model.Delegates;
 import com.tron.explorer.model.Transaction;
 import com.tron.explorer.model.Transactions;
 import com.tron.explorer.model.TronException;
 import com.tron.explorer.service.AccountService;
+import com.tron.explorer.service.MarketService;
+import com.tron.explorer.service.NewsService;
 import com.tron.explorer.service.WalletService;
 import com.tron.explorer.util.CheckUtil;
 import com.tron.explorer.util.DecodeUtil;
@@ -85,6 +90,7 @@ public class WalletController extends Controller {
 	public void logout() throws TronException {
 		if(this.getSession().getAttribute("address") != null){
 			this.getSession().removeAttribute("address");
+			this.getSession().removeAttribute("password");
 		}
 		renderJson();
 	}
@@ -92,6 +98,7 @@ public class WalletController extends Controller {
 	public void doLogin() throws TronException {
 		String password = getPara("password");
 		String address = getPara("address");
+		String from = getPara("from");
 		JSONObject obj = new JSONObject();
 		if(StringUtils.isBlank(password) || password.length() < 40){
 			obj.put("status", 0);
@@ -103,6 +110,16 @@ public class WalletController extends Controller {
 			obj.put("status", 1);
 			if(StringUtil.isBlank(address)){
 				address = account.getAddress();
+			}
+			if(!StringUtils.isBlank(from)){
+				obj.put("TRX", account.getBalance());
+				Iterator<Entry<String, Long>> entries = account.getAssets().entrySet().iterator();  				  
+				while (entries.hasNext()) {  				  
+				    Entry<String, Long> entry = entries.next(); 
+				    obj.put(entry.getKey(), entry.getValue());
+				}  
+				obj.put("price", WalletService.getCurrPrice());
+				obj.put("address", address);
 			}
 			this.getSession().setAttribute("address", address);
 			this.getSession().setAttribute("password", password);
@@ -225,6 +242,83 @@ public class WalletController extends Controller {
 		String password = (String) this.getSession().getAttribute("password");
 		boolean result = WalletService.unfreeze(fromAddress,password);
 		if(result){
+			obj.put("code", 1);
+		}
+		renderJson(obj);		
+	}
+	
+	public void getLatestAsset() throws TronException{
+		JSONObject obj = new JSONObject();
+		String password = (String) this.getSession().getAttribute("password");
+		if(password == null){
+			obj.put("code", 0);
+		}else{
+			obj.put("code", 1);
+			String fromAddress = (String) this.getSession().getAttribute("address");
+			Account account = WalletService.getAccountByPassword(password);
+			obj.put("TRX", account.getBalance());
+			Iterator<Entry<String, Long>> entries = account.getAssets().entrySet().iterator();  				  
+			while (entries.hasNext()) {  				  
+			    Entry<String, Long> entry = entries.next(); 
+			    obj.put(entry.getKey(), entry.getValue());
+			}  
+			obj.put("price", WalletService.getCurrPrice());
+			obj.put("address", fromAddress);
+		}
+		
+		renderJson(obj);		
+	}
+	
+	public void getTransactionHistory() throws TronException{
+		JSONObject obj = new JSONObject();
+		String password = (String) this.getSession().getAttribute("password");
+		if(password == null){
+			obj.put("code", 0);
+		}else{
+			obj.put("code", 1);
+			Long currPageIndex = PageUtil.getPage(getPara("page"));	
+			BaseQuery baseQuery = new BaseQuery();
+			int pageSize = 10;
+			baseQuery.setLimit(pageSize);
+			baseQuery.setOffset((currPageIndex-1)*pageSize);
+			baseQuery.setSort("-timestamp");
+			String address = (String) this.getSession().getAttribute("address");
+			Transactions transactions = AccountService.queryTransactionList(address,baseQuery);			
+			obj.put("list", JSON.toJSONString(transactions.getOrders()));
+			obj.put("address", address);
+		}
+		
+		renderJson(obj);		
+	}
+	
+	public void getNews() throws TronException{
+		JSONObject obj = new JSONObject();
+		obj.put("list", JSON.toJSONString(NewsService.queryNews()));
+		renderJson(obj);		
+	}
+	
+	public void getMarket() throws TronException{
+		JSONObject obj = new JSONObject();
+		obj.put("list", JSON.toJSONString(MarketService.queryPrice4Extension()));
+		renderJson(obj);		
+	}
+	
+	public void getWitness() throws TronException{
+		JSONObject obj = new JSONObject();
+		Delegates delegates = CacheKit.get("delegateList", "index");
+		if(delegates == null){
+			delegates = new Delegates();
+		}
+		obj.put("list", JSON.toJSONString(delegates.getDelegates()));
+		renderJson(obj);		
+	}
+	
+	public void checkUpdate() throws TronException{
+		String localVersion = getPara("version");
+		String latestVersion = Constrain.LASTEST_VERSION;
+		JSONObject obj = new JSONObject();
+		obj.put("code", 0);
+		if(!Utils.isNewVersion(localVersion, latestVersion)){
 			obj.put("code", 1);
 		}
 		renderJson(obj);		

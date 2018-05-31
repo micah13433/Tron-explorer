@@ -24,8 +24,9 @@ public class Constrain {
 	public final static int INDEX_LIST_NUMBER = 10;
 	public final static int ONE_TRX = 1000000;
 	
-	public final static byte ADD_PRE_FIX_BYTE = (byte) 0xa0;;
-	public final static String ADD_PRE_FIX_STRING = "a0";
+	public final static byte ADD_PRE_FIX_BYTE = (byte) 0x41;;
 	public final static int ADDRESS_SIZE = 21;
 	public final static int BASE58CHECK_ADDRESS_SIZE = 35;
+	
+	public final static String LASTEST_VERSION = "1.0.0";
 }

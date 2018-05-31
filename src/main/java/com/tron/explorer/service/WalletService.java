@@ -16,6 +16,7 @@ import org.tron.protos.Protocol.Transaction;
 import org.tron.walletserver.WalletClient;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.protobuf.ByteString;
@@ -104,5 +105,12 @@ public class WalletService extends BaseService{
 			result = true;
 		}
 		return result;
+	}
+
+	public static String getCurrPrice() throws TronException {
+		String response = client.get("https://api.coinmarketcap.com/v1/ticker/tron/");
+		JSONArray array = JSONArray.parseArray(response);
+		JSONObject jsonObject = array.getJSONObject(0);
+		return jsonObject.getString("price_usd");
 	}
 }

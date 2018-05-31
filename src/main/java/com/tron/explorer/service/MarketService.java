@@ -8,8 +8,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.alibaba.fastjson.JSONArray;
 import com.tron.explorer.http.HttpClient;
 import com.tron.explorer.model.Market;
+import com.tron.explorer.model.Market4M;
 import com.tron.explorer.model.TronException;
 
 public class MarketService extends BaseService {
@@ -47,6 +49,31 @@ public class MarketService extends BaseService {
 		String html = client.get(
 				"https://block.cc/api/v1/marketKline/tron");		
 		return html;
+	}
+	
+	public static List<Market4M> queryPrice4Extension() throws TronException {
+		String html = client.get(
+				"https://api.jinse.com/v4/market/web/list?currency_type=trx&type=1&currency=CNY&_source=m");
+		List<Market4M> result = new ArrayList<Market4M>();
+		JSONArray array = JSONArray.parseArray(html);
+		Market4M obj = null;
+		String rate = null;
+		for(int i=0;i< array.size();i++){
+			obj = new Market4M();
+			obj.setDomain(array.getJSONObject(i).getString("domain"));
+			obj.setLogo(array.getJSONObject(i).getString("logo"));
+			obj.setName(array.getJSONObject(i).getString("exchange_name"));
+			obj.setPrice(array.getJSONObject(i).getString("last"));
+			rate = array.getJSONObject(i).getString("degree");
+			if(rate!= null && !rate.startsWith("-")){
+				rate = ("+" + rate);
+			}
+			
+			rate = rate + "%";
+			obj.setRate(rate);
+			result.add(obj);
+		}
+		return result;
 	}
 	
 }
