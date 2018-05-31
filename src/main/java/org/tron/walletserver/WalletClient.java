@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
 import org.tron.api.GrpcAPI;
+import org.tron.api.GrpcAPI.AccountNetMessage;
 import org.tron.api.GrpcAPI.AssetIssueList;
 import org.tron.api.GrpcAPI.BlockList;
 import org.tron.api.GrpcAPI.NodeList;
@@ -752,10 +753,6 @@ public class WalletClient {
     return rpcCli.getAssetIssueListByTimestamp(timestamp);
   }
 
-  public static Optional<TransactionList> getTransactionsByTimestamp(long start, long end) {
-    return rpcCli.getTransactionsByTimestamp(start, end);
-  }
-
   public static Optional<AssetIssueList> getAssetIssueList() {
     return rpcCli.getAssetIssueList();
   }
@@ -778,14 +775,6 @@ public class WalletClient {
 
   public static GrpcAPI.NumberMessage getNextMaintenanceTime() {
     return rpcCli.getNextMaintenanceTime();
-  }
-
-  public static Optional<TransactionList> getTransactionsFromThis(byte[] address) {
-    return rpcCli.getTransactionsFromThis(address);
-  }
-
-  public static Optional<TransactionList> getTransactionsToThis(byte[] address) {
-    return rpcCli.getTransactionsToThis(address);
   }
 
   public static Optional<Transaction> getTransactionById(String txID) {
@@ -892,5 +881,9 @@ public class WalletClient {
 
   public static Optional<BlockList> getBlockByLatestNum(long num) {
     return rpcCli.getBlockByLatestNum(num);
+  }
+  
+  public static AccountNetMessage getAccountNet(byte[] address) {
+    return rpcCli.getAccountNet(address);
   }
 }

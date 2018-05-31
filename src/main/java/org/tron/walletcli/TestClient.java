@@ -661,28 +661,6 @@ public class TestClient {
     }
   }
 
-  private void getTransactionsByTimestamp(String[] parameters) {
-    String start = "";
-    String end = "";
-    if (parameters == null || parameters.length != 4) {
-      System.out.println(
-          "getTransactionsByTimestamp needs 2 parameters, start_time and end_time, time format is yyyy-mm-dd hh:mm:ss");
-      return;
-    } else {
-      start = parameters[0] + " " + parameters[1];
-      end = parameters[2] + " " + parameters[3];
-    }
-    long startTime = Timestamp.valueOf(start).getTime();
-    long endTime = Timestamp.valueOf(end).getTime();
-    Optional<TransactionList> result = WalletClient.getTransactionsByTimestamp(startTime, endTime);
-    if (result.isPresent()) {
-      TransactionList transactionList = result.get();
-      logger.info(Utils.printTransactionList(transactionList));
-    } else {
-      logger.info("getTransactionsByTimestamp " + " failed !!");
-    }
-  }
-
   private void getTransactionById(String[] parameters) {
     String txid = "";
     if (parameters == null || parameters.length != 1) {
@@ -697,48 +675,6 @@ public class TestClient {
       logger.info(Utils.printTransaction(transaction));
     } else {
       logger.info("getTransactionById " + " failed !!");
-    }
-  }
-
-  private void getTransactionsFromThis(String[] parameters) {
-    if (parameters == null || parameters.length != 1) {
-      System.out.println("GetTransactionsFromThis need 1 parameter like following: ");
-      System.out.println("GetTransactionsFromThis Address ");
-      return;
-    }
-    String address = parameters[0];
-    byte[] addressBytes = WalletClient.decodeFromBase58Check(address);
-    if (addressBytes == null) {
-      return;
-    }
-
-    Optional<TransactionList> result = WalletClient.getTransactionsFromThis(addressBytes);
-    if (result.isPresent()) {
-      TransactionList transactionList = result.get();
-      logger.info(Utils.printTransactionList(transactionList));
-    } else {
-      logger.info("GetTransactionsFromThis " + " failed !!");
-    }
-  }
-
-  private void getTransactionsToThis(String[] parameters) {
-    if (parameters == null || parameters.length != 1) {
-      System.out.println("getTransactionsToThis need 1 parameter like following: ");
-      System.out.println("getTransactionsToThis Address ");
-      return;
-    }
-    String address = parameters[0];
-    byte[] addressBytes = WalletClient.decodeFromBase58Check(address);
-    if (addressBytes == null) {
-      return;
-    }
-
-    Optional<TransactionList> result = WalletClient.getTransactionsToThis(addressBytes);
-    if (result.isPresent()) {
-      TransactionList transactionList = result.get();
-      logger.info(Utils.printTransactionList(transactionList));
-    } else {
-      logger.info("getTransactionsToThis " + " failed !!");
     }
   }
 
@@ -998,18 +934,6 @@ public class TestClient {
             getAssetIssueListByTimestamp(parameters);
             break;
           }
-          case "gettransactionsfromthis": {
-            getTransactionsFromThis(parameters);
-            break;
-          }
-          case "gettransactionstothis": {
-            getTransactionsToThis(parameters);
-            break;
-          }
-          case "gettransactionsbytimestamp": {
-            getTransactionsByTimestamp(parameters);
-            break;
-          }
           case "gettransactionbyid": {
             getTransactionById(parameters);
             break;
@@ -1049,11 +973,7 @@ public class TestClient {
     System.out.println(totalTransition.getNum());
     Block block = client.GetBlock(12345);
     System.out.println(block.getTransactionsCount() + "--" + Base58.encodeChecked(block.getBlockHeader().getRawData().getWitnessAddress().toByteArray()));
-    
-    byte[] addressBytes = WalletClient.decodeFromBase58Check("27d3byPxZXKQWfXX7sJvemJJuv5M65F3vjS");
-    Optional<TransactionList>  list = WalletClient.getTransactionsFromThis(addressBytes);
-    System.out.println(list.get().getTransactionCount());
-    
+       
      
   }
 }

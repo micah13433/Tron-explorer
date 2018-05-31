@@ -19,6 +19,7 @@
 package org.tron.common.utils;
 
 import com.google.protobuf.ByteString;
+import java.io.Console;
 import java.security.SecureRandom;
 import java.nio.*;
 import java.nio.charset.Charset;
@@ -26,6 +27,8 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
+import org.tron.api.GrpcAPI.AccountNetMessage;
 import org.tron.api.GrpcAPI.AssetIssueList;
 import org.tron.api.GrpcAPI.BlockList;
 import org.tron.api.GrpcAPI.TransactionList;
@@ -127,8 +130,11 @@ public class Utils {
         result += "\n";
       }
     }
-    result += "bandwidth: ";
-    result += account.getBandwidth();
+    result += "free_net_usage: ";
+    result += account.getFreeNetUsage();
+    result += "\n";
+    result += "net_usage: ";
+    result += account.getNetUsage();
     result += "\n";
     if (account.getCreateTime() != 0) {
       result += "create_time: ";
@@ -163,6 +169,12 @@ public class Utils {
         result += "  balance: ";
         result += account.getAssetMap().get(name);
         result += "\n";
+        result += "  latest_asset_operation_time: ";
+        result += account.getLatestAssetOperationTimeMap().get(name);
+        result += "\n";
+        result += "  free_asset_net_usage: ";
+        result += account.getFreeAssetNetUsageMap().get(name);
+        result += "\n";
         result += "}";
         result += "\n";
       }
@@ -185,6 +197,14 @@ public class Utils {
     }
     result += "latest_opration_time: ";
     result += new Date(account.getLatestOprationTime());
+    result += "\n";
+
+    result += "latest_consume_time: ";
+    result += account.getLatestConsumeTime();
+    result += "\n";
+
+    result += "latest_consume_free_time: ";
+    result += account.getLatestConsumeFreeTime();
     result += "\n";
 
     result += "allowance: ";
@@ -311,6 +331,18 @@ public class Utils {
     result += "url: ";
     result += new String(assetIssue.getUrl().toByteArray(), Charset.forName("UTF-8"));
     result += "\n";
+    result += "free asset net limit: ";
+    result += assetIssue.getFreeAssetNetLimit();
+    result += "\n";
+    result += "public free asset net limit: ";
+    result += assetIssue.getPublicFreeAssetNetLimit();
+    result += "\n";
+    result += "public free asset net usage: ";
+    result += assetIssue.getPublicFreeAssetNetUsage();
+    result += "\n";
+    result += "public latest free net time: ";
+    result += assetIssue.getPublicLatestFreeNetTime();
+    result += "\n";
 
     if (assetIssue.getFrozenSupplyCount() > 0) {
       for (FrozenSupply frozenSupply : assetIssue.getFrozenSupplyList()) {
@@ -363,10 +395,10 @@ public class Utils {
           result += "type: ";
           result += accountCreateContract.getType();
           result += "\n";
-          if (accountCreateContract.getAccountName() != null
-              && accountCreateContract.getAccountName().size() > 0) {
-            result += "account_name: ";
-            result += new String(accountCreateContract.getAccountName().toByteArray(),
+          if (accountCreateContract.getAccountAddress() != null
+              && accountCreateContract.getAccountAddress().size() > 0) {
+            result += "account_address: ";
+            result += new String(accountCreateContract.getAccountAddress().toByteArray(),
                 Charset.forName("UTF-8"));
             result += "\n";
           }
@@ -764,4 +796,70 @@ public class Utils {
     }
     return result;
   }
+
+  public static String printAccountNet(AccountNetMessage accountNet) {
+    String result = "";
+    result += "free_net_used: ";
+    result += accountNet.getFreeNetUsed();
+    result += "\n";
+    result += "free_net_limit: ";
+    result += accountNet.getFreeNetLimit();
+    result += "\n";
+    result += "net_used: ";
+    result += accountNet.getNetUsed();
+    result += "\n";
+    result += "net_limit: ";
+    result += accountNet.getNetLimit();
+    result += "\n";
+    result += "total_net_limit: ";
+    result += accountNet.getTotalNetLimit();
+    result += "\n";
+    result += "total_net_weight: ";
+    result += accountNet.getTotalNetWeight();
+    result += "\n";
+
+    if (accountNet.getAssetNetLimitCount() > 0) {
+      for (String name : accountNet.getAssetNetLimitMap().keySet()) {
+        result += "asset";
+        result += "\n";
+        result += "{";
+        result += "\n";
+        result += "  name: ";
+        result += name;
+        result += "\n";
+        result += "  free_asset_net_used: ";
+        result += accountNet.getAssetNetUsedMap().get(name);
+        result += "\n";
+        result += "  free_asset_net_limit: ";
+        result += accountNet.getAssetNetLimitMap().get(name);
+        result += "\n";
+        result += "}";
+        result += "\n";
+      }
+    }
+    return result;
+  }
+
+  public static String inputPassword() {
+    Scanner in = null;
+    String password;
+    Console cons = System.console();
+    if (cons == null) {
+      in = new Scanner(System.in);
+    }
+    while (true) {
+      if (cons != null) {
+        char[] pwd = cons.readPassword("password: ");
+        password = String.valueOf(pwd);
+      } else {
+        String input = in.nextLine().trim();
+        password = input.split("\\s+")[0];
+      }
+      if (WalletClient.passwordValid(password)) {
+        return password;
+      }
+      System.out.println("Invalid password, please input again.");
+    }
+  }
 }
+

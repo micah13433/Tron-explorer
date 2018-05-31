@@ -347,102 +347,6 @@ public final class WalletSolidityGrpc {
      }
      return getGetTransactionByIdMethod;
   }
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  @java.lang.Deprecated // Use {@link #getGetTransactionsByTimestampMethod()} instead. 
-  public static final io.grpc.MethodDescriptor<org.tron.api.GrpcAPI.TimeMessage,
-      org.tron.api.GrpcAPI.TransactionList> METHOD_GET_TRANSACTIONS_BY_TIMESTAMP = getGetTransactionsByTimestampMethod();
-
-  private static volatile io.grpc.MethodDescriptor<org.tron.api.GrpcAPI.TimeMessage,
-      org.tron.api.GrpcAPI.TransactionList> getGetTransactionsByTimestampMethod;
-
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static io.grpc.MethodDescriptor<org.tron.api.GrpcAPI.TimeMessage,
-      org.tron.api.GrpcAPI.TransactionList> getGetTransactionsByTimestampMethod() {
-    io.grpc.MethodDescriptor<org.tron.api.GrpcAPI.TimeMessage, org.tron.api.GrpcAPI.TransactionList> getGetTransactionsByTimestampMethod;
-    if ((getGetTransactionsByTimestampMethod = WalletSolidityGrpc.getGetTransactionsByTimestampMethod) == null) {
-      synchronized (WalletSolidityGrpc.class) {
-        if ((getGetTransactionsByTimestampMethod = WalletSolidityGrpc.getGetTransactionsByTimestampMethod) == null) {
-          WalletSolidityGrpc.getGetTransactionsByTimestampMethod = getGetTransactionsByTimestampMethod = 
-              io.grpc.MethodDescriptor.<org.tron.api.GrpcAPI.TimeMessage, org.tron.api.GrpcAPI.TransactionList>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "protocol.WalletSolidity", "GetTransactionsByTimestamp"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.tron.api.GrpcAPI.TimeMessage.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.tron.api.GrpcAPI.TransactionList.getDefaultInstance()))
-                  .setSchemaDescriptor(new WalletSolidityMethodDescriptorSupplier("GetTransactionsByTimestamp"))
-                  .build();
-          }
-        }
-     }
-     return getGetTransactionsByTimestampMethod;
-  }
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  @java.lang.Deprecated // Use {@link #getGetTransactionsFromThisMethod()} instead. 
-  public static final io.grpc.MethodDescriptor<org.tron.protos.Protocol.Account,
-      org.tron.api.GrpcAPI.TransactionList> METHOD_GET_TRANSACTIONS_FROM_THIS = getGetTransactionsFromThisMethod();
-
-  private static volatile io.grpc.MethodDescriptor<org.tron.protos.Protocol.Account,
-      org.tron.api.GrpcAPI.TransactionList> getGetTransactionsFromThisMethod;
-
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static io.grpc.MethodDescriptor<org.tron.protos.Protocol.Account,
-      org.tron.api.GrpcAPI.TransactionList> getGetTransactionsFromThisMethod() {
-    io.grpc.MethodDescriptor<org.tron.protos.Protocol.Account, org.tron.api.GrpcAPI.TransactionList> getGetTransactionsFromThisMethod;
-    if ((getGetTransactionsFromThisMethod = WalletSolidityGrpc.getGetTransactionsFromThisMethod) == null) {
-      synchronized (WalletSolidityGrpc.class) {
-        if ((getGetTransactionsFromThisMethod = WalletSolidityGrpc.getGetTransactionsFromThisMethod) == null) {
-          WalletSolidityGrpc.getGetTransactionsFromThisMethod = getGetTransactionsFromThisMethod = 
-              io.grpc.MethodDescriptor.<org.tron.protos.Protocol.Account, org.tron.api.GrpcAPI.TransactionList>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "protocol.WalletSolidity", "GetTransactionsFromThis"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.tron.protos.Protocol.Account.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.tron.api.GrpcAPI.TransactionList.getDefaultInstance()))
-                  .setSchemaDescriptor(new WalletSolidityMethodDescriptorSupplier("GetTransactionsFromThis"))
-                  .build();
-          }
-        }
-     }
-     return getGetTransactionsFromThisMethod;
-  }
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  @java.lang.Deprecated // Use {@link #getGetTransactionsToThisMethod()} instead. 
-  public static final io.grpc.MethodDescriptor<org.tron.protos.Protocol.Account,
-      org.tron.api.GrpcAPI.TransactionList> METHOD_GET_TRANSACTIONS_TO_THIS = getGetTransactionsToThisMethod();
-
-  private static volatile io.grpc.MethodDescriptor<org.tron.protos.Protocol.Account,
-      org.tron.api.GrpcAPI.TransactionList> getGetTransactionsToThisMethod;
-
-  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static io.grpc.MethodDescriptor<org.tron.protos.Protocol.Account,
-      org.tron.api.GrpcAPI.TransactionList> getGetTransactionsToThisMethod() {
-    io.grpc.MethodDescriptor<org.tron.protos.Protocol.Account, org.tron.api.GrpcAPI.TransactionList> getGetTransactionsToThisMethod;
-    if ((getGetTransactionsToThisMethod = WalletSolidityGrpc.getGetTransactionsToThisMethod) == null) {
-      synchronized (WalletSolidityGrpc.class) {
-        if ((getGetTransactionsToThisMethod = WalletSolidityGrpc.getGetTransactionsToThisMethod) == null) {
-          WalletSolidityGrpc.getGetTransactionsToThisMethod = getGetTransactionsToThisMethod = 
-              io.grpc.MethodDescriptor.<org.tron.protos.Protocol.Account, org.tron.api.GrpcAPI.TransactionList>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "protocol.WalletSolidity", "GetTransactionsToThis"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.tron.protos.Protocol.Account.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.tron.api.GrpcAPI.TransactionList.getDefaultInstance()))
-                  .setSchemaDescriptor(new WalletSolidityMethodDescriptorSupplier("GetTransactionsToThis"))
-                  .build();
-          }
-        }
-     }
-     return getGetTransactionsToThisMethod;
-  }
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -544,27 +448,6 @@ public final class WalletSolidityGrpc {
       asyncUnimplementedUnaryCall(getGetTransactionByIdMethod(), responseObserver);
     }
 
-    /**
-     */
-    public void getTransactionsByTimestamp(org.tron.api.GrpcAPI.TimeMessage request,
-        io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetTransactionsByTimestampMethod(), responseObserver);
-    }
-
-    /**
-     */
-    public void getTransactionsFromThis(org.tron.protos.Protocol.Account request,
-        io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetTransactionsFromThisMethod(), responseObserver);
-    }
-
-    /**
-     */
-    public void getTransactionsToThis(org.tron.protos.Protocol.Account request,
-        io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetTransactionsToThisMethod(), responseObserver);
-    }
-
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -637,27 +520,6 @@ public final class WalletSolidityGrpc {
                 org.tron.api.GrpcAPI.BytesMessage,
                 org.tron.protos.Protocol.Transaction>(
                   this, METHODID_GET_TRANSACTION_BY_ID)))
-          .addMethod(
-            getGetTransactionsByTimestampMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                org.tron.api.GrpcAPI.TimeMessage,
-                org.tron.api.GrpcAPI.TransactionList>(
-                  this, METHODID_GET_TRANSACTIONS_BY_TIMESTAMP)))
-          .addMethod(
-            getGetTransactionsFromThisMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                org.tron.protos.Protocol.Account,
-                org.tron.api.GrpcAPI.TransactionList>(
-                  this, METHODID_GET_TRANSACTIONS_FROM_THIS)))
-          .addMethod(
-            getGetTransactionsToThisMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                org.tron.protos.Protocol.Account,
-                org.tron.api.GrpcAPI.TransactionList>(
-                  this, METHODID_GET_TRANSACTIONS_TO_THIS)))
           .build();
     }
   }
@@ -762,30 +624,6 @@ public final class WalletSolidityGrpc {
       asyncUnaryCall(
           getChannel().newCall(getGetTransactionByIdMethod(), getCallOptions()), request, responseObserver);
     }
-
-    /**
-     */
-    public void getTransactionsByTimestamp(org.tron.api.GrpcAPI.TimeMessage request,
-        io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getGetTransactionsByTimestampMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void getTransactionsFromThis(org.tron.protos.Protocol.Account request,
-        io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getGetTransactionsFromThisMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void getTransactionsToThis(org.tron.protos.Protocol.Account request,
-        io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getGetTransactionsToThisMethod(), getCallOptions()), request, responseObserver);
-    }
   }
 
   /**
@@ -877,27 +715,6 @@ public final class WalletSolidityGrpc {
     public org.tron.protos.Protocol.Transaction getTransactionById(org.tron.api.GrpcAPI.BytesMessage request) {
       return blockingUnaryCall(
           getChannel(), getGetTransactionByIdMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public org.tron.api.GrpcAPI.TransactionList getTransactionsByTimestamp(org.tron.api.GrpcAPI.TimeMessage request) {
-      return blockingUnaryCall(
-          getChannel(), getGetTransactionsByTimestampMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public org.tron.api.GrpcAPI.TransactionList getTransactionsFromThis(org.tron.protos.Protocol.Account request) {
-      return blockingUnaryCall(
-          getChannel(), getGetTransactionsFromThisMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public org.tron.api.GrpcAPI.TransactionList getTransactionsToThis(org.tron.protos.Protocol.Account request) {
-      return blockingUnaryCall(
-          getChannel(), getGetTransactionsToThisMethod(), getCallOptions(), request);
     }
   }
 
@@ -1001,30 +818,6 @@ public final class WalletSolidityGrpc {
       return futureUnaryCall(
           getChannel().newCall(getGetTransactionByIdMethod(), getCallOptions()), request);
     }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<org.tron.api.GrpcAPI.TransactionList> getTransactionsByTimestamp(
-        org.tron.api.GrpcAPI.TimeMessage request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetTransactionsByTimestampMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<org.tron.api.GrpcAPI.TransactionList> getTransactionsFromThis(
-        org.tron.protos.Protocol.Account request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetTransactionsFromThisMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<org.tron.api.GrpcAPI.TransactionList> getTransactionsToThis(
-        org.tron.protos.Protocol.Account request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetTransactionsToThisMethod(), getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_GET_ACCOUNT = 0;
@@ -1037,9 +830,6 @@ public final class WalletSolidityGrpc {
   private static final int METHODID_GET_BLOCK_BY_NUM = 7;
   private static final int METHODID_TOTAL_TRANSACTION = 8;
   private static final int METHODID_GET_TRANSACTION_BY_ID = 9;
-  private static final int METHODID_GET_TRANSACTIONS_BY_TIMESTAMP = 10;
-  private static final int METHODID_GET_TRANSACTIONS_FROM_THIS = 11;
-  private static final int METHODID_GET_TRANSACTIONS_TO_THIS = 12;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -1097,18 +887,6 @@ public final class WalletSolidityGrpc {
         case METHODID_GET_TRANSACTION_BY_ID:
           serviceImpl.getTransactionById((org.tron.api.GrpcAPI.BytesMessage) request,
               (io.grpc.stub.StreamObserver<org.tron.protos.Protocol.Transaction>) responseObserver);
-          break;
-        case METHODID_GET_TRANSACTIONS_BY_TIMESTAMP:
-          serviceImpl.getTransactionsByTimestamp((org.tron.api.GrpcAPI.TimeMessage) request,
-              (io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList>) responseObserver);
-          break;
-        case METHODID_GET_TRANSACTIONS_FROM_THIS:
-          serviceImpl.getTransactionsFromThis((org.tron.protos.Protocol.Account) request,
-              (io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList>) responseObserver);
-          break;
-        case METHODID_GET_TRANSACTIONS_TO_THIS:
-          serviceImpl.getTransactionsToThis((org.tron.protos.Protocol.Account) request,
-              (io.grpc.stub.StreamObserver<org.tron.api.GrpcAPI.TransactionList>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -1181,9 +959,6 @@ public final class WalletSolidityGrpc {
               .addMethod(getGetBlockByNumMethod())
               .addMethod(getTotalTransactionMethod())
               .addMethod(getGetTransactionByIdMethod())
-              .addMethod(getGetTransactionsByTimestampMethod())
-              .addMethod(getGetTransactionsFromThisMethod())
-              .addMethod(getGetTransactionsToThisMethod())
               .build();
         }
       }

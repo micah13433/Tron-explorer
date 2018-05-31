@@ -59,7 +59,7 @@ jQuery(document).ready(function() {
     		return false;
     	}
     	$(this).find('input[type="text"]').each(function(){
-    		if( $(this).val() == "" || $(this).val().length < 35) {
+    		if( $(this).val() == "" || $(this).val().length < 34) {
     			e.preventDefault();
     			$(this).addClass('input-error');
     			canSubmit = false;

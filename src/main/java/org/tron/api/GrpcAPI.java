@@ -9080,6 +9080,2788 @@ public final class GrpcAPI {
 
   }
 
+  public interface AccountPaginatedOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.AccountPaginated)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.protocol.Account account = 1;</code>
+     */
+    boolean hasAccount();
+    /**
+     * <code>.protocol.Account account = 1;</code>
+     */
+    org.tron.protos.Protocol.Account getAccount();
+    /**
+     * <code>.protocol.Account account = 1;</code>
+     */
+    org.tron.protos.Protocol.AccountOrBuilder getAccountOrBuilder();
+
+    /**
+     * <code>int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    /**
+     * <code>int64 limit = 3;</code>
+     */
+    long getLimit();
+  }
+  /**
+   * Protobuf type {@code protocol.AccountPaginated}
+   */
+  public  static final class AccountPaginated extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:protocol.AccountPaginated)
+      AccountPaginatedOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use AccountPaginated.newBuilder() to construct.
+    private AccountPaginated(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AccountPaginated() {
+      offset_ = 0L;
+      limit_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AccountPaginated(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              org.tron.protos.Protocol.Account.Builder subBuilder = null;
+              if (account_ != null) {
+                subBuilder = account_.toBuilder();
+              }
+              account_ = input.readMessage(org.tron.protos.Protocol.Account.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(account_);
+                account_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
+
+              offset_ = input.readInt64();
+              break;
+            }
+            case 24: {
+
+              limit_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.tron.api.GrpcAPI.internal_static_protocol_AccountPaginated_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.tron.api.GrpcAPI.internal_static_protocol_AccountPaginated_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.tron.api.GrpcAPI.AccountPaginated.class, org.tron.api.GrpcAPI.AccountPaginated.Builder.class);
+    }
+
+    public static final int ACCOUNT_FIELD_NUMBER = 1;
+    private org.tron.protos.Protocol.Account account_;
+    /**
+     * <code>.protocol.Account account = 1;</code>
+     */
+    public boolean hasAccount() {
+      return account_ != null;
+    }
+    /**
+     * <code>.protocol.Account account = 1;</code>
+     */
+    public org.tron.protos.Protocol.Account getAccount() {
+      return account_ == null ? org.tron.protos.Protocol.Account.getDefaultInstance() : account_;
+    }
+    /**
+     * <code>.protocol.Account account = 1;</code>
+     */
+    public org.tron.protos.Protocol.AccountOrBuilder getAccountOrBuilder() {
+      return getAccount();
+    }
+
+    public static final int OFFSET_FIELD_NUMBER = 2;
+    private long offset_;
+    /**
+     * <code>int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
+    public static final int LIMIT_FIELD_NUMBER = 3;
+    private long limit_;
+    /**
+     * <code>int64 limit = 3;</code>
+     */
+    public long getLimit() {
+      return limit_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (account_ != null) {
+        output.writeMessage(1, getAccount());
+      }
+      if (offset_ != 0L) {
+        output.writeInt64(2, offset_);
+      }
+      if (limit_ != 0L) {
+        output.writeInt64(3, limit_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (account_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getAccount());
+      }
+      if (offset_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, offset_);
+      }
+      if (limit_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, limit_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.tron.api.GrpcAPI.AccountPaginated)) {
+        return super.equals(obj);
+      }
+      org.tron.api.GrpcAPI.AccountPaginated other = (org.tron.api.GrpcAPI.AccountPaginated) obj;
+
+      boolean result = true;
+      result = result && (hasAccount() == other.hasAccount());
+      if (hasAccount()) {
+        result = result && getAccount()
+            .equals(other.getAccount());
+      }
+      result = result && (getOffset()
+          == other.getOffset());
+      result = result && (getLimit()
+          == other.getLimit());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasAccount()) {
+        hash = (37 * hash) + ACCOUNT_FIELD_NUMBER;
+        hash = (53 * hash) + getAccount().hashCode();
+      }
+      hash = (37 * hash) + OFFSET_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getOffset());
+      hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getLimit());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.AccountPaginated parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.tron.api.GrpcAPI.AccountPaginated prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code protocol.AccountPaginated}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:protocol.AccountPaginated)
+        org.tron.api.GrpcAPI.AccountPaginatedOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_AccountPaginated_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_AccountPaginated_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.tron.api.GrpcAPI.AccountPaginated.class, org.tron.api.GrpcAPI.AccountPaginated.Builder.class);
+      }
+
+      // Construct using org.tron.api.GrpcAPI.AccountPaginated.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (accountBuilder_ == null) {
+          account_ = null;
+        } else {
+          account_ = null;
+          accountBuilder_ = null;
+        }
+        offset_ = 0L;
+
+        limit_ = 0L;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_AccountPaginated_descriptor;
+      }
+
+      public org.tron.api.GrpcAPI.AccountPaginated getDefaultInstanceForType() {
+        return org.tron.api.GrpcAPI.AccountPaginated.getDefaultInstance();
+      }
+
+      public org.tron.api.GrpcAPI.AccountPaginated build() {
+        org.tron.api.GrpcAPI.AccountPaginated result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.tron.api.GrpcAPI.AccountPaginated buildPartial() {
+        org.tron.api.GrpcAPI.AccountPaginated result = new org.tron.api.GrpcAPI.AccountPaginated(this);
+        if (accountBuilder_ == null) {
+          result.account_ = account_;
+        } else {
+          result.account_ = accountBuilder_.build();
+        }
+        result.offset_ = offset_;
+        result.limit_ = limit_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.tron.api.GrpcAPI.AccountPaginated) {
+          return mergeFrom((org.tron.api.GrpcAPI.AccountPaginated)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.tron.api.GrpcAPI.AccountPaginated other) {
+        if (other == org.tron.api.GrpcAPI.AccountPaginated.getDefaultInstance()) return this;
+        if (other.hasAccount()) {
+          mergeAccount(other.getAccount());
+        }
+        if (other.getOffset() != 0L) {
+          setOffset(other.getOffset());
+        }
+        if (other.getLimit() != 0L) {
+          setLimit(other.getLimit());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.tron.api.GrpcAPI.AccountPaginated parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.tron.api.GrpcAPI.AccountPaginated) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private org.tron.protos.Protocol.Account account_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.tron.protos.Protocol.Account, org.tron.protos.Protocol.Account.Builder, org.tron.protos.Protocol.AccountOrBuilder> accountBuilder_;
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      public boolean hasAccount() {
+        return accountBuilder_ != null || account_ != null;
+      }
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      public org.tron.protos.Protocol.Account getAccount() {
+        if (accountBuilder_ == null) {
+          return account_ == null ? org.tron.protos.Protocol.Account.getDefaultInstance() : account_;
+        } else {
+          return accountBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      public Builder setAccount(org.tron.protos.Protocol.Account value) {
+        if (accountBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          account_ = value;
+          onChanged();
+        } else {
+          accountBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      public Builder setAccount(
+          org.tron.protos.Protocol.Account.Builder builderForValue) {
+        if (accountBuilder_ == null) {
+          account_ = builderForValue.build();
+          onChanged();
+        } else {
+          accountBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      public Builder mergeAccount(org.tron.protos.Protocol.Account value) {
+        if (accountBuilder_ == null) {
+          if (account_ != null) {
+            account_ =
+              org.tron.protos.Protocol.Account.newBuilder(account_).mergeFrom(value).buildPartial();
+          } else {
+            account_ = value;
+          }
+          onChanged();
+        } else {
+          accountBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      public Builder clearAccount() {
+        if (accountBuilder_ == null) {
+          account_ = null;
+          onChanged();
+        } else {
+          account_ = null;
+          accountBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      public org.tron.protos.Protocol.Account.Builder getAccountBuilder() {
+        
+        onChanged();
+        return getAccountFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      public org.tron.protos.Protocol.AccountOrBuilder getAccountOrBuilder() {
+        if (accountBuilder_ != null) {
+          return accountBuilder_.getMessageOrBuilder();
+        } else {
+          return account_ == null ?
+              org.tron.protos.Protocol.Account.getDefaultInstance() : account_;
+        }
+      }
+      /**
+       * <code>.protocol.Account account = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.tron.protos.Protocol.Account, org.tron.protos.Protocol.Account.Builder, org.tron.protos.Protocol.AccountOrBuilder> 
+          getAccountFieldBuilder() {
+        if (accountBuilder_ == null) {
+          accountBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.tron.protos.Protocol.Account, org.tron.protos.Protocol.Account.Builder, org.tron.protos.Protocol.AccountOrBuilder>(
+                  getAccount(),
+                  getParentForChildren(),
+                  isClean());
+          account_ = null;
+        }
+        return accountBuilder_;
+      }
+
+      private long offset_ ;
+      /**
+       * <code>int64 offset = 2;</code>
+       */
+      public long getOffset() {
+        return offset_;
+      }
+      /**
+       * <code>int64 offset = 2;</code>
+       */
+      public Builder setOffset(long value) {
+        
+        offset_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 offset = 2;</code>
+       */
+      public Builder clearOffset() {
+        
+        offset_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long limit_ ;
+      /**
+       * <code>int64 limit = 3;</code>
+       */
+      public long getLimit() {
+        return limit_;
+      }
+      /**
+       * <code>int64 limit = 3;</code>
+       */
+      public Builder setLimit(long value) {
+        
+        limit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 limit = 3;</code>
+       */
+      public Builder clearLimit() {
+        
+        limit_ = 0L;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:protocol.AccountPaginated)
+    }
+
+    // @@protoc_insertion_point(class_scope:protocol.AccountPaginated)
+    private static final org.tron.api.GrpcAPI.AccountPaginated DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.tron.api.GrpcAPI.AccountPaginated();
+    }
+
+    public static org.tron.api.GrpcAPI.AccountPaginated getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AccountPaginated>
+        PARSER = new com.google.protobuf.AbstractParser<AccountPaginated>() {
+      public AccountPaginated parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AccountPaginated(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AccountPaginated> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AccountPaginated> getParserForType() {
+      return PARSER;
+    }
+
+    public org.tron.api.GrpcAPI.AccountPaginated getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface TimePaginatedMessageOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.TimePaginatedMessage)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.protocol.TimeMessage timeMessage = 1;</code>
+     */
+    boolean hasTimeMessage();
+    /**
+     * <code>.protocol.TimeMessage timeMessage = 1;</code>
+     */
+    org.tron.api.GrpcAPI.TimeMessage getTimeMessage();
+    /**
+     * <code>.protocol.TimeMessage timeMessage = 1;</code>
+     */
+    org.tron.api.GrpcAPI.TimeMessageOrBuilder getTimeMessageOrBuilder();
+
+    /**
+     * <code>int64 offset = 2;</code>
+     */
+    long getOffset();
+
+    /**
+     * <code>int64 limit = 3;</code>
+     */
+    long getLimit();
+  }
+  /**
+   * Protobuf type {@code protocol.TimePaginatedMessage}
+   */
+  public  static final class TimePaginatedMessage extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:protocol.TimePaginatedMessage)
+      TimePaginatedMessageOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use TimePaginatedMessage.newBuilder() to construct.
+    private TimePaginatedMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TimePaginatedMessage() {
+      offset_ = 0L;
+      limit_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TimePaginatedMessage(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              org.tron.api.GrpcAPI.TimeMessage.Builder subBuilder = null;
+              if (timeMessage_ != null) {
+                subBuilder = timeMessage_.toBuilder();
+              }
+              timeMessage_ = input.readMessage(org.tron.api.GrpcAPI.TimeMessage.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(timeMessage_);
+                timeMessage_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
+
+              offset_ = input.readInt64();
+              break;
+            }
+            case 24: {
+
+              limit_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.tron.api.GrpcAPI.internal_static_protocol_TimePaginatedMessage_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.tron.api.GrpcAPI.internal_static_protocol_TimePaginatedMessage_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.tron.api.GrpcAPI.TimePaginatedMessage.class, org.tron.api.GrpcAPI.TimePaginatedMessage.Builder.class);
+    }
+
+    public static final int TIMEMESSAGE_FIELD_NUMBER = 1;
+    private org.tron.api.GrpcAPI.TimeMessage timeMessage_;
+    /**
+     * <code>.protocol.TimeMessage timeMessage = 1;</code>
+     */
+    public boolean hasTimeMessage() {
+      return timeMessage_ != null;
+    }
+    /**
+     * <code>.protocol.TimeMessage timeMessage = 1;</code>
+     */
+    public org.tron.api.GrpcAPI.TimeMessage getTimeMessage() {
+      return timeMessage_ == null ? org.tron.api.GrpcAPI.TimeMessage.getDefaultInstance() : timeMessage_;
+    }
+    /**
+     * <code>.protocol.TimeMessage timeMessage = 1;</code>
+     */
+    public org.tron.api.GrpcAPI.TimeMessageOrBuilder getTimeMessageOrBuilder() {
+      return getTimeMessage();
+    }
+
+    public static final int OFFSET_FIELD_NUMBER = 2;
+    private long offset_;
+    /**
+     * <code>int64 offset = 2;</code>
+     */
+    public long getOffset() {
+      return offset_;
+    }
+
+    public static final int LIMIT_FIELD_NUMBER = 3;
+    private long limit_;
+    /**
+     * <code>int64 limit = 3;</code>
+     */
+    public long getLimit() {
+      return limit_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (timeMessage_ != null) {
+        output.writeMessage(1, getTimeMessage());
+      }
+      if (offset_ != 0L) {
+        output.writeInt64(2, offset_);
+      }
+      if (limit_ != 0L) {
+        output.writeInt64(3, limit_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (timeMessage_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getTimeMessage());
+      }
+      if (offset_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, offset_);
+      }
+      if (limit_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, limit_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.tron.api.GrpcAPI.TimePaginatedMessage)) {
+        return super.equals(obj);
+      }
+      org.tron.api.GrpcAPI.TimePaginatedMessage other = (org.tron.api.GrpcAPI.TimePaginatedMessage) obj;
+
+      boolean result = true;
+      result = result && (hasTimeMessage() == other.hasTimeMessage());
+      if (hasTimeMessage()) {
+        result = result && getTimeMessage()
+            .equals(other.getTimeMessage());
+      }
+      result = result && (getOffset()
+          == other.getOffset());
+      result = result && (getLimit()
+          == other.getLimit());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasTimeMessage()) {
+        hash = (37 * hash) + TIMEMESSAGE_FIELD_NUMBER;
+        hash = (53 * hash) + getTimeMessage().hashCode();
+      }
+      hash = (37 * hash) + OFFSET_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getOffset());
+      hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getLimit());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.tron.api.GrpcAPI.TimePaginatedMessage prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code protocol.TimePaginatedMessage}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:protocol.TimePaginatedMessage)
+        org.tron.api.GrpcAPI.TimePaginatedMessageOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_TimePaginatedMessage_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_TimePaginatedMessage_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.tron.api.GrpcAPI.TimePaginatedMessage.class, org.tron.api.GrpcAPI.TimePaginatedMessage.Builder.class);
+      }
+
+      // Construct using org.tron.api.GrpcAPI.TimePaginatedMessage.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (timeMessageBuilder_ == null) {
+          timeMessage_ = null;
+        } else {
+          timeMessage_ = null;
+          timeMessageBuilder_ = null;
+        }
+        offset_ = 0L;
+
+        limit_ = 0L;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_TimePaginatedMessage_descriptor;
+      }
+
+      public org.tron.api.GrpcAPI.TimePaginatedMessage getDefaultInstanceForType() {
+        return org.tron.api.GrpcAPI.TimePaginatedMessage.getDefaultInstance();
+      }
+
+      public org.tron.api.GrpcAPI.TimePaginatedMessage build() {
+        org.tron.api.GrpcAPI.TimePaginatedMessage result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.tron.api.GrpcAPI.TimePaginatedMessage buildPartial() {
+        org.tron.api.GrpcAPI.TimePaginatedMessage result = new org.tron.api.GrpcAPI.TimePaginatedMessage(this);
+        if (timeMessageBuilder_ == null) {
+          result.timeMessage_ = timeMessage_;
+        } else {
+          result.timeMessage_ = timeMessageBuilder_.build();
+        }
+        result.offset_ = offset_;
+        result.limit_ = limit_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.tron.api.GrpcAPI.TimePaginatedMessage) {
+          return mergeFrom((org.tron.api.GrpcAPI.TimePaginatedMessage)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.tron.api.GrpcAPI.TimePaginatedMessage other) {
+        if (other == org.tron.api.GrpcAPI.TimePaginatedMessage.getDefaultInstance()) return this;
+        if (other.hasTimeMessage()) {
+          mergeTimeMessage(other.getTimeMessage());
+        }
+        if (other.getOffset() != 0L) {
+          setOffset(other.getOffset());
+        }
+        if (other.getLimit() != 0L) {
+          setLimit(other.getLimit());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.tron.api.GrpcAPI.TimePaginatedMessage parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.tron.api.GrpcAPI.TimePaginatedMessage) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private org.tron.api.GrpcAPI.TimeMessage timeMessage_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.tron.api.GrpcAPI.TimeMessage, org.tron.api.GrpcAPI.TimeMessage.Builder, org.tron.api.GrpcAPI.TimeMessageOrBuilder> timeMessageBuilder_;
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      public boolean hasTimeMessage() {
+        return timeMessageBuilder_ != null || timeMessage_ != null;
+      }
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      public org.tron.api.GrpcAPI.TimeMessage getTimeMessage() {
+        if (timeMessageBuilder_ == null) {
+          return timeMessage_ == null ? org.tron.api.GrpcAPI.TimeMessage.getDefaultInstance() : timeMessage_;
+        } else {
+          return timeMessageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      public Builder setTimeMessage(org.tron.api.GrpcAPI.TimeMessage value) {
+        if (timeMessageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          timeMessage_ = value;
+          onChanged();
+        } else {
+          timeMessageBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      public Builder setTimeMessage(
+          org.tron.api.GrpcAPI.TimeMessage.Builder builderForValue) {
+        if (timeMessageBuilder_ == null) {
+          timeMessage_ = builderForValue.build();
+          onChanged();
+        } else {
+          timeMessageBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      public Builder mergeTimeMessage(org.tron.api.GrpcAPI.TimeMessage value) {
+        if (timeMessageBuilder_ == null) {
+          if (timeMessage_ != null) {
+            timeMessage_ =
+              org.tron.api.GrpcAPI.TimeMessage.newBuilder(timeMessage_).mergeFrom(value).buildPartial();
+          } else {
+            timeMessage_ = value;
+          }
+          onChanged();
+        } else {
+          timeMessageBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      public Builder clearTimeMessage() {
+        if (timeMessageBuilder_ == null) {
+          timeMessage_ = null;
+          onChanged();
+        } else {
+          timeMessage_ = null;
+          timeMessageBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      public org.tron.api.GrpcAPI.TimeMessage.Builder getTimeMessageBuilder() {
+        
+        onChanged();
+        return getTimeMessageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      public org.tron.api.GrpcAPI.TimeMessageOrBuilder getTimeMessageOrBuilder() {
+        if (timeMessageBuilder_ != null) {
+          return timeMessageBuilder_.getMessageOrBuilder();
+        } else {
+          return timeMessage_ == null ?
+              org.tron.api.GrpcAPI.TimeMessage.getDefaultInstance() : timeMessage_;
+        }
+      }
+      /**
+       * <code>.protocol.TimeMessage timeMessage = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.tron.api.GrpcAPI.TimeMessage, org.tron.api.GrpcAPI.TimeMessage.Builder, org.tron.api.GrpcAPI.TimeMessageOrBuilder> 
+          getTimeMessageFieldBuilder() {
+        if (timeMessageBuilder_ == null) {
+          timeMessageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.tron.api.GrpcAPI.TimeMessage, org.tron.api.GrpcAPI.TimeMessage.Builder, org.tron.api.GrpcAPI.TimeMessageOrBuilder>(
+                  getTimeMessage(),
+                  getParentForChildren(),
+                  isClean());
+          timeMessage_ = null;
+        }
+        return timeMessageBuilder_;
+      }
+
+      private long offset_ ;
+      /**
+       * <code>int64 offset = 2;</code>
+       */
+      public long getOffset() {
+        return offset_;
+      }
+      /**
+       * <code>int64 offset = 2;</code>
+       */
+      public Builder setOffset(long value) {
+        
+        offset_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 offset = 2;</code>
+       */
+      public Builder clearOffset() {
+        
+        offset_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long limit_ ;
+      /**
+       * <code>int64 limit = 3;</code>
+       */
+      public long getLimit() {
+        return limit_;
+      }
+      /**
+       * <code>int64 limit = 3;</code>
+       */
+      public Builder setLimit(long value) {
+        
+        limit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 limit = 3;</code>
+       */
+      public Builder clearLimit() {
+        
+        limit_ = 0L;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:protocol.TimePaginatedMessage)
+    }
+
+    // @@protoc_insertion_point(class_scope:protocol.TimePaginatedMessage)
+    private static final org.tron.api.GrpcAPI.TimePaginatedMessage DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.tron.api.GrpcAPI.TimePaginatedMessage();
+    }
+
+    public static org.tron.api.GrpcAPI.TimePaginatedMessage getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TimePaginatedMessage>
+        PARSER = new com.google.protobuf.AbstractParser<TimePaginatedMessage>() {
+      public TimePaginatedMessage parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TimePaginatedMessage(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TimePaginatedMessage> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TimePaginatedMessage> getParserForType() {
+      return PARSER;
+    }
+
+    public org.tron.api.GrpcAPI.TimePaginatedMessage getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface AccountNetMessageOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.AccountNetMessage)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int64 freeNetUsed = 1;</code>
+     */
+    long getFreeNetUsed();
+
+    /**
+     * <code>int64 freeNetLimit = 2;</code>
+     */
+    long getFreeNetLimit();
+
+    /**
+     * <code>int64 NetUsed = 3;</code>
+     */
+    long getNetUsed();
+
+    /**
+     * <code>int64 NetLimit = 4;</code>
+     */
+    long getNetLimit();
+
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+    int getAssetNetUsedCount();
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+    boolean containsAssetNetUsed(
+        java.lang.String key);
+    /**
+     * Use {@link #getAssetNetUsedMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.Long>
+    getAssetNetUsed();
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+    java.util.Map<java.lang.String, java.lang.Long>
+    getAssetNetUsedMap();
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+
+    long getAssetNetUsedOrDefault(
+        java.lang.String key,
+        long defaultValue);
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+
+    long getAssetNetUsedOrThrow(
+        java.lang.String key);
+
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+    int getAssetNetLimitCount();
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+    boolean containsAssetNetLimit(
+        java.lang.String key);
+    /**
+     * Use {@link #getAssetNetLimitMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.Long>
+    getAssetNetLimit();
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+    java.util.Map<java.lang.String, java.lang.Long>
+    getAssetNetLimitMap();
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+
+    long getAssetNetLimitOrDefault(
+        java.lang.String key,
+        long defaultValue);
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+
+    long getAssetNetLimitOrThrow(
+        java.lang.String key);
+
+    /**
+     * <code>int64 TotalNetLimit = 7;</code>
+     */
+    long getTotalNetLimit();
+
+    /**
+     * <code>int64 TotalNetWeight = 8;</code>
+     */
+    long getTotalNetWeight();
+  }
+  /**
+   * Protobuf type {@code protocol.AccountNetMessage}
+   */
+  public  static final class AccountNetMessage extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:protocol.AccountNetMessage)
+      AccountNetMessageOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use AccountNetMessage.newBuilder() to construct.
+    private AccountNetMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AccountNetMessage() {
+      freeNetUsed_ = 0L;
+      freeNetLimit_ = 0L;
+      netUsed_ = 0L;
+      netLimit_ = 0L;
+      totalNetLimit_ = 0L;
+      totalNetWeight_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AccountNetMessage(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              freeNetUsed_ = input.readInt64();
+              break;
+            }
+            case 16: {
+
+              freeNetLimit_ = input.readInt64();
+              break;
+            }
+            case 24: {
+
+              netUsed_ = input.readInt64();
+              break;
+            }
+            case 32: {
+
+              netLimit_ = input.readInt64();
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                assetNetUsed_ = com.google.protobuf.MapField.newMapField(
+                    AssetNetUsedDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000010;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
+              assetNetUsed__ = input.readMessage(
+                  AssetNetUsedDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              assetNetUsed_.getMutableMap().put(
+                  assetNetUsed__.getKey(), assetNetUsed__.getValue());
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                assetNetLimit_ = com.google.protobuf.MapField.newMapField(
+                    AssetNetLimitDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000020;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
+              assetNetLimit__ = input.readMessage(
+                  AssetNetLimitDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              assetNetLimit_.getMutableMap().put(
+                  assetNetLimit__.getKey(), assetNetLimit__.getValue());
+              break;
+            }
+            case 56: {
+
+              totalNetLimit_ = input.readInt64();
+              break;
+            }
+            case 64: {
+
+              totalNetWeight_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.tron.api.GrpcAPI.internal_static_protocol_AccountNetMessage_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 5:
+          return internalGetAssetNetUsed();
+        case 6:
+          return internalGetAssetNetLimit();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.tron.api.GrpcAPI.internal_static_protocol_AccountNetMessage_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.tron.api.GrpcAPI.AccountNetMessage.class, org.tron.api.GrpcAPI.AccountNetMessage.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int FREENETUSED_FIELD_NUMBER = 1;
+    private long freeNetUsed_;
+    /**
+     * <code>int64 freeNetUsed = 1;</code>
+     */
+    public long getFreeNetUsed() {
+      return freeNetUsed_;
+    }
+
+    public static final int FREENETLIMIT_FIELD_NUMBER = 2;
+    private long freeNetLimit_;
+    /**
+     * <code>int64 freeNetLimit = 2;</code>
+     */
+    public long getFreeNetLimit() {
+      return freeNetLimit_;
+    }
+
+    public static final int NETUSED_FIELD_NUMBER = 3;
+    private long netUsed_;
+    /**
+     * <code>int64 NetUsed = 3;</code>
+     */
+    public long getNetUsed() {
+      return netUsed_;
+    }
+
+    public static final int NETLIMIT_FIELD_NUMBER = 4;
+    private long netLimit_;
+    /**
+     * <code>int64 NetLimit = 4;</code>
+     */
+    public long getNetLimit() {
+      return netLimit_;
+    }
+
+    public static final int ASSETNETUSED_FIELD_NUMBER = 5;
+    private static final class AssetNetUsedDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.Long> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.Long>newDefaultInstance(
+                  org.tron.api.GrpcAPI.internal_static_protocol_AccountNetMessage_AssetNetUsedEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.INT64,
+                  0L);
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.Long> assetNetUsed_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
+    internalGetAssetNetUsed() {
+      if (assetNetUsed_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            AssetNetUsedDefaultEntryHolder.defaultEntry);
+      }
+      return assetNetUsed_;
+    }
+
+    public int getAssetNetUsedCount() {
+      return internalGetAssetNetUsed().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+
+    public boolean containsAssetNetUsed(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetAssetNetUsed().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getAssetNetUsedMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.Long> getAssetNetUsed() {
+      return getAssetNetUsedMap();
+    }
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+
+    public java.util.Map<java.lang.String, java.lang.Long> getAssetNetUsedMap() {
+      return internalGetAssetNetUsed().getMap();
+    }
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+
+    public long getAssetNetUsedOrDefault(
+        java.lang.String key,
+        long defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Long> map =
+          internalGetAssetNetUsed().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+     */
+
+    public long getAssetNetUsedOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Long> map =
+          internalGetAssetNetUsed().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public static final int ASSETNETLIMIT_FIELD_NUMBER = 6;
+    private static final class AssetNetLimitDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.Long> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.Long>newDefaultInstance(
+                  org.tron.api.GrpcAPI.internal_static_protocol_AccountNetMessage_AssetNetLimitEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.INT64,
+                  0L);
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.Long> assetNetLimit_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
+    internalGetAssetNetLimit() {
+      if (assetNetLimit_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            AssetNetLimitDefaultEntryHolder.defaultEntry);
+      }
+      return assetNetLimit_;
+    }
+
+    public int getAssetNetLimitCount() {
+      return internalGetAssetNetLimit().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+
+    public boolean containsAssetNetLimit(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetAssetNetLimit().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getAssetNetLimitMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.Long> getAssetNetLimit() {
+      return getAssetNetLimitMap();
+    }
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+
+    public java.util.Map<java.lang.String, java.lang.Long> getAssetNetLimitMap() {
+      return internalGetAssetNetLimit().getMap();
+    }
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+
+    public long getAssetNetLimitOrDefault(
+        java.lang.String key,
+        long defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Long> map =
+          internalGetAssetNetLimit().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+     */
+
+    public long getAssetNetLimitOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Long> map =
+          internalGetAssetNetLimit().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public static final int TOTALNETLIMIT_FIELD_NUMBER = 7;
+    private long totalNetLimit_;
+    /**
+     * <code>int64 TotalNetLimit = 7;</code>
+     */
+    public long getTotalNetLimit() {
+      return totalNetLimit_;
+    }
+
+    public static final int TOTALNETWEIGHT_FIELD_NUMBER = 8;
+    private long totalNetWeight_;
+    /**
+     * <code>int64 TotalNetWeight = 8;</code>
+     */
+    public long getTotalNetWeight() {
+      return totalNetWeight_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (freeNetUsed_ != 0L) {
+        output.writeInt64(1, freeNetUsed_);
+      }
+      if (freeNetLimit_ != 0L) {
+        output.writeInt64(2, freeNetLimit_);
+      }
+      if (netUsed_ != 0L) {
+        output.writeInt64(3, netUsed_);
+      }
+      if (netLimit_ != 0L) {
+        output.writeInt64(4, netLimit_);
+      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetAssetNetUsed(),
+          AssetNetUsedDefaultEntryHolder.defaultEntry,
+          5);
+      com.google.protobuf.GeneratedMessageV3
+        .serializeStringMapTo(
+          output,
+          internalGetAssetNetLimit(),
+          AssetNetLimitDefaultEntryHolder.defaultEntry,
+          6);
+      if (totalNetLimit_ != 0L) {
+        output.writeInt64(7, totalNetLimit_);
+      }
+      if (totalNetWeight_ != 0L) {
+        output.writeInt64(8, totalNetWeight_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (freeNetUsed_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, freeNetUsed_);
+      }
+      if (freeNetLimit_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, freeNetLimit_);
+      }
+      if (netUsed_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, netUsed_);
+      }
+      if (netLimit_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, netLimit_);
+      }
+      for (java.util.Map.Entry<java.lang.String, java.lang.Long> entry
+           : internalGetAssetNetUsed().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
+        assetNetUsed__ = AssetNetUsedDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(5, assetNetUsed__);
+      }
+      for (java.util.Map.Entry<java.lang.String, java.lang.Long> entry
+           : internalGetAssetNetLimit().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
+        assetNetLimit__ = AssetNetLimitDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(6, assetNetLimit__);
+      }
+      if (totalNetLimit_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, totalNetLimit_);
+      }
+      if (totalNetWeight_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(8, totalNetWeight_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.tron.api.GrpcAPI.AccountNetMessage)) {
+        return super.equals(obj);
+      }
+      org.tron.api.GrpcAPI.AccountNetMessage other = (org.tron.api.GrpcAPI.AccountNetMessage) obj;
+
+      boolean result = true;
+      result = result && (getFreeNetUsed()
+          == other.getFreeNetUsed());
+      result = result && (getFreeNetLimit()
+          == other.getFreeNetLimit());
+      result = result && (getNetUsed()
+          == other.getNetUsed());
+      result = result && (getNetLimit()
+          == other.getNetLimit());
+      result = result && internalGetAssetNetUsed().equals(
+          other.internalGetAssetNetUsed());
+      result = result && internalGetAssetNetLimit().equals(
+          other.internalGetAssetNetLimit());
+      result = result && (getTotalNetLimit()
+          == other.getTotalNetLimit());
+      result = result && (getTotalNetWeight()
+          == other.getTotalNetWeight());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + FREENETUSED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getFreeNetUsed());
+      hash = (37 * hash) + FREENETLIMIT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getFreeNetLimit());
+      hash = (37 * hash) + NETUSED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getNetUsed());
+      hash = (37 * hash) + NETLIMIT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getNetLimit());
+      if (!internalGetAssetNetUsed().getMap().isEmpty()) {
+        hash = (37 * hash) + ASSETNETUSED_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetAssetNetUsed().hashCode();
+      }
+      if (!internalGetAssetNetLimit().getMap().isEmpty()) {
+        hash = (37 * hash) + ASSETNETLIMIT_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetAssetNetLimit().hashCode();
+      }
+      hash = (37 * hash) + TOTALNETLIMIT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTotalNetLimit());
+      hash = (37 * hash) + TOTALNETWEIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTotalNetWeight());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.tron.api.GrpcAPI.AccountNetMessage parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.tron.api.GrpcAPI.AccountNetMessage prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code protocol.AccountNetMessage}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:protocol.AccountNetMessage)
+        org.tron.api.GrpcAPI.AccountNetMessageOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_AccountNetMessage_descriptor;
+      }
+
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 5:
+            return internalGetAssetNetUsed();
+          case 6:
+            return internalGetAssetNetLimit();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 5:
+            return internalGetMutableAssetNetUsed();
+          case 6:
+            return internalGetMutableAssetNetLimit();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_AccountNetMessage_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.tron.api.GrpcAPI.AccountNetMessage.class, org.tron.api.GrpcAPI.AccountNetMessage.Builder.class);
+      }
+
+      // Construct using org.tron.api.GrpcAPI.AccountNetMessage.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        freeNetUsed_ = 0L;
+
+        freeNetLimit_ = 0L;
+
+        netUsed_ = 0L;
+
+        netLimit_ = 0L;
+
+        internalGetMutableAssetNetUsed().clear();
+        internalGetMutableAssetNetLimit().clear();
+        totalNetLimit_ = 0L;
+
+        totalNetWeight_ = 0L;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.tron.api.GrpcAPI.internal_static_protocol_AccountNetMessage_descriptor;
+      }
+
+      public org.tron.api.GrpcAPI.AccountNetMessage getDefaultInstanceForType() {
+        return org.tron.api.GrpcAPI.AccountNetMessage.getDefaultInstance();
+      }
+
+      public org.tron.api.GrpcAPI.AccountNetMessage build() {
+        org.tron.api.GrpcAPI.AccountNetMessage result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.tron.api.GrpcAPI.AccountNetMessage buildPartial() {
+        org.tron.api.GrpcAPI.AccountNetMessage result = new org.tron.api.GrpcAPI.AccountNetMessage(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.freeNetUsed_ = freeNetUsed_;
+        result.freeNetLimit_ = freeNetLimit_;
+        result.netUsed_ = netUsed_;
+        result.netLimit_ = netLimit_;
+        result.assetNetUsed_ = internalGetAssetNetUsed();
+        result.assetNetUsed_.makeImmutable();
+        result.assetNetLimit_ = internalGetAssetNetLimit();
+        result.assetNetLimit_.makeImmutable();
+        result.totalNetLimit_ = totalNetLimit_;
+        result.totalNetWeight_ = totalNetWeight_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.tron.api.GrpcAPI.AccountNetMessage) {
+          return mergeFrom((org.tron.api.GrpcAPI.AccountNetMessage)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.tron.api.GrpcAPI.AccountNetMessage other) {
+        if (other == org.tron.api.GrpcAPI.AccountNetMessage.getDefaultInstance()) return this;
+        if (other.getFreeNetUsed() != 0L) {
+          setFreeNetUsed(other.getFreeNetUsed());
+        }
+        if (other.getFreeNetLimit() != 0L) {
+          setFreeNetLimit(other.getFreeNetLimit());
+        }
+        if (other.getNetUsed() != 0L) {
+          setNetUsed(other.getNetUsed());
+        }
+        if (other.getNetLimit() != 0L) {
+          setNetLimit(other.getNetLimit());
+        }
+        internalGetMutableAssetNetUsed().mergeFrom(
+            other.internalGetAssetNetUsed());
+        internalGetMutableAssetNetLimit().mergeFrom(
+            other.internalGetAssetNetLimit());
+        if (other.getTotalNetLimit() != 0L) {
+          setTotalNetLimit(other.getTotalNetLimit());
+        }
+        if (other.getTotalNetWeight() != 0L) {
+          setTotalNetWeight(other.getTotalNetWeight());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.tron.api.GrpcAPI.AccountNetMessage parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.tron.api.GrpcAPI.AccountNetMessage) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private long freeNetUsed_ ;
+      /**
+       * <code>int64 freeNetUsed = 1;</code>
+       */
+      public long getFreeNetUsed() {
+        return freeNetUsed_;
+      }
+      /**
+       * <code>int64 freeNetUsed = 1;</code>
+       */
+      public Builder setFreeNetUsed(long value) {
+        
+        freeNetUsed_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 freeNetUsed = 1;</code>
+       */
+      public Builder clearFreeNetUsed() {
+        
+        freeNetUsed_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long freeNetLimit_ ;
+      /**
+       * <code>int64 freeNetLimit = 2;</code>
+       */
+      public long getFreeNetLimit() {
+        return freeNetLimit_;
+      }
+      /**
+       * <code>int64 freeNetLimit = 2;</code>
+       */
+      public Builder setFreeNetLimit(long value) {
+        
+        freeNetLimit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 freeNetLimit = 2;</code>
+       */
+      public Builder clearFreeNetLimit() {
+        
+        freeNetLimit_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long netUsed_ ;
+      /**
+       * <code>int64 NetUsed = 3;</code>
+       */
+      public long getNetUsed() {
+        return netUsed_;
+      }
+      /**
+       * <code>int64 NetUsed = 3;</code>
+       */
+      public Builder setNetUsed(long value) {
+        
+        netUsed_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 NetUsed = 3;</code>
+       */
+      public Builder clearNetUsed() {
+        
+        netUsed_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long netLimit_ ;
+      /**
+       * <code>int64 NetLimit = 4;</code>
+       */
+      public long getNetLimit() {
+        return netLimit_;
+      }
+      /**
+       * <code>int64 NetLimit = 4;</code>
+       */
+      public Builder setNetLimit(long value) {
+        
+        netLimit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 NetLimit = 4;</code>
+       */
+      public Builder clearNetLimit() {
+        
+        netLimit_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.Long> assetNetUsed_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
+      internalGetAssetNetUsed() {
+        if (assetNetUsed_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              AssetNetUsedDefaultEntryHolder.defaultEntry);
+        }
+        return assetNetUsed_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
+      internalGetMutableAssetNetUsed() {
+        onChanged();;
+        if (assetNetUsed_ == null) {
+          assetNetUsed_ = com.google.protobuf.MapField.newMapField(
+              AssetNetUsedDefaultEntryHolder.defaultEntry);
+        }
+        if (!assetNetUsed_.isMutable()) {
+          assetNetUsed_ = assetNetUsed_.copy();
+        }
+        return assetNetUsed_;
+      }
+
+      public int getAssetNetUsedCount() {
+        return internalGetAssetNetUsed().getMap().size();
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+       */
+
+      public boolean containsAssetNetUsed(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetAssetNetUsed().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getAssetNetUsedMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Long> getAssetNetUsed() {
+        return getAssetNetUsedMap();
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+       */
+
+      public java.util.Map<java.lang.String, java.lang.Long> getAssetNetUsedMap() {
+        return internalGetAssetNetUsed().getMap();
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+       */
+
+      public long getAssetNetUsedOrDefault(
+          java.lang.String key,
+          long defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Long> map =
+            internalGetAssetNetUsed().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+       */
+
+      public long getAssetNetUsedOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Long> map =
+            internalGetAssetNetUsed().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearAssetNetUsed() {
+        internalGetMutableAssetNetUsed().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+       */
+
+      public Builder removeAssetNetUsed(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableAssetNetUsed().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Long>
+      getMutableAssetNetUsed() {
+        return internalGetMutableAssetNetUsed().getMutableMap();
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+       */
+      public Builder putAssetNetUsed(
+          java.lang.String key,
+          long value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        
+        internalGetMutableAssetNetUsed().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetUsed = 5;</code>
+       */
+
+      public Builder putAllAssetNetUsed(
+          java.util.Map<java.lang.String, java.lang.Long> values) {
+        internalGetMutableAssetNetUsed().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.Long> assetNetLimit_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
+      internalGetAssetNetLimit() {
+        if (assetNetLimit_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              AssetNetLimitDefaultEntryHolder.defaultEntry);
+        }
+        return assetNetLimit_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
+      internalGetMutableAssetNetLimit() {
+        onChanged();;
+        if (assetNetLimit_ == null) {
+          assetNetLimit_ = com.google.protobuf.MapField.newMapField(
+              AssetNetLimitDefaultEntryHolder.defaultEntry);
+        }
+        if (!assetNetLimit_.isMutable()) {
+          assetNetLimit_ = assetNetLimit_.copy();
+        }
+        return assetNetLimit_;
+      }
+
+      public int getAssetNetLimitCount() {
+        return internalGetAssetNetLimit().getMap().size();
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+       */
+
+      public boolean containsAssetNetLimit(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetAssetNetLimit().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getAssetNetLimitMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Long> getAssetNetLimit() {
+        return getAssetNetLimitMap();
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+       */
+
+      public java.util.Map<java.lang.String, java.lang.Long> getAssetNetLimitMap() {
+        return internalGetAssetNetLimit().getMap();
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+       */
+
+      public long getAssetNetLimitOrDefault(
+          java.lang.String key,
+          long defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Long> map =
+            internalGetAssetNetLimit().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+       */
+
+      public long getAssetNetLimitOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Long> map =
+            internalGetAssetNetLimit().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearAssetNetLimit() {
+        internalGetMutableAssetNetLimit().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+       */
+
+      public Builder removeAssetNetLimit(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableAssetNetLimit().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Long>
+      getMutableAssetNetLimit() {
+        return internalGetMutableAssetNetLimit().getMutableMap();
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+       */
+      public Builder putAssetNetLimit(
+          java.lang.String key,
+          long value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        
+        internalGetMutableAssetNetLimit().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;string, int64&gt; assetNetLimit = 6;</code>
+       */
+
+      public Builder putAllAssetNetLimit(
+          java.util.Map<java.lang.String, java.lang.Long> values) {
+        internalGetMutableAssetNetLimit().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+
+      private long totalNetLimit_ ;
+      /**
+       * <code>int64 TotalNetLimit = 7;</code>
+       */
+      public long getTotalNetLimit() {
+        return totalNetLimit_;
+      }
+      /**
+       * <code>int64 TotalNetLimit = 7;</code>
+       */
+      public Builder setTotalNetLimit(long value) {
+        
+        totalNetLimit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 TotalNetLimit = 7;</code>
+       */
+      public Builder clearTotalNetLimit() {
+        
+        totalNetLimit_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long totalNetWeight_ ;
+      /**
+       * <code>int64 TotalNetWeight = 8;</code>
+       */
+      public long getTotalNetWeight() {
+        return totalNetWeight_;
+      }
+      /**
+       * <code>int64 TotalNetWeight = 8;</code>
+       */
+      public Builder setTotalNetWeight(long value) {
+        
+        totalNetWeight_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 TotalNetWeight = 8;</code>
+       */
+      public Builder clearTotalNetWeight() {
+        
+        totalNetWeight_ = 0L;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:protocol.AccountNetMessage)
+    }
+
+    // @@protoc_insertion_point(class_scope:protocol.AccountNetMessage)
+    private static final org.tron.api.GrpcAPI.AccountNetMessage DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.tron.api.GrpcAPI.AccountNetMessage();
+    }
+
+    public static org.tron.api.GrpcAPI.AccountNetMessage getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AccountNetMessage>
+        PARSER = new com.google.protobuf.AbstractParser<AccountNetMessage>() {
+      public AccountNetMessage parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AccountNetMessage(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AccountNetMessage> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AccountNetMessage> getParserForType() {
+      return PARSER;
+    }
+
+    public org.tron.api.GrpcAPI.AccountNetMessage getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_protocol_Return_descriptor;
   private static final 
@@ -9155,6 +11937,31 @@ public final class GrpcAPI {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_protocol_TransactionLimit_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protocol_AccountPaginated_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_protocol_AccountPaginated_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protocol_TimePaginatedMessage_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_protocol_TimePaginatedMessage_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protocol_AccountNetMessage_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_protocol_AccountNetMessage_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protocol_AccountNetMessage_AssetNetUsedEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_protocol_AccountNetMessage_AssetNetUsedEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protocol_AccountNetMessage_AssetNetLimitEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_protocol_AccountNetMessage_AssetNetLimitEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9191,159 +11998,198 @@ public final class GrpcAPI {
       "illiseconds\030\001 \001(\003\022\031\n\021endInMilliseconds\030\002" +
       " \001(\003\".\n\nBlockLimit\022\020\n\010startNum\030\001 \001(\003\022\016\n\006" +
       "endNum\030\002 \001(\003\";\n\020TransactionLimit\022\025\n\rtran" +
-      "sactionId\030\001 \001(\014\022\020\n\010limitNum\030\002 \001(\0032\267\034\n\006Wa" +
-      "llet\022g\n\nGetAccount\022\021.protocol.Account\032\021." +
-      "protocol.Account\"3\202\323\344\223\002-\"\022/wallet/getacc" +
-      "ount:\001*Z\024\022\022/wallet/getaccount\022\211\001\n\021Create" +
-      "Transaction\022\032.protocol.TransferContract\032" +
-      "\025.protocol.Transaction\"A\202\323\344\223\002;\"\031/wallet/" +
-      "createtransaction:\001*Z\033\022\031/wallet/createtr" +
-      "ansaction\022\210\001\n\024BroadcastTransaction\022\025.pro" +
-      "tocol.Transaction\032\020.protocol.Return\"G\202\323\344" +
-      "\223\002A\"\034/wallet/broadcasttransaction:\001*Z\036\022\034" +
-      "/wallet/broadcasttransaction\022\202\001\n\rUpdateA" +
-      "ccount\022\037.protocol.AccountUpdateContract\032" +
-      "\025.protocol.Transaction\"9\202\323\344\223\0023\"\025/wallet/" +
-      "updateaccount:\001*Z\027\022\025/wallet/updateaccoun" +
-      "t\022\217\001\n\022VoteWitnessAccount\022\035.protocol.Vote" +
-      "WitnessContract\032\025.protocol.Transaction\"C" +
-      "\202\323\344\223\002=\"\032/wallet/votewitnessaccount:\001*Z\034\022" +
-      "\032/wallet/votewitnessaccount\022\210\001\n\020CreateAs" +
-      "setIssue\022\034.protocol.AssetIssueContract\032\025" +
-      ".protocol.Transaction\"?\202\323\344\223\0029\"\030/wallet/c" +
-      "reateassetissue:\001*Z\032\022\030/wallet/createasse" +
-      "tissue\022\202\001\n\rUpdateWitness\022\037.protocol.Witn" +
-      "essUpdateContract\032\025.protocol.Transaction" +
-      "\"9\202\323\344\223\0023\"\025/wallet/updatewitness:\001*Z\027\022\025/w" +
-      "allet/updatewitness\022\202\001\n\rCreateWitness\022\037." +
-      "protocol.WitnessCreateContract\032\025.protoco" +
-      "l.Transaction\"9\202\323\344\223\0023\"\025/wallet/createwit" +
-      "ness:\001*Z\027\022\025/wallet/createwitness\022\202\001\n\rTra" +
-      "nsferAsset\022\037.protocol.TransferAssetContr" +
-      "act\032\025.protocol.Transaction\"9\202\323\344\223\0023\"\025/wal" +
-      "let/transferasset:\001*Z\027\022\025/wallet/transfer" +
-      "asset\022\242\001\n\025ParticipateAssetIssue\022\'.protoc" +
-      "ol.ParticipateAssetIssueContract\032\025.proto" +
-      "col.Transaction\"I\202\323\344\223\002C\"\035/wallet/partici" +
-      "pateassetissue:\001*Z\037\022\035/wallet/participate" +
-      "assetissue\022\202\001\n\rFreezeBalance\022\037.protocol." +
-      "FreezeBalanceContract\032\025.protocol.Transac" +
-      "tion\"9\202\323\344\223\0023\"\025/wallet/freezebalance:\001*Z\027" +
-      "\022\025/wallet/freezebalance\022\212\001\n\017UnfreezeBala" +
-      "nce\022!.protocol.UnfreezeBalanceContract\032\025" +
-      ".protocol.Transaction\"=\202\323\344\223\0027\"\027/wallet/u" +
-      "nfreezebalance:\001*Z\031\022\027/wallet/unfreezebal" +
-      "ance\022\202\001\n\rUnfreezeAsset\022\037.protocol.Unfree" +
-      "zeAssetContract\032\025.protocol.Transaction\"9" +
-      "\202\323\344\223\0023\"\025/wallet/unfreezeasset:\001*Z\027\022\025/wal" +
-      "let/unfreezeasset\022\212\001\n\017WithdrawBalance\022!." +
-      "protocol.WithdrawBalanceContract\032\025.proto" +
-      "col.Transaction\"=\202\323\344\223\0027\"\027/wallet/withdra" +
-      "wbalance:\001*Z\031\022\027/wallet/withdrawbalance\022j" +
-      "\n\tListNodes\022\026.protocol.EmptyMessage\032\022.pr" +
-      "otocol.NodeList\"1\202\323\344\223\002+\"\021/wallet/listnod" +
-      "es:\001*Z\023\022\021/wallet/listnodes\022\222\001\n\026GetAssetI" +
-      "ssueByAccount\022\021.protocol.Account\032\030.proto" +
-      "col.AssetIssueList\"K\202\323\344\223\002E\"\036/wallet/geta" +
-      "ssetissuebyaccount:\001*Z \022\036/wallet/getasse" +
-      "tissuebyaccount\022\222\001\n\023GetAssetIssueByName\022" +
-      "\026.protocol.BytesMessage\032\034.protocol.Asset" +
-      "IssueContract\"E\202\323\344\223\002?\"\033/wallet/getasseti" +
-      "ssuebyname:\001*Z\035\022\033/wallet/getassetissueby" +
-      "name\022m\n\013GetNowBlock\022\026.protocol.EmptyMess" +
-      "age\032\017.protocol.Block\"5\202\323\344\223\002/\"\023/wallet/ge" +
-      "tnowblock:\001*Z\025\022\023/wallet/getnowblock\022t\n\rG" +
-      "etBlockByNum\022\027.protocol.NumberMessage\032\017." +
-      "protocol.Block\"9\202\323\344\223\0023\"\025/wallet/getblock" +
-      "bynum:\001*Z\027\022\025/wallet/getblockbynum\022p\n\014Get" +
-      "BlockById\022\026.protocol.BytesMessage\032\017.prot" +
-      "ocol.Block\"7\202\323\344\223\0021\"\024/wallet/getblockbyid" +
-      ":\001*Z\026\022\024/wallet/getblockbyid\022\207\001\n\023GetBlock" +
-      "ByLimitNext\022\024.protocol.BlockLimit\032\023.prot" +
-      "ocol.BlockList\"E\202\323\344\223\002?\"\033/wallet/getblock" +
-      "bylimitnext:\001*Z\035\022\033/wallet/getblockbylimi" +
-      "tnext\022\212\001\n\023GetBlockByLatestNum\022\027.protocol" +
-      ".NumberMessage\032\023.protocol.BlockList\"E\202\323\344" +
-      "\223\002?\"\033/wallet/getblockbylatestnum:\001*Z\035\022\033/" +
-      "wallet/getblockbylatestnum\022\210\001\n\022GetTransa" +
-      "ctionById\022\026.protocol.BytesMessage\032\025.prot" +
-      "ocol.Transaction\"C\202\323\344\223\002=\"\032/wallet/gettra" +
-      "nsactionbyid:\001*Z\034\022\032/wallet/gettransactio" +
-      "nbyid\022y\n\rListWitnesses\022\026.protocol.EmptyM" +
-      "essage\032\025.protocol.WitnessList\"9\202\323\344\223\0023\"\025/" +
-      "wallet/listwitnesses:\001*Z\027\022\025/wallet/listw" +
-      "itnesses\022\210\001\n\021GetAssetIssueList\022\026.protoco" +
-      "l.EmptyMessage\032\030.protocol.AssetIssueList" +
-      "\"A\202\323\344\223\002;\"\031/wallet/getassetissuelist:\001*Z\033" +
-      "\022\031/wallet/getassetissuelist\022\204\001\n\020TotalTra" +
-      "nsaction\022\026.protocol.EmptyMessage\032\027.proto" +
-      "col.NumberMessage\"?\202\323\344\223\0029\"\030/wallet/total" +
-      "transaction:\001*Z\032\022\030/wallet/totaltransacti" +
-      "on\022\226\001\n\026GetNextMaintenanceTime\022\026.protocol" +
-      ".EmptyMessage\032\027.protocol.NumberMessage\"K" +
-      "\202\323\344\223\002E\"\036/wallet/getnextmaintenancetime:\001" +
-      "*Z \022\036/wallet/getnextmaintenancetime2\361\017\n\016" +
-      "WalletSolidity\022w\n\nGetAccount\022\021.protocol." +
-      "Account\032\021.protocol.Account\"C\202\323\344\223\002=\"\032/wal" +
-      "letsolidity/getaccount:\001*Z\034\022\032/walletsoli" +
-      "dity/getaccount\022\211\001\n\rListWitnesses\022\026.prot" +
-      "ocol.EmptyMessage\032\025.protocol.WitnessList" +
-      "\"I\202\323\344\223\002C\"\035/walletsolidity/listwitnesses:" +
-      "\001*Z\037\022\035/walletsolidity/listwitnesses\022\230\001\n\021" +
-      "GetAssetIssueList\022\026.protocol.EmptyMessag" +
-      "e\032\030.protocol.AssetIssueList\"Q\202\323\344\223\002K\"!/wa" +
-      "lletsolidity/getassetissuelist:\001*Z#\022!/wa" +
-      "lletsolidity/getassetissuelist\022\272\001\n\034GetAs" +
-      "setIssueListByTimestamp\022\027.protocol.Numbe" +
-      "rMessage\032\030.protocol.AssetIssueList\"g\202\323\344\223" +
-      "\002a\",/walletsolidity/getassetissuelistbyt" +
-      "imestamp:\001*Z.\022,/walletsolidity/getasseti" +
-      "ssuelistbytimestamp\022\242\001\n\026GetAssetIssueByA" +
-      "ccount\022\021.protocol.Account\032\030.protocol.Ass" +
-      "etIssueList\"[\202\323\344\223\002U\"&/walletsolidity/get" +
-      "assetissuebyaccount:\001*Z(\022&/walletsolidit" +
-      "y/getassetissuebyaccount\022\242\001\n\023GetAssetIss" +
-      "ueByName\022\026.protocol.BytesMessage\032\034.proto" +
-      "col.AssetIssueContract\"U\202\323\344\223\002O\"#/wallets" +
-      "olidity/getassetissuebyname:\001*Z%\022#/walle" +
-      "tsolidity/getassetissuebyname\022}\n\013GetNowB" +
-      "lock\022\026.protocol.EmptyMessage\032\017.protocol." +
-      "Block\"E\202\323\344\223\002?\"\033/walletsolidity/getnowblo" +
-      "ck:\001*Z\035\022\033/walletsolidity/getnowblock\022\204\001\n" +
-      "\rGetBlockByNum\022\027.protocol.NumberMessage\032" +
-      "\017.protocol.Block\"I\202\323\344\223\002C\"\035/walletsolidit" +
-      "y/getblockbynum:\001*Z\037\022\035/walletsolidity/ge" +
-      "tblockbynum\022\224\001\n\020TotalTransaction\022\026.proto" +
-      "col.EmptyMessage\032\027.protocol.NumberMessag" +
-      "e\"O\202\323\344\223\002I\" /walletsolidity/totaltransact" +
-      "ion:\001*Z\"\022 /walletsolidity/totaltransacti" +
-      "on\022\230\001\n\022GetTransactionById\022\026.protocol.Byt" +
-      "esMessage\032\025.protocol.Transaction\"S\202\323\344\223\002M" +
-      "\"\"/walletsolidity/gettransactionbyid:\001*Z" +
-      "$\022\"/walletsolidity/gettransactionbyid\022\263\001" +
-      "\n\032GetTransactionsByTimestamp\022\025.protocol." +
-      "TimeMessage\032\031.protocol.TransactionList\"c" +
-      "\202\323\344\223\002]\"*/walletsolidity/gettransactionsb" +
-      "ytimestamp:\001*Z,\022*/walletsolidity/gettran" +
-      "sactionsbytimestamp\022\246\001\n\027GetTransactionsF" +
-      "romThis\022\021.protocol.Account\032\031.protocol.Tr" +
-      "ansactionList\"]\202\323\344\223\002W\"\'/walletsolidity/g" +
-      "ettransactionsfromthis:\001*Z)\022\'/walletsoli" +
-      "dity/gettransactionsfromthis\022\240\001\n\025GetTran" +
-      "sactionsToThis\022\021.protocol.Account\032\031.prot" +
-      "ocol.TransactionList\"Y\202\323\344\223\002S\"%/walletsol" +
-      "idity/gettransactionstothis:\001*Z\'\022%/walle" +
-      "tsolidity/gettransactionstothis2\231\002\n\010Data" +
-      "base\022G\n\021getBlockReference\022\026.protocol.Emp" +
-      "tyMessage\032\030.protocol.BlockReference\"\000\022M\n" +
-      "\024GetDynamicProperties\022\026.protocol.EmptyMe" +
-      "ssage\032\033.protocol.DynamicProperties\"\000\0228\n\013" +
-      "GetNowBlock\022\026.protocol.EmptyMessage\032\017.pr" +
-      "otocol.Block\"\000\022;\n\rGetBlockByNum\022\027.protoc" +
-      "ol.NumberMessage\032\017.protocol.Block\"\0002\t\n\007N" +
-      "etworkBA\n\014org.tron.apiB\007GrpcAPIZ(github." +
-      "com/tronprotocol/grpc-gateway/apib\006proto" +
-      "3"
+      "sactionId\030\001 \001(\014\022\020\n\010limitNum\030\002 \001(\003\"U\n\020Acc" +
+      "ountPaginated\022\"\n\007account\030\001 \001(\0132\021.protoco" +
+      "l.Account\022\016\n\006offset\030\002 \001(\003\022\r\n\005limit\030\003 \001(\003" +
+      "\"a\n\024TimePaginatedMessage\022*\n\013timeMessage\030" +
+      "\001 \001(\0132\025.protocol.TimeMessage\022\016\n\006offset\030\002" +
+      " \001(\003\022\r\n\005limit\030\003 \001(\003\"\207\003\n\021AccountNetMessag" +
+      "e\022\023\n\013freeNetUsed\030\001 \001(\003\022\024\n\014freeNetLimit\030\002" +
+      " \001(\003\022\017\n\007NetUsed\030\003 \001(\003\022\020\n\010NetLimit\030\004 \001(\003\022" +
+      "C\n\014assetNetUsed\030\005 \003(\0132-.protocol.Account" +
+      "NetMessage.AssetNetUsedEntry\022E\n\rassetNet" +
+      "Limit\030\006 \003(\0132..protocol.AccountNetMessage" +
+      ".AssetNetLimitEntry\022\025\n\rTotalNetLimit\030\007 \001" +
+      "(\003\022\026\n\016TotalNetWeight\030\010 \001(\003\0323\n\021AssetNetUs" +
+      "edEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\003:\0028\001\032" +
+      "4\n\022AssetNetLimitEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005va" +
+      "lue\030\002 \001(\003:\0028\0012\264\037\n\006Wallet\022g\n\nGetAccount\022\021" +
+      ".protocol.Account\032\021.protocol.Account\"3\202\323" +
+      "\344\223\002-\"\022/wallet/getaccount:\001*Z\024\022\022/wallet/g" +
+      "etaccount\022\211\001\n\021CreateTransaction\022\032.protoc" +
+      "ol.TransferContract\032\025.protocol.Transacti" +
+      "on\"A\202\323\344\223\002;\"\031/wallet/createtransaction:\001*" +
+      "Z\033\022\031/wallet/createtransaction\022\210\001\n\024Broadc" +
+      "astTransaction\022\025.protocol.Transaction\032\020." +
+      "protocol.Return\"G\202\323\344\223\002A\"\034/wallet/broadca" +
+      "sttransaction:\001*Z\036\022\034/wallet/broadcasttra" +
+      "nsaction\022\202\001\n\rUpdateAccount\022\037.protocol.Ac" +
+      "countUpdateContract\032\025.protocol.Transacti" +
+      "on\"9\202\323\344\223\0023\"\025/wallet/updateaccount:\001*Z\027\022\025" +
+      "/wallet/updateaccount\022\217\001\n\022VoteWitnessAcc" +
+      "ount\022\035.protocol.VoteWitnessContract\032\025.pr" +
+      "otocol.Transaction\"C\202\323\344\223\002=\"\032/wallet/vote" +
+      "witnessaccount:\001*Z\034\022\032/wallet/votewitness" +
+      "account\022\210\001\n\020CreateAssetIssue\022\034.protocol." +
+      "AssetIssueContract\032\025.protocol.Transactio" +
+      "n\"?\202\323\344\223\0029\"\030/wallet/createassetissue:\001*Z\032" +
+      "\022\030/wallet/createassetissue\022\202\001\n\rUpdateWit" +
+      "ness\022\037.protocol.WitnessUpdateContract\032\025." +
+      "protocol.Transaction\"9\202\323\344\223\0023\"\025/wallet/up" +
+      "datewitness:\001*Z\027\022\025/wallet/updatewitness\022" +
+      "\202\001\n\rCreateAccount\022\037.protocol.AccountCrea" +
+      "teContract\032\025.protocol.Transaction\"9\202\323\344\223\002" +
+      "3\"\025/wallet/createaccount:\001*Z\027\022\025/wallet/c" +
+      "reateaccount\022\202\001\n\rCreateWitness\022\037.protoco" +
+      "l.WitnessCreateContract\032\025.protocol.Trans" +
+      "action\"9\202\323\344\223\0023\"\025/wallet/createwitness:\001*" +
+      "Z\027\022\025/wallet/createwitness\022\202\001\n\rTransferAs" +
+      "set\022\037.protocol.TransferAssetContract\032\025.p" +
+      "rotocol.Transaction\"9\202\323\344\223\0023\"\025/wallet/tra" +
+      "nsferasset:\001*Z\027\022\025/wallet/transferasset\022\242" +
+      "\001\n\025ParticipateAssetIssue\022\'.protocol.Part" +
+      "icipateAssetIssueContract\032\025.protocol.Tra" +
+      "nsaction\"I\202\323\344\223\002C\"\035/wallet/participateass" +
+      "etissue:\001*Z\037\022\035/wallet/participateassetis" +
+      "sue\022\202\001\n\rFreezeBalance\022\037.protocol.FreezeB" +
+      "alanceContract\032\025.protocol.Transaction\"9\202" +
+      "\323\344\223\0023\"\025/wallet/freezebalance:\001*Z\027\022\025/wall" +
+      "et/freezebalance\022\212\001\n\017UnfreezeBalance\022!.p" +
+      "rotocol.UnfreezeBalanceContract\032\025.protoc" +
+      "ol.Transaction\"=\202\323\344\223\0027\"\027/wallet/unfreeze" +
+      "balance:\001*Z\031\022\027/wallet/unfreezebalance\022\202\001" +
+      "\n\rUnfreezeAsset\022\037.protocol.UnfreezeAsset" +
+      "Contract\032\025.protocol.Transaction\"9\202\323\344\223\0023\"" +
+      "\025/wallet/unfreezeasset:\001*Z\027\022\025/wallet/unf" +
+      "reezeasset\022\212\001\n\017WithdrawBalance\022!.protoco" +
+      "l.WithdrawBalanceContract\032\025.protocol.Tra" +
+      "nsaction\"=\202\323\344\223\0027\"\027/wallet/withdrawbalanc" +
+      "e:\001*Z\031\022\027/wallet/withdrawbalance\022z\n\013Updat" +
+      "eAsset\022\035.protocol.UpdateAssetContract\032\025." +
+      "protocol.Transaction\"5\202\323\344\223\002/\"\023/wallet/up" +
+      "dateasset:\001*Z\025\022\023/wallet/updateasset\022j\n\tL" +
+      "istNodes\022\026.protocol.EmptyMessage\032\022.proto" +
+      "col.NodeList\"1\202\323\344\223\002+\"\021/wallet/listnodes:" +
+      "\001*Z\023\022\021/wallet/listnodes\022\222\001\n\026GetAssetIssu" +
+      "eByAccount\022\021.protocol.Account\032\030.protocol" +
+      ".AssetIssueList\"K\202\323\344\223\002E\"\036/wallet/getasse" +
+      "tissuebyaccount:\001*Z \022\036/wallet/getassetis" +
+      "suebyaccount\022z\n\rGetAccountNet\022\021.protocol" +
+      ".Account\032\033.protocol.AccountNetMessage\"9\202" +
+      "\323\344\223\0023\"\025/wallet/getaccountnet:\001*Z\027\022\025/wall" +
+      "et/getaccountnet\022\222\001\n\023GetAssetIssueByName" +
+      "\022\026.protocol.BytesMessage\032\034.protocol.Asse" +
+      "tIssueContract\"E\202\323\344\223\002?\"\033/wallet/getasset" +
+      "issuebyname:\001*Z\035\022\033/wallet/getassetissueb" +
+      "yname\022m\n\013GetNowBlock\022\026.protocol.EmptyMes" +
+      "sage\032\017.protocol.Block\"5\202\323\344\223\002/\"\023/wallet/g" +
+      "etnowblock:\001*Z\025\022\023/wallet/getnowblock\022t\n\r" +
+      "GetBlockByNum\022\027.protocol.NumberMessage\032\017" +
+      ".protocol.Block\"9\202\323\344\223\0023\"\025/wallet/getbloc" +
+      "kbynum:\001*Z\027\022\025/wallet/getblockbynum\022p\n\014Ge" +
+      "tBlockById\022\026.protocol.BytesMessage\032\017.pro" +
+      "tocol.Block\"7\202\323\344\223\0021\"\024/wallet/getblockbyi" +
+      "d:\001*Z\026\022\024/wallet/getblockbyid\022\207\001\n\023GetBloc" +
+      "kByLimitNext\022\024.protocol.BlockLimit\032\023.pro" +
+      "tocol.BlockList\"E\202\323\344\223\002?\"\033/wallet/getbloc" +
+      "kbylimitnext:\001*Z\035\022\033/wallet/getblockbylim" +
+      "itnext\022\212\001\n\023GetBlockByLatestNum\022\027.protoco" +
+      "l.NumberMessage\032\023.protocol.BlockList\"E\202\323" +
+      "\344\223\002?\"\033/wallet/getblockbylatestnum:\001*Z\035\022\033" +
+      "/wallet/getblockbylatestnum\022\210\001\n\022GetTrans" +
+      "actionById\022\026.protocol.BytesMessage\032\025.pro" +
+      "tocol.Transaction\"C\202\323\344\223\002=\"\032/wallet/gettr" +
+      "ansactionbyid:\001*Z\034\022\032/wallet/gettransacti" +
+      "onbyid\022y\n\rListWitnesses\022\026.protocol.Empty" +
+      "Message\032\025.protocol.WitnessList\"9\202\323\344\223\0023\"\025" +
+      "/wallet/listwitnesses:\001*Z\027\022\025/wallet/list" +
+      "witnesses\022\210\001\n\021GetAssetIssueList\022\026.protoc" +
+      "ol.EmptyMessage\032\030.protocol.AssetIssueLis" +
+      "t\"A\202\323\344\223\002;\"\031/wallet/getassetissuelist:\001*Z" +
+      "\033\022\031/wallet/getassetissuelist\022\204\001\n\020TotalTr" +
+      "ansaction\022\026.protocol.EmptyMessage\032\027.prot" +
+      "ocol.NumberMessage\"?\202\323\344\223\0029\"\030/wallet/tota" +
+      "ltransaction:\001*Z\032\022\030/wallet/totaltransact" +
+      "ion\022\226\001\n\026GetNextMaintenanceTime\022\026.protoco" +
+      "l.EmptyMessage\032\027.protocol.NumberMessage\"" +
+      "K\202\323\344\223\002E\"\036/wallet/getnextmaintenancetime:" +
+      "\001*Z \022\036/wallet/getnextmaintenancetime2\357\013\n" +
+      "\016WalletSolidity\022w\n\nGetAccount\022\021.protocol" +
+      ".Account\032\021.protocol.Account\"C\202\323\344\223\002=\"\032/wa" +
+      "lletsolidity/getaccount:\001*Z\034\022\032/walletsol" +
+      "idity/getaccount\022\211\001\n\rListWitnesses\022\026.pro" +
+      "tocol.EmptyMessage\032\025.protocol.WitnessLis" +
+      "t\"I\202\323\344\223\002C\"\035/walletsolidity/listwitnesses" +
+      ":\001*Z\037\022\035/walletsolidity/listwitnesses\022\230\001\n" +
+      "\021GetAssetIssueList\022\026.protocol.EmptyMessa" +
+      "ge\032\030.protocol.AssetIssueList\"Q\202\323\344\223\002K\"!/w" +
+      "alletsolidity/getassetissuelist:\001*Z#\022!/w" +
+      "alletsolidity/getassetissuelist\022\272\001\n\034GetA" +
+      "ssetIssueListByTimestamp\022\027.protocol.Numb" +
+      "erMessage\032\030.protocol.AssetIssueList\"g\202\323\344" +
+      "\223\002a\",/walletsolidity/getassetissuelistby" +
+      "timestamp:\001*Z.\022,/walletsolidity/getasset" +
+      "issuelistbytimestamp\022\242\001\n\026GetAssetIssueBy" +
+      "Account\022\021.protocol.Account\032\030.protocol.As" +
+      "setIssueList\"[\202\323\344\223\002U\"&/walletsolidity/ge" +
+      "tassetissuebyaccount:\001*Z(\022&/walletsolidi" +
+      "ty/getassetissuebyaccount\022\242\001\n\023GetAssetIs" +
+      "sueByName\022\026.protocol.BytesMessage\032\034.prot" +
+      "ocol.AssetIssueContract\"U\202\323\344\223\002O\"#/wallet" +
+      "solidity/getassetissuebyname:\001*Z%\022#/wall" +
+      "etsolidity/getassetissuebyname\022}\n\013GetNow" +
+      "Block\022\026.protocol.EmptyMessage\032\017.protocol" +
+      ".Block\"E\202\323\344\223\002?\"\033/walletsolidity/getnowbl" +
+      "ock:\001*Z\035\022\033/walletsolidity/getnowblock\022\204\001" +
+      "\n\rGetBlockByNum\022\027.protocol.NumberMessage" +
+      "\032\017.protocol.Block\"I\202\323\344\223\002C\"\035/walletsolidi" +
+      "ty/getblockbynum:\001*Z\037\022\035/walletsolidity/g" +
+      "etblockbynum\022\224\001\n\020TotalTransaction\022\026.prot" +
+      "ocol.EmptyMessage\032\027.protocol.NumberMessa" +
+      "ge\"O\202\323\344\223\002I\" /walletsolidity/totaltransac" +
+      "tion:\001*Z\"\022 /walletsolidity/totaltransact" +
+      "ion\022\230\001\n\022GetTransactionById\022\026.protocol.By" +
+      "tesMessage\032\025.protocol.Transaction\"S\202\323\344\223\002" +
+      "M\"\"/walletsolidity/gettransactionbyid:\001*" +
+      "Z$\022\"/walletsolidity/gettransactionbyid2\343" +
+      "\010\n\017WalletExtension\022\276\001\n\032GetTransactionsBy" +
+      "Timestamp\022\036.protocol.TimePaginatedMessag" +
+      "e\032\031.protocol.TransactionList\"e\202\323\344\223\002_\"+/w" +
+      "alletextension/gettransactionsbytimestam" +
+      "p:\001*Z-\022+/walletextension/gettransactions" +
+      "bytimestamp\022\302\001\n\037GetTransactionsByTimesta" +
+      "mpCount\022\025.protocol.TimeMessage\032\027.protoco" +
+      "l.NumberMessage\"o\202\323\344\223\002i\"0/walletextensio" +
+      "n/gettransactionsbytimestampcount:\001*Z2\0220" +
+      "/walletextension/gettransactionsbytimest" +
+      "ampcount\022\261\001\n\027GetTransactionsFromThis\022\032.p" +
+      "rotocol.AccountPaginated\032\031.protocol.Tran" +
+      "sactionList\"_\202\323\344\223\002Y\"(/walletextension/ge" +
+      "ttransactionsfromthis:\001*Z*\022(/walletexten" +
+      "sion/gettransactionsfromthis\022\253\001\n\025GetTran" +
+      "sactionsToThis\022\032.protocol.AccountPaginat" +
+      "ed\032\031.protocol.TransactionList\"[\202\323\344\223\002U\"&/" +
+      "walletextension/gettransactionstothis:\001*" +
+      "Z(\022&/walletextension/gettransactionstoth" +
+      "is\022\265\001\n\034GetTransactionsFromThisCount\022\021.pr" +
+      "otocol.Account\032\027.protocol.NumberMessage\"" +
+      "i\202\323\344\223\002c\"-/walletextension/gettransaction" +
+      "sfromthiscount:\001*Z/\022-/walletextension/ge" +
+      "ttransactionsfromthiscount\022\257\001\n\032GetTransa" +
+      "ctionsToThisCount\022\021.protocol.Account\032\027.p" +
+      "rotocol.NumberMessage\"e\202\323\344\223\002_\"+/walletex" +
+      "tension/gettransactionstothiscount:\001*Z-\022" +
+      "+/walletextension/gettransactionstothisc" +
+      "ount2\231\002\n\010Database\022G\n\021getBlockReference\022\026" +
+      ".protocol.EmptyMessage\032\030.protocol.BlockR" +
+      "eference\"\000\022M\n\024GetDynamicProperties\022\026.pro" +
+      "tocol.EmptyMessage\032\033.protocol.DynamicPro" +
+      "perties\"\000\0228\n\013GetNowBlock\022\026.protocol.Empt" +
+      "yMessage\032\017.protocol.Block\"\000\022;\n\rGetBlockB" +
+      "yNum\022\027.protocol.NumberMessage\032\017.protocol" +
+      ".Block\"\0002\t\n\007NetworkBA\n\014org.tron.apiB\007Grp" +
+      "cAPIZ(github.com/tronprotocol/grpc-gatew" +
+      "ay/apib\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9450,6 +12296,36 @@ public final class GrpcAPI {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_TransactionLimit_descriptor,
         new java.lang.String[] { "TransactionId", "LimitNum", });
+    internal_static_protocol_AccountPaginated_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_protocol_AccountPaginated_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_protocol_AccountPaginated_descriptor,
+        new java.lang.String[] { "Account", "Offset", "Limit", });
+    internal_static_protocol_TimePaginatedMessage_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_protocol_TimePaginatedMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_protocol_TimePaginatedMessage_descriptor,
+        new java.lang.String[] { "TimeMessage", "Offset", "Limit", });
+    internal_static_protocol_AccountNetMessage_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_protocol_AccountNetMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_protocol_AccountNetMessage_descriptor,
+        new java.lang.String[] { "FreeNetUsed", "FreeNetLimit", "NetUsed", "NetLimit", "AssetNetUsed", "AssetNetLimit", "TotalNetLimit", "TotalNetWeight", });
+    internal_static_protocol_AccountNetMessage_AssetNetUsedEntry_descriptor =
+      internal_static_protocol_AccountNetMessage_descriptor.getNestedTypes().get(0);
+    internal_static_protocol_AccountNetMessage_AssetNetUsedEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_protocol_AccountNetMessage_AssetNetUsedEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_protocol_AccountNetMessage_AssetNetLimitEntry_descriptor =
+      internal_static_protocol_AccountNetMessage_descriptor.getNestedTypes().get(1);
+    internal_static_protocol_AccountNetMessage_AssetNetLimitEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_protocol_AccountNetMessage_AssetNetLimitEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(com.google.api.AnnotationsProto.http);

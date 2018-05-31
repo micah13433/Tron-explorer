@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.tron.api.GrpcAPI.AccountNetMessage;
+import org.tron.walletserver.WalletClient;
+
 import com.tron.explorer.encrypt.Base58;
 import com.tron.explorer.util.CheckUtil;
 import com.tron.explorer.util.FormatUtil;
@@ -62,14 +65,23 @@ public class Account  {
 	private List<Frozen> frozens;
 	private String lastOperationTime;
 	private long frozenAmount;
-	private long bandWidth;	
+	private long bandWidthUsed;
+	private long bandWidthRemain;
 	
-	public String getBandWidth() {
-		return Utils.getStrictAmount(bandWidth);
+	public long getBandWidthRemain() {
+		return bandWidthRemain;
 	}
 
-	public void setBandWidth(long bandWidth) {
-		this.bandWidth = bandWidth;
+	public void setBandWidthRemain(long bandWidthTotal) {
+		this.bandWidthRemain = bandWidthTotal;
+	}
+
+	public String getBandWidthUsed() {
+		return String.valueOf(bandWidthUsed);
+	}
+
+	public void setBandWidthUsed(long bandWidth) {
+		this.bandWidthUsed = bandWidth;
 	}
 
 	public String getFrozenAmount() {
@@ -174,7 +186,9 @@ public class Account  {
 				address = fromAddress;
 			}
 			balance = account.getBalance();
-			bandWidth = account.getBandwidth();
+			bandWidthUsed = account.getNetUsage();
+			AccountNetMessage message = WalletClient.getAccountNet(account.getAddress().toByteArray());
+			bandWidthRemain = message.getNetLimit() - message.getNetUsed();
 			lastOperationTime = FormatUtil.formatTimeInMillis(account.getLatestOprationTime());
 			assets = account.getAssetMap();
 			if(account.getVotesList().size() > 0){
