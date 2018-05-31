@@ -533,11 +533,11 @@
 				if(res.data && res.data.code && res.data.code == 1){
 					 swal("Success!", "","success");
 					 document.getElementById("getFreeTRX").innerHTML = "获取测试TRX";
-					 //setTimeout(function(){location.href="/wallet";}, 1000);  
+					 setTimeout(function(){location.href="/wallet";}, 1000);  
 				 }else{
 					 sweetAlert("Oops...", "出错了~", "error");
 					 $scope.canGetFreeTRX = true;
-					 //document.getElementById("getFreeTRX").innerHTML = "获取测试TRX";
+					 document.getElementById("getFreeTRX").innerHTML = "获取测试TRX";
 				 }
 			});
 		};
