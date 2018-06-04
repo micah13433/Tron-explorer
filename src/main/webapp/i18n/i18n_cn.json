@@ -76,7 +76,7 @@
     "node.list": "节点列表",
     "node.country": "国家",
     "node.city": "城市",
-    "node.count": "数目",
+    "node.count": "IP",
     "node.longitude": "经度",
     "node.latitude": "纬度",
     "account.list": "用户列表",

@@ -1,8 +1,6 @@
 package com.tron.explorer.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -48,15 +46,12 @@ public class Nodes {
 		init(string);
 	}
 
-	@SuppressWarnings("unchecked")
 	private void init(String inputString) throws TronException {
 		if (StringUtils.isEmpty(inputString)) {
 			return;
 		}
-		inputString = inputString.replace("\\", "");
-		inputString = inputString.substring(1, inputString.length() - 1);
 		JSONObject obj = JSON.parseObject(inputString);
-		JSONArray cityArray = obj.getJSONArray("citys");
+		JSONArray cityArray = obj.getJSONArray("nodes");
 		if (cityArray == null || cityArray.size() <= 0)
 			return;
 		Node node = null;
@@ -71,31 +66,37 @@ public class Nodes {
 			JSONObject job = cityArray.getJSONObject(i);
 			if (StringUtils.isBlank(job.getString("city"))
 					|| "null".equals(job.getString("city"))) {
-				continue;
+				node.setCity("Unknown City");
+			}else{
+				node.setCity(job.getString("city"));
 			}
-			node.setCity(job.getString("city"));
 			node.setCountry(job.getString("country"));
-			node.setLatitude(job.getString("latitude"));
-			node.setLongitude(job.getString("longitude"));
-			node.setCount(Integer.valueOf(job.getString("count")));
-			totalCount += node.getCount();
+			node.setLatitude(job.getString("lat"));
+			node.setLongitude(job.getString("lng"));
+			node.setCount(1);
+			node.setIp(job.getString("ip"));
+			totalCount ++;
 			nodes.add(node);
 
 			//for chart
 			if (!countryNodeMap.containsKey(job.getString("country"))) {
-				countryNodeMap.put(job.getString("country"),Integer.valueOf(job.getString("count")));
+				countryNodeMap.put(job.getString("country"),1);
 			} else {
-				countryNodeMap.put(job.getString("country"),countryNodeMap.get(job.getString("country")) + Integer.valueOf(job.getString("count")));
+				countryNodeMap.put(job.getString("country"),countryNodeMap.get(job.getString("country")) + 1);
 			}
 			if (!cityNodeMap.containsKey(job.getString("country"))) {
 				cityNodeMap.put(job.getString("country"),new HashMap<String, Integer>() {
 						{
-							put(job.getString("city"),Integer.valueOf(job.getString("count")));
+							put(job.getString("city"),1);
 						}
 					});
 			}else{
 				Map<String, Integer> innerMap = cityNodeMap.get(job.getString("country"));
-				innerMap.put(job.getString("city"), Integer.valueOf(job.getString("count")));
+				if(innerMap.containsKey(job.getString("city"))){
+					innerMap.put(job.getString("city"), innerMap.get(job.getString("city")) + 1);
+				}else{
+					innerMap.put(job.getString("city"), 1);
+				}
 				cityNodeMap.put(job.getString("country"),innerMap);
 			}
 		}
@@ -111,16 +112,7 @@ public class Nodes {
 		}
 		CacheKit.remove("nodeList", "second");
 		CacheKit.put("nodeList", "second", node4ChartList);
-		Collections.sort(nodes, new Comparator() {
-			@Override
-			public int compare(Object o1, Object o2) {
-				Node j1 = (Node) o1;
-				Node j2 = (Node) o2;
-				int index = Integer.valueOf(j2.getCount()).compareTo(
-						Integer.valueOf(j1.getCount()));
-				return index;
-			}
-		});
+
 	}
 
 }

@@ -42,9 +42,9 @@
                         <table class="table table-hover">
                             <tr id="append">
                                 <th class="text-center">#</th>
+                                <th class="text-center" i18n="node.count">IP</th>
 								<th class="text-center" i18n="node.country">国家</th>
-                                <th class="text-center" i18n="node.city">城市</th>
-								<th class="text-center" i18n="node.count">节点数</th>
+                                <th class="text-center" i18n="node.city">城市</th>							
 								<th class="text-center" i18n="node.longitude">精度</th>
 								<th class="text-center" i18n="node.latitude">维度</th>
                             </tr>
@@ -55,11 +55,12 @@
 							<tr>
 								<td class="text-center">#(i+(currpage-1)*20)
 								</td>
+								<td class="text-center indexGray" >#(node.ip)</td>
 								<td class="text-center">                                        
 									<div class="cell-blockid indexGray">#(node.country)</div>
 								</td>
 								<td class="text-center indexGray" >#(node.city)</td>
-								<td class="text-center indexGray" >#(node.count)</td>
+								
 								<td class="text-center indexGray" >#(node.longitude)</td>
 								<td class="text-center indexGray" >#(node.latitude)</td>
 							</tr>

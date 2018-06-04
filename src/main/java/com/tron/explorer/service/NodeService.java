@@ -8,12 +8,7 @@ public class NodeService extends BaseService {
 	
 	public static Nodes queryNodes() throws TronException{
 		return new Nodes(client.get(
-				PropUtil.getValue("baseURL") + "/nodeList"));		
-	}
-	
-	public static long queryNodesNum() throws TronException{
-		return new Nodes(client.get(
-				PropUtil.getValue("baseURL") + "/nodeList")).getTotalCount();
+				PropUtil.getValue("baseNewURL") + "/api/node"));		
 	}
 	
 }

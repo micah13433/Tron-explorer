@@ -76,7 +76,7 @@
     "node.list": "Node",
     "node.country": "Country",
     "node.city": "City",
-    "node.count": "Count",
+    "node.count": "IP",
     "node.longitude": "Longitude",
     "node.latitude": "Latitude",
     "account.list": "Account",

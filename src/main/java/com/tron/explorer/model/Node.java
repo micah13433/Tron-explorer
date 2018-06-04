@@ -8,7 +8,17 @@ public class Node  {
 	private String longitude;
 	private String latitude;
 	private int count;
+	private String ip;
 	
+	
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 	public String getCountry() {
 		return country;
 	}

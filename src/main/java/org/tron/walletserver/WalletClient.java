@@ -88,8 +88,7 @@ public class WalletClient {
 
   public static GrpcClient init() {
     Config config = Configuration.getByPath("config.conf");
-    txtPath = System.getProperty("user.dir") + "/" + config.getString("CityDb.TxtPath");
-
+    txtPath = config.getString("CityDb.TxtPath");
     String fullNode = "";
     String solidityNode = "";
     if (config.hasPath("soliditynode.ip.list")) {
