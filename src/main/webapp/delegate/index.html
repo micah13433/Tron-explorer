@@ -33,25 +33,39 @@
                             <tr id="append">
                                 <th class="text-center" i18n="delegate.rank">排名</th>
 								<th class="text-center" i18n="delegate.delegate">见证人</th>
+								#if(currpage == 1)
+								<th class="text-center" i18n="delegate.status">状态</th>
+								#end
                                 <th class="text-center" i18n="delegate.votes">得票数</th>
-                                <th class="text-center" i18n="delegate.blockHeight">最新产出区块</th>
+                                <th class="text-center" i18n="delegate.lastBlockHeight">最新产出区块</th>
 								<th class="text-center" i18n="delegate.produceBlockNum">生产块数</th>
 								<th class="text-center" i18n="delegate.lostBlockNum">丢失块数</th>
+								<th class="text-center" i18n="delegate.productivity">生产率</th>
                             </tr>
                             #if(count > 0)
                             #setLocal(i = 0)							
 							#for(delegate : delegates)
 							#setLocal(i = i+1)
 							<tr>
-								<td class="text-center">#(i+(currpage-1)*20)
+								<td class="text-center">#(i+(currpage-1)*27)
 								</td>
 								<td class="text-center">                                        
 									<div class="cell-blockid indexGray"><a href="/account/detail?address=#(delegate.address)" target="_blank">#(delegate.address)</a></div>
 								</td>
+								#if(currpage == 1)
+								<td class="text-center indexGray" >
+									#if(delegate.status == true)
+									<img src="../images/online.png" class="statusPng"/>
+									#else
+									<img src="../images/offline.png" class="statusPng"/>
+									#end
+								</td>
+								#end
 								<td class="text-center indexGray" >#(delegate.votes) TRX</td>
 								<td class="text-center indexGray">#(delegate.latestBlockNumber)</td>
 								<td class="text-center indexGray">#(delegate.producedTotal)</td>
 								<td class="text-center indexGray">#(delegate.missedTotal)</td>
+								<td class="text-center indexGray">#(delegate.productivity)</td>
 							</tr>
 							#end
 							#end

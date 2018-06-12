@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.tron.common.utils.Sha256Hash;
 import org.tron.protos.Contract.AccountCreateContract;
 import org.tron.protos.Contract.AccountUpdateContract;
 import org.tron.protos.Contract.AssetIssueContract;
@@ -13,7 +14,9 @@ import org.tron.protos.Contract.FreezeBalanceContract;
 import org.tron.protos.Contract.ParticipateAssetIssueContract;
 import org.tron.protos.Contract.TransferAssetContract;
 import org.tron.protos.Contract.TransferContract;
+import org.tron.protos.Contract.UnfreezeAssetContract;
 import org.tron.protos.Contract.UnfreezeBalanceContract;
+import org.tron.protos.Contract.UpdateAssetContract;
 import org.tron.protos.Contract.VoteAssetContract;
 import org.tron.protos.Contract.VoteWitnessContract;
 import org.tron.protos.Contract.WithdrawBalanceContract;
@@ -21,6 +24,7 @@ import org.tron.protos.Contract.WitnessCreateContract;
 import org.tron.protos.Contract.WitnessUpdateContract;
 import org.tron.protos.Protocol.BlockHeader.raw;
 import org.tron.protos.Protocol.Transaction.Contract;
+import org.tron.walletserver.WalletClient;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -34,8 +38,11 @@ import com.tron.explorer.util.Utils;
 public class Block implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	private boolean confirmed = false;
 	private int size;
 	private long height;
+	private int status;
+	private String hash;
 	private String previousHash;
 	private long generatorId;
 	private String generatorAddress;
@@ -47,8 +54,32 @@ public class Block implements Serializable {
 	private String blockSignature;
 	private List<Transaction> tradeList;
 	
+	public boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(boolean confirmed) {
+		this.confirmed = confirmed;
+	}
+
 	public int getSize() {
 		return size;
+	}	
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 	public void setSize(int size) {
@@ -154,9 +185,14 @@ public class Block implements Serializable {
 			size = array.length;
 			org.tron.protos.Protocol.Block block = org.tron.protos.Protocol.Block.parseFrom(array);			
 			height = block.getBlockHeader().getRawData().getNumber();
-			
+			long lastConfrimedHeight = WalletClient.getLastestConfirmedBlockByLatestNum();
+			if(lastConfrimedHeight >= height){
+				confirmed = true;
+			}else{
+				confirmed = false;
+			}
 			raw rawData = block.getBlockHeader().getRawData();
-
+			hash = Sha256Hash.of(rawData.toByteArray()).toString();
 			generatorAddress = Base58.encodeChecked(rawData.getWitnessAddress().toByteArray());
 			generateTime = FormatUtil.formatTimeInMillis(rawData.getTimestamp());
 			numberOfTransactions = block.getTransactionsCount();
@@ -166,6 +202,7 @@ public class Block implements Serializable {
 					Transaction trade = null;
 					for(org.tron.protos.Protocol.Transaction transaction : transList){
 						trade = new Transaction();
+						trade.setHash(Sha256Hash.of(transaction.getRawData().toByteArray()).toString());
 						trade.setBlockHeight(height);
 						structTrade(transaction,trade);
 						tradeList.add(trade);
@@ -279,7 +316,19 @@ public class Block implements Serializable {
 				trade.setSender(Base58.encodeChecked(withdrawBalanceContract.getOwnerAddress().toByteArray()));
 				trade.setDesc("<button type=\"button\" class=\"btn btn-danger\" i18n=\"transtype.withdrawbalance\">奖励赎回</button>");
 				break;
-			default:   
+			case Constrain.UNFREEZEASSETCONTRACT:
+				trade.setType(Constrain.UNFREEZEASSETCONTRACT);
+				UnfreezeAssetContract unfreezeAssetContract = any.unpack(UnfreezeAssetContract.class);
+				trade.setSender(Base58.encodeChecked(unfreezeAssetContract.getOwnerAddress().toByteArray()));
+				trade.setDesc("<button type=\"button\" class=\"btn btn-warning\" i18n=\"transtype.unfreezeasset\">资产解冻</button>");
+				break;
+			case Constrain.UPDATEASSETCONTRACT:
+				trade.setType(Constrain.UPDATEASSETCONTRACT);
+				UpdateAssetContract updateAssetContract = any.unpack(UpdateAssetContract.class);
+				trade.setSender(Base58.encodeChecked(updateAssetContract.getOwnerAddress().toByteArray()));
+				trade.setDesc("<button type=\"button\" class=\"btn btn-danger\" i18n=\"transtype.updateasset\">资产更新</button>");
+				break;
+			case Constrain.TRANSFERCONTRACT:  
 				trade.setType(Constrain.TRANSFERCONTRACT);
 				trade.setDesc("<button type=\"button\" class=\"btn btn-primary\" i18n=\"transtype.tranfer\">普通转账</button>");
 				TransferContract transferContract = any.unpack(TransferContract.class);

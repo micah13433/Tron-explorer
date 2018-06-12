@@ -74,6 +74,24 @@ public interface Utils {
 	  return df.format(Double.valueOf(amount)/Constrain.ONE_TRX);
   }
   
+  static String getSupplyAmount(long amount) {
+	  DecimalFormat df = new DecimalFormat("###.########");
+	  return df.format(Double.valueOf(amount)*100/(Constrain.TRON_ALL_NUM * Constrain.ONE_TRX)) + "%";
+  }
+  
+  static String getPercentAmount(long amount,long all) {
+	  return getPercentAmount(amount,all,2);
+  }
+  
+  static String getPercentAmount(long amount,long all,int point) {
+	  String format = "###.";
+	  for(int i=0;i<point;i++){
+		  format += "#";
+	  }
+	  DecimalFormat df = new DecimalFormat(format);
+	  return df.format(Double.valueOf(amount)*100/all) + "%";
+  }
+  
   public static boolean isNewVersion(String localVersion, String onlineVersion) {
       if (localVersion == null || onlineVersion == null) {
           throw new IllegalArgumentException("argument may not be null !");

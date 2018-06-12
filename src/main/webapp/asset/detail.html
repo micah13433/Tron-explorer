@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="asset.detail">资产详情</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title" i18n="asset.detail">资产详情</li>
+                </ol>
+            </div>
+			
+			#if(status == 1)
+			<div class="row">
+                
+                <div>				
+                    <div class="panel panel-bm indexNetworkStats">
+                        <div class="panel-heading">
+                            <div class="panel-heading-title">#(asset.name)</div>
+                        </div>
+                        <div class="panel-body" style="color:#777">
+                            <ul>
+                                <li>
+                                    <dl>
+                                        <dt i18n="asset.desc">描述</dt>
+                                        <dd>
+                                        	#(asset.description)
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <dl>
+                                        <dt i18n="asset.issuer">发起人</dt>
+                                        <dd><a href="/account/detail?address=#(asset.ownerAddress)">#(asset.ownerAddress)</a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                 <li>
+                                    <dl>
+                                        <dt i18n="asset.url">网址</dt>
+                                        <dd><a href="#(asset.url)" target="_blank">#(asset.url)</a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                            <ul> 
+                                <li>
+                                    <dl>
+                                        <dt i18n="asset.totalSupply">总额</dt>
+                                        <dd>#(asset.totalSupply)
+                                        </dd>
+                                    </dl>
+                                </li> 
+                                <li>
+                                    <dl>
+                                        <dt i18n="asset.price">单价</dt>
+                                        <dd>#(asset.price)
+                                        </dd>
+                                    </dl>
+                                </li> 
+                                <li>
+                                    <dl>
+                                        <dt i18n="asset.startTime">开始时间</dt>
+                                        <dd>#(asset.startTime)
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <dl>
+                                        <dt i18n="asset.endTime">截止时间</dt>
+                                        <dd>#(asset.endTime)
+                                        </dd>
+                                    </dl>
+                                </li> 
+                            </ul> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+						
+            <div class="row blockList">
+				<div class="panel-bm indexNetworkStats">
+					<div class="panel-heading">
+						<div class="panel-heading-title" i18n="index.recenttransactions">最近交易记录</div>
+					</div>
+				</div>
+                
+                <div class="blockList-inner">
+                    <div class="indexBlockList" style="min-height:0px;">
+					    #if(transCount == 0)
+					    	<span class="emptyTip" i18n="account.notransactionfound">无此用户最近交易记录.</span>
+						#else
+                        <table class="table table-hover">
+                            <tr id="append2">
+                                <th class="text-center" i18n="transaction.type">交易类型</th>
+								<th class="text-center" i18n="transaction.generatetime">交易时间</th>
+                                <th class="text-center" i18n="transaction.sender">发送者</th>
+                                <th class="text-center" i18n="transaction.receiver">接收者</th>
+                                <th class="text-center" i18n="transaction.amount">金额</th>
+                            </tr>
+                            #setLocal(i = 0)
+                           #for(order : asset.getTrans())
+                           #setLocal(i = i+1)
+							<tr>
+								<td class="text-center">
+									<a href="/transaction/detail?hash=#(order.hash)">#(order.typeDesc)</a>
+								</td>
+								<td class="text-center">                                        
+                                        <div class="cell-blockid indexGray">#(order.time)</div>
+                                    </td>
+                                    <td class="text-center indexGray" ><a href="/account/detail?address=#(order.sender)">#(order.sender)</a></td>
+                                    <td class="text-center indexGray"><a href="/account/detail?address=#(order.recipient)">#(order.recipient)</a></td>
+                                    <td class="text-center indexGray">
+										#(order.amount)
+                                    </td>
+							</tr>
+							#end
+                        </table>
+						#end
+                    </div>
+                </div>
+             </div>
+             
+             <div class="row blockList">
+				<div class="panel-bm indexNetworkStats">
+					<div class="panel-heading">
+						<div class="panel-heading-title" i18n="asset.toplist">持仓排行</div>
+					</div>
+				</div>
+                
+                <div class="blockList-inner">
+                    <div class="indexBlockList" style="min-height:0px;">
+                        <table class="table table-hover">
+                            <tr id="append2">
+                            	<th class="text-center">#</th>
+                                <th class="text-center" i18n="account.address">地址</th>
+								<th class="text-center" i18n="account.balance">余额</th>
+                                <th class="text-center" i18n="account.supply">总量占比</th>
+                            </tr>
+                            #setLocal(i = 0)
+                           #for(top : asset.getTops())
+                           #setLocal(i = i+1)
+							<tr>
+								<td class="text-center">#(i)</td>
+								<td class="text-center">
+									<a href="/account/detail?address=#(top.address)">#(top.address)</a>
+								</td>
+								<td class="text-center">                                        
+                                        <div class="cell-blockid indexGray">#(top.count)</div>
+                                    </td>
+                                    <td class="text-center indexGray" >#(top.rate)</td>
+							</tr>
+							#end
+                        </table>
+                    </div>
+                </div>
+             </div>
+			#else
+				#@empty()	
+			#end
+        </div>
+    </div>
+	
+	#@foot()
+	
+</body>
+</html>

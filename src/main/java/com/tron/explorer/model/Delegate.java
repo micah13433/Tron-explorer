@@ -1,5 +1,7 @@
 package com.tron.explorer.model;
 
+import com.tron.explorer.util.Utils;
+
 
 public class Delegate  {
 	
@@ -12,7 +14,30 @@ public class Delegate  {
 	private long latestSlotNum;
 	private String pubKey;
 	private boolean isJobs;
+	private String productivity;
+	private boolean status;
 	
+		
+	public String getProductivity() {
+		if(producedTotal > 0){
+			return Utils.getPercentAmount(producedTotal, producedTotal + missedTotal);
+		}else{
+			return "";
+		}
+	}
+
+	public void setProductivity(String productivity) {
+		this.productivity = productivity;
+	}
+
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	public String getAddress() {
 		return address;
 	}

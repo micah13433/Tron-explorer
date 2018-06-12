@@ -23,11 +23,11 @@ public class DelegateController extends Controller {
 			render("delegate/index.html");
 			return;
 		}
-		int [] pageIndexArray = PageUtil.getPageIndex(delegates.getDelegates(),currPageIndex);
+		int [] pageIndexArray = PageUtil.getPageIndex(delegates.getDelegates(),currPageIndex,Constrain.delegatePageSize);
 		List<Delegate> delecateList = delegates.getDelegates().subList(pageIndexArray[0], pageIndexArray[1]);		
 	
 		setAttr("currpage",currPageIndex);
-		setAttr("totalpage",delegates.getDelegates().size()/Constrain.pageSize + 1);
+		setAttr("totalpage",delegates.getDelegates().size()/Constrain.delegatePageSize + 1);
 		setAttr("delegates", delecateList);
 		setAttr("count", delegates.getDelegates().size());
 		render("delegate/index.html");

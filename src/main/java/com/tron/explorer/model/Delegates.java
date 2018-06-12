@@ -6,7 +6,9 @@ import java.util.List;
 import org.tron.api.GrpcAPI.WitnessList;
 import org.tron.protos.Protocol.Witness;
 
+import com.tron.explorer.Constrain;
 import com.tron.explorer.encrypt.Base58;
+import com.tron.explorer.service.BlockService;
 import com.tron.explorer.util.DecodeUtil;
 
 
@@ -51,6 +53,7 @@ public class Delegates  {
 			List<Witness> list = witnessList.getWitnessesList();
 			Delegate delegate = null;
 			Witness wit = null;
+			long maxBlockHeight = BlockService.queryLatestConfirmedBlock();
 			for(int i=0; i< list.size(); i++){
 				wit = list.get(i);
 				if(wit == null) continue;
@@ -60,6 +63,11 @@ public class Delegates  {
 				delegate.setUrl(wit.getUrl());
 				delegate.setVotes(wit.getVoteCount());
 				delegate.setLatestBlockNumber(wit.getLatestBlockNum());
+				if(maxBlockHeight - wit.getLatestBlockNum() <= Constrain.delegatePageSize){
+					delegate.setStatus(true);
+				}else{
+					delegate.setStatus(false);
+				}
 				delegate.setLatestSlotNum(wit.getLatestSlotNum());
 				delegate.setMissedTotal(wit.getTotalMissed());
 				delegate.setProducedTotal(wit.getTotalProduced());

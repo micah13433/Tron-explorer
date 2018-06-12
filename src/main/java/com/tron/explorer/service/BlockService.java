@@ -47,4 +47,8 @@ public class BlockService extends BaseService {
 		return new AdapterModel(WalletClient.getTotalTransaction().toByteArray()).getTransactionNum();
 	}
 	
+	public static long queryLatestConfirmedBlock() throws TronException{	
+		return  WalletClient.getLastestConfirmedBlockByLatestNum();
+	}
+	
 }

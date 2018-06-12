@@ -33,6 +33,20 @@
                             <ul>
                                 <li>
                                     <dl>
+                                        <dt i18n="block.status">状态</dt>
+                                        <dd>
+                                        	#if(block.confirmed == true)
+                                        		<button type="button" class="btn btn-success" i18n="block.confirmed">已确认</button>
+                                        	#else
+                                        		<button type="button" class="btn btn-danger" i18n="block.unconfirmed">未确认</button>
+                                        	#end
+                                        </dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <dl>
                                         <dt i18n="delegate.blockHeight">区块高度</dt>
                                         <dd>#(block.height)
                                         </dd>
@@ -72,7 +86,15 @@
                                         <dd>#(block.numberOfTransactions)</dd>
                                     </dl>
                                 </li>
-
+								
+								<li>
+                                    <dl>
+                                        <dt i18n="block.hash">区块Hash</dt>
+                                        <dd>#(block.hash)
+                                        </dd>
+                                    </dl>
+                                </li>
+                                
 								<li>
                                     <dl>
                                         <dt i18n="block.parentHash">父区块Hash</dt>

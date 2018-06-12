@@ -3,12 +3,15 @@ package com.tron.explorer.controller;
 
 import java.util.List;
 
+import org.jsoup.helper.StringUtil;
+
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.tron.explorer.Constrain;
 import com.tron.explorer.model.Asset;
 import com.tron.explorer.model.Assets;
 import com.tron.explorer.model.TronException;
+import com.tron.explorer.service.AssetService;
 import com.tron.explorer.util.PageUtil;
 
 public class AssetController extends Controller {
@@ -43,6 +46,19 @@ public class AssetController extends Controller {
 	
 	public void count() throws TronException{
 		renderText(String.valueOf(CacheKit.get("persistedList", "assetNum")));
+	}
+	
+	public void detail() throws TronException {
+		String name = getPara("name");
+		Asset asset = AssetService.getAssetByName(name);
+		if(StringUtil.isBlank(asset.getName())){
+			setAttr("status", 0);
+		}else{
+			setAttr("status", 1);
+			setAttr("transCount",asset.getTrans().size());
+			setAttr("asset", asset);
+		}			
+		render("asset/detail.html");
 	}
 }
  

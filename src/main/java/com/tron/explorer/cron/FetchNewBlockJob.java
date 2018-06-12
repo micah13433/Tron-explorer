@@ -21,8 +21,8 @@ public class FetchNewBlockJob implements Job{
 	
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		try {
-			Long currBlockHeightInCache = CacheKit.get("persistedList", "maxBlockHeight");
+		Long currBlockHeightInCache = CacheKit.get("persistedList", "maxBlockHeight");
+		try {		
 			boolean updateBlockNum = false;
 			if(currBlockHeightInCache == null){
 				currBlockHeightInCache = BlockService.getLatestBlockNumber();
@@ -46,8 +46,9 @@ public class FetchNewBlockJob implements Job{
 				CacheKit.put("transactionList", "index", block.getTradeList());
 			}
 		     
-		} catch (TronException ex) {	
+		} catch (TronException ex) {
 			log.error("区块初始化=> [失败]:" + ex.getLocalizedMessage());
+			CacheKit.put("persistedList", "maxBlockHeight", currBlockHeightInCache + 1);
 		}
 		
 	}

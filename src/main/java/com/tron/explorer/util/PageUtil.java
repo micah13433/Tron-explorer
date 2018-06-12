@@ -7,10 +7,15 @@ import com.tron.explorer.Constrain;
 public class PageUtil {
 
 	public static <T> int[] getPageIndex(List<T> blocks,
-			Long currPageIndex) {
-		int fromindex = (int) ((currPageIndex -1) * Constrain.pageSize);
+			Long currPageIndex) {		
+		return getPageIndex(blocks,currPageIndex,Constrain.pageSize);
+	}
+	
+	public static <T> int[] getPageIndex(List<T> blocks,
+			Long currPageIndex,int pageSize) {
+		int fromindex = (int) ((currPageIndex -1) * pageSize);
 		fromindex = fromindex > blocks.size() ? 0 : fromindex;
-		int toindex = fromindex + Constrain.pageSize;		
+		int toindex = fromindex + pageSize;		
 		toindex = toindex > blocks.size() ? blocks.size() : toindex;
 		return new int[]{fromindex,toindex};
 	}

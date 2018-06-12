@@ -30,7 +30,7 @@ public class Account  {
 			this.count = count;
 		}		
 		
-		Vote(){
+		public Vote(){
 			
 		}
 	}
@@ -61,6 +61,7 @@ public class Account  {
 	private int type;
 	private long balance;
 	private Map<String, Long> assets;
+	private String supply;
 	private List<Vote> votes;
 	private List<Frozen> frozens;
 	private String lastOperationTime;
@@ -154,6 +155,14 @@ public class Account  {
 
 	public void setLastOperationTime(String lastOperationTime) {
 		this.lastOperationTime = lastOperationTime;
+	}
+	
+	public String getSupply() {
+		return Utils.getSupplyAmount(balance);
+	}
+
+	public void setSupply(String supply) {
+		this.supply = supply;
 	}
 
 	public Account() throws TronException {

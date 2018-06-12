@@ -638,28 +638,28 @@ public class TestClient {
     }
   }
 
-  private void getAssetIssueListByTimestamp(String[] parameters) {
-    long timeStamp = -1;
-    if (parameters == null || parameters.length == 0) {
-      System.out.println("no time input, use current time");
-      timeStamp = System.currentTimeMillis();
-    } else {
-      if (parameters.length != 2) {
-        System.out.println("You can GetAssetIssueListByTimestamp like:");
-        System.out.println("GetAssetIssueListByTimestamp yyyy-mm-dd hh:mm:ss");
-        return;
-      } else {
-        timeStamp = Timestamp.valueOf(parameters[0] + " " + parameters[1]).getTime();
-      }
-    }
-    Optional<AssetIssueList> result = WalletClient.getAssetIssueListByTimestamp(timeStamp);
-    if (result.isPresent()) {
-      AssetIssueList assetIssueList = result.get();
-      logger.info(Utils.printAssetIssueList(assetIssueList));
-    } else {
-      logger.info("GetAssetIssueListByTimestamp " + " failed !!");
-    }
-  }
+//  private void getAssetIssueListByTimestamp(String[] parameters) {
+//    long timeStamp = -1;
+//    if (parameters == null || parameters.length == 0) {
+//      System.out.println("no time input, use current time");
+//      timeStamp = System.currentTimeMillis();
+//    } else {
+//      if (parameters.length != 2) {
+//        System.out.println("You can GetAssetIssueListByTimestamp like:");
+//        System.out.println("GetAssetIssueListByTimestamp yyyy-mm-dd hh:mm:ss");
+//        return;
+//      } else {
+//        timeStamp = Timestamp.valueOf(parameters[0] + " " + parameters[1]).getTime();
+//      }
+//    }
+//    Optional<AssetIssueList> result = WalletClient.getAssetIssueListByTimestamp(timeStamp);
+//    if (result.isPresent()) {
+//      AssetIssueList assetIssueList = result.get();
+//      logger.info(Utils.printAssetIssueList(assetIssueList));
+//    } else {
+//      logger.info("GetAssetIssueListByTimestamp " + " failed !!");
+//    }
+//  }
 
   private void getTransactionById(String[] parameters) {
     String txid = "";
@@ -930,10 +930,10 @@ public class TestClient {
             getNextMaintenanceTime();
             break;
           }
-          case "getassetissuelistbytimestamp": {
-            getAssetIssueListByTimestamp(parameters);
-            break;
-          }
+//          case "getassetissuelistbytimestamp": {
+//            getAssetIssueListByTimestamp(parameters);
+//            break;
+//          }
           case "gettransactionbyid": {
             getTransactionById(parameters);
             break;

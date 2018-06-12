@@ -117,6 +117,9 @@
 .indexBlockList{
 	min-height:350px;
 }
+.transactionDetail{
+	min-height:300px;
+}
 .noresultDiv{
 	text-align:center;
 	margin:0 auto;
@@ -163,6 +166,10 @@
 }
 .width_4{
 	width:40%;
+}
+.statusPng{
+	width:20px;
+	height:20px;
 }
 .container{width:1180px!important}.btn-bm{border-radius:3px;font-size:14px;line-height:20px;padding:4px 30px}#scrollUp{bottom:20px;right:20px;padding:10px 20px;background-color:#555;color:#fff}.mask-loading{position:relative}.mask-loading:before{content:'';position:absolute;top:0;bottom:0;left:0;right:0;background:#fff;opacity:.7;z-index:999}.abstract-section{float:left;line-height:30px;width:50%}.abstract-section dl{margin-bottom:0;overflow:hidden}.abstract-section dt{float:left;color:#888;font-weight:400;margin-right:10px}.abstract-section dd{float:right}.abstract-section dt,.abstract-section dd{line-height:30px}.abstract-section:first-child{border-right:1px solid #e6e9ee;padding-right:50px}.abstract-section:last-child{padding-left:50px}.cell-blockid{display:inline-block;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.block-ver{margin:0 2px}
 @font-face{font-family:'Droid Sans Mono';font-style:normal;font-weight:400;src:local('Droid Sans Mono'),local('DroidSansMono'),url(../fonts/Droid_Sans_Mono.woff) format('woff')}

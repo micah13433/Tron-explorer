@@ -748,9 +748,9 @@ public class WalletClient {
     return result;
   }
 
-  public static Optional<AssetIssueList> getAssetIssueListByTimestamp(long timestamp) {
-    return rpcCli.getAssetIssueListByTimestamp(timestamp);
-  }
+//  public static Optional<AssetIssueList> getAssetIssueListByTimestamp(long timestamp) {
+//    return rpcCli.getAssetIssueListByTimestamp(timestamp);
+//  }
 
   public static Optional<AssetIssueList> getAssetIssueList() {
     return rpcCli.getAssetIssueList();
@@ -881,6 +881,10 @@ public class WalletClient {
   public static Optional<BlockList> getBlockByLatestNum(long num) {
     return rpcCli.getBlockByLatestNum(num);
   }
+  
+  public static long getLastestConfirmedBlockByLatestNum() {
+	    return rpcCli.getLastestConfirmedBlockByLatestNum();
+	  }
   
   public static AccountNetMessage getAccountNet(byte[] address) {
     return rpcCli.getAccountNet(address);

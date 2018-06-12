@@ -75,7 +75,7 @@
                                 #if(transCount > 0)
 								#for(order : transactions)
                                 <tr data-id="479937">
-                                    <td class="text-center">#(order.desc)
+                                    <td class="text-center"><a href="/transaction/detail?hash=#(order.hash)">#(order.desc)</a>
                                     </td>
                                     <td class="text-center">                                        
                                         <div class="cell-blockid indexGray"><a href="/block/detail?height=#(order.blockHeight)#(append)">#(order.blockHeight)</a></div>

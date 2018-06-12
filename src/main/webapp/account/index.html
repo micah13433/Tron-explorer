@@ -34,6 +34,7 @@
                                 <th class="text-center">#</th>
 								<th class="text-center" i18n="account.address">地址</th>
                                 <th class="text-center" i18n="account.balance">余额</th>
+                                <th class="text-center" i18n="account.supply">总量占比</th>
 								<th class="text-center" i18n="account.voteHistory">投票记录</th>
 								<th class="text-center" i18n="account.asset">其它资产</th>
                             </tr>
@@ -48,6 +49,7 @@
 									<div class="cell-blockid indexGray"><a href="/account/detail?address=#(account.address)" target="_blank">#(account.address)</a></div>
 								</td>
 								<td class="text-center indexGray" >#(account.balance) TRX</td>
+								<td class="text-center indexGray" >#(account.supply)</td>
 								<td class="text-center indexGray"><a href="/account/voteList?address=#(account.address)"><img class="listItemImage" src="../images/vote.png"/></a></td>
 								<td class="text-center indexGray"><a href="/account/assertList?address=#(account.address)"><img class="listItemImage" src="../images/assert.png"/></a></td>
 							</tr>

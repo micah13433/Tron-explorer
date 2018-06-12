@@ -12113,7 +12113,7 @@ public final class GrpcAPI {
       "ion\022\226\001\n\026GetNextMaintenanceTime\022\026.protoco" +
       "l.EmptyMessage\032\027.protocol.NumberMessage\"" +
       "K\202\323\344\223\002E\"\036/wallet/getnextmaintenancetime:" +
-      "\001*Z \022\036/wallet/getnextmaintenancetime2\357\013\n" +
+      "\001*Z \022\036/wallet/getnextmaintenancetime2\266\005\n" +
       "\016WalletSolidity\022w\n\nGetAccount\022\021.protocol" +
       ".Account\032\021.protocol.Account\"C\202\323\344\223\002=\"\032/wa" +
       "lletsolidity/getaccount:\001*Z\034\022\032/walletsol" +
@@ -12124,72 +12124,32 @@ public final class GrpcAPI {
       "\021GetAssetIssueList\022\026.protocol.EmptyMessa" +
       "ge\032\030.protocol.AssetIssueList\"Q\202\323\344\223\002K\"!/w" +
       "alletsolidity/getassetissuelist:\001*Z#\022!/w" +
-      "alletsolidity/getassetissuelist\022\272\001\n\034GetA" +
-      "ssetIssueListByTimestamp\022\027.protocol.Numb" +
-      "erMessage\032\030.protocol.AssetIssueList\"g\202\323\344" +
-      "\223\002a\",/walletsolidity/getassetissuelistby" +
-      "timestamp:\001*Z.\022,/walletsolidity/getasset" +
-      "issuelistbytimestamp\022\242\001\n\026GetAssetIssueBy" +
-      "Account\022\021.protocol.Account\032\030.protocol.As" +
-      "setIssueList\"[\202\323\344\223\002U\"&/walletsolidity/ge" +
-      "tassetissuebyaccount:\001*Z(\022&/walletsolidi" +
-      "ty/getassetissuebyaccount\022\242\001\n\023GetAssetIs" +
-      "sueByName\022\026.protocol.BytesMessage\032\034.prot" +
-      "ocol.AssetIssueContract\"U\202\323\344\223\002O\"#/wallet" +
-      "solidity/getassetissuebyname:\001*Z%\022#/wall" +
-      "etsolidity/getassetissuebyname\022}\n\013GetNow" +
-      "Block\022\026.protocol.EmptyMessage\032\017.protocol" +
-      ".Block\"E\202\323\344\223\002?\"\033/walletsolidity/getnowbl" +
-      "ock:\001*Z\035\022\033/walletsolidity/getnowblock\022\204\001" +
-      "\n\rGetBlockByNum\022\027.protocol.NumberMessage" +
-      "\032\017.protocol.Block\"I\202\323\344\223\002C\"\035/walletsolidi" +
-      "ty/getblockbynum:\001*Z\037\022\035/walletsolidity/g" +
-      "etblockbynum\022\224\001\n\020TotalTransaction\022\026.prot" +
-      "ocol.EmptyMessage\032\027.protocol.NumberMessa" +
-      "ge\"O\202\323\344\223\002I\" /walletsolidity/totaltransac" +
-      "tion:\001*Z\"\022 /walletsolidity/totaltransact" +
-      "ion\022\230\001\n\022GetTransactionById\022\026.protocol.By" +
-      "tesMessage\032\025.protocol.Transaction\"S\202\323\344\223\002" +
-      "M\"\"/walletsolidity/gettransactionbyid:\001*" +
-      "Z$\022\"/walletsolidity/gettransactionbyid2\343" +
-      "\010\n\017WalletExtension\022\276\001\n\032GetTransactionsBy" +
-      "Timestamp\022\036.protocol.TimePaginatedMessag" +
-      "e\032\031.protocol.TransactionList\"e\202\323\344\223\002_\"+/w" +
-      "alletextension/gettransactionsbytimestam" +
-      "p:\001*Z-\022+/walletextension/gettransactions" +
-      "bytimestamp\022\302\001\n\037GetTransactionsByTimesta" +
-      "mpCount\022\025.protocol.TimeMessage\032\027.protoco" +
-      "l.NumberMessage\"o\202\323\344\223\002i\"0/walletextensio" +
-      "n/gettransactionsbytimestampcount:\001*Z2\0220" +
-      "/walletextension/gettransactionsbytimest" +
-      "ampcount\022\261\001\n\027GetTransactionsFromThis\022\032.p" +
-      "rotocol.AccountPaginated\032\031.protocol.Tran" +
-      "sactionList\"_\202\323\344\223\002Y\"(/walletextension/ge" +
-      "ttransactionsfromthis:\001*Z*\022(/walletexten" +
-      "sion/gettransactionsfromthis\022\253\001\n\025GetTran" +
-      "sactionsToThis\022\032.protocol.AccountPaginat" +
-      "ed\032\031.protocol.TransactionList\"[\202\323\344\223\002U\"&/" +
-      "walletextension/gettransactionstothis:\001*" +
-      "Z(\022&/walletextension/gettransactionstoth" +
-      "is\022\265\001\n\034GetTransactionsFromThisCount\022\021.pr" +
-      "otocol.Account\032\027.protocol.NumberMessage\"" +
-      "i\202\323\344\223\002c\"-/walletextension/gettransaction" +
-      "sfromthiscount:\001*Z/\022-/walletextension/ge" +
-      "ttransactionsfromthiscount\022\257\001\n\032GetTransa" +
-      "ctionsToThisCount\022\021.protocol.Account\032\027.p" +
-      "rotocol.NumberMessage\"e\202\323\344\223\002_\"+/walletex" +
-      "tension/gettransactionstothiscount:\001*Z-\022" +
-      "+/walletextension/gettransactionstothisc" +
-      "ount2\231\002\n\010Database\022G\n\021getBlockReference\022\026" +
-      ".protocol.EmptyMessage\032\030.protocol.BlockR" +
-      "eference\"\000\022M\n\024GetDynamicProperties\022\026.pro" +
-      "tocol.EmptyMessage\032\033.protocol.DynamicPro" +
-      "perties\"\000\0228\n\013GetNowBlock\022\026.protocol.Empt" +
-      "yMessage\032\017.protocol.Block\"\000\022;\n\rGetBlockB" +
-      "yNum\022\027.protocol.NumberMessage\032\017.protocol" +
-      ".Block\"\0002\t\n\007NetworkBA\n\014org.tron.apiB\007Grp" +
-      "cAPIZ(github.com/tronprotocol/grpc-gatew" +
-      "ay/apib\006proto3"
+      "alletsolidity/getassetissuelist\022}\n\013GetNo" +
+      "wBlock\022\026.protocol.EmptyMessage\032\017.protoco" +
+      "l.Block\"E\202\323\344\223\002?\"\033/walletsolidity/getnowb" +
+      "lock:\001*Z\035\022\033/walletsolidity/getnowblock\022\204" +
+      "\001\n\rGetBlockByNum\022\027.protocol.NumberMessag" +
+      "e\032\017.protocol.Block\"I\202\323\344\223\002C\"\035/walletsolid" +
+      "ity/getblockbynum:\001*Z\037\022\035/walletsolidity/" +
+      "getblockbynum2\363\002\n\017WalletExtension\022\261\001\n\027Ge" +
+      "tTransactionsFromThis\022\032.protocol.Account" +
+      "Paginated\032\031.protocol.TransactionList\"_\202\323" +
+      "\344\223\002Y\"(/walletextension/gettransactionsfr" +
+      "omthis:\001*Z*\022(/walletextension/gettransac" +
+      "tionsfromthis\022\253\001\n\025GetTransactionsToThis\022" +
+      "\032.protocol.AccountPaginated\032\031.protocol.T" +
+      "ransactionList\"[\202\323\344\223\002U\"&/walletextension" +
+      "/gettransactionstothis:\001*Z(\022&/walletexte" +
+      "nsion/gettransactionstothis2\231\002\n\010Database" +
+      "\022G\n\021getBlockReference\022\026.protocol.EmptyMe" +
+      "ssage\032\030.protocol.BlockReference\"\000\022M\n\024Get" +
+      "DynamicProperties\022\026.protocol.EmptyMessag" +
+      "e\032\033.protocol.DynamicProperties\"\000\0228\n\013GetN" +
+      "owBlock\022\026.protocol.EmptyMessage\032\017.protoc" +
+      "ol.Block\"\000\022;\n\rGetBlockByNum\022\027.protocol.N" +
+      "umberMessage\032\017.protocol.Block\"\0002\t\n\007Netwo" +
+      "rkBA\n\014org.tron.apiB\007GrpcAPIZ(github.com/" +
+      "tronprotocol/grpc-gateway/apib\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

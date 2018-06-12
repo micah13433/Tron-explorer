@@ -395,13 +395,13 @@ public class Utils {
           result += "type: ";
           result += accountCreateContract.getType();
           result += "\n";
-          if (accountCreateContract.getAccountAddress() != null
-              && accountCreateContract.getAccountAddress().size() > 0) {
-            result += "account_address: ";
-            result += new String(accountCreateContract.getAccountAddress().toByteArray(),
-                Charset.forName("UTF-8"));
-            result += "\n";
-          }
+//          if (accountCreateContract.getAccountAddress() != null
+//              && accountCreateContract.getAccountAddress().size() > 0) {
+//            result += "account_address: ";
+//            result += new String(accountCreateContract.getAccountAddress().toByteArray(),
+//                Charset.forName("UTF-8"));
+//            result += "\n";
+//          }
           result += "owner_address: ";
           result += WalletClient
               .encode58Check(accountCreateContract.getOwnerAddress().toByteArray());

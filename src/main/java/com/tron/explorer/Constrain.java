@@ -2,8 +2,10 @@ package com.tron.explorer;
 
 
 public class Constrain {
-
+	public final static long TRON_ALL_NUM = 100000000000L;
+	
 	public final static int pageSize = 20;
+	public final static int delegatePageSize = 27;
 
 	public final static int ACCOUNTCREATECONTRACT = 0;
 	public final static int TRANSFERCONTRACT = 1;
@@ -19,6 +21,8 @@ public class Constrain {
 	public final static int FREEZEBALANCECONTRACT= 11;
 	public final static int UNFREEZEBALANCECONTRACT = 12;
 	public final static int WITHDRAWBALANCECONTRACT = 13;
+	public final static int UNFREEZEASSETCONTRACT = 14;
+	public final static int UPDATEASSETCONTRACT = 15;
 	public final static int CUSTOMCONTRACT = 20;
 	  
 	public final static int INDEX_LIST_NUMBER = 10;
@@ -27,6 +31,7 @@ public class Constrain {
 	public final static byte ADD_PRE_FIX_BYTE = (byte) 0x41;;
 	public final static int ADDRESS_SIZE = 21;
 	public final static int BASE58CHECK_ADDRESS_SIZE = 34;
+	public final static int TRANSACTION_HASH_SIZE = 64;
 	
 	public final static String LASTEST_VERSION = "1.0.0";
 }

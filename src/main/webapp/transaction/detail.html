@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title i18n="transaction.detail">交易详情</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../css/main.css"/>    
+</head>
+<body>
+	
+	#@head()
+
+    <div class="main-body">
+        <div class="container">
+
+            <div class="row">
+                <ol class="breadcrumb bm">
+                    <li><a href="/" i18n="common.index">首页</a></li>
+                    <li class="head-title" i18n="transaction.detail">交易详情</li>
+                </ol>
+            </div>
+			
+			#if(status == 1)
+			<div class="row">
+                
+                <div>				
+                    <div class="panel panel-bm indexNetworkStats">
+                        <div class="panel-heading">
+                            <div class="panel-heading-title" i18n="account.summary">摘要</div>
+                        </div>
+                        <div class="panel-body" style="color:#777">
+                            <ul>
+                                <li>
+                                    <dl>
+                                        <dt i18n="block.status">状态</dt>
+                                        <dd>
+                                        	#if(transaction.confirmed == true)
+                                        		<button type="button" class="btn btn-success" i18n="block.confirmed">已确认</button>
+                                        	#else
+                                        		<button type="button" class="btn btn-danger" i18n="block.unconfirmed">未确认</button>
+                                        	#end
+                                        </dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <dl>
+                                        <dt i18n="transaction.hash">交易Hash</dt>
+                                        <dd>#(transaction.hash)
+                                        </dd>
+                                    </dl>
+                                </li>
+                                 <li>
+                                    <dl>
+                                        <dt i18n="delegate.blockHeight">区块高度</dt>
+                                        <dd><a href="/block/detail?height=#(transaction.blockHeight)">#(transaction.blockHeight)</a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <dl>
+                                        <dt i18n="transaction.generatetime">
+                                            交易时间
+                                        </dt>
+                                        <dd>#(transaction.time)
+                                        </dd>
+                                    </dl>
+                                </li> 
+                            </ul> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+			
+            <div class="row transactionDetail">
+				<div class="panel panel-bm indexNetworkStats">
+					<div class="panel-heading">
+						<div class="panel-heading-title" i18n="transaction.dt">详情</div>
+					</div>
+					
+					<div class="panel-body" style="color:#777">
+                      <ul>
+                          <li>
+                              <dl>
+                                  <dt i18n="transaction.type">交易类型</dt>
+                                  <dd>#(transaction.typeDesc)</dd>
+                              </dl>
+                          </li>
+                      </ul>
+                      <ul>
+                          <li>
+                              <dl>
+                                  <dt i18n="transaction.owner">发起者</dt>
+                                  <dd><a href="/account/detail?address=#(transaction.sender)">#(transaction.sender)</a>
+                                  </dd>
+                              </dl>
+                          </li>
+                          #if(transaction.type == 1 || transaction.type == 2)
+                           <li>
+                              <dl>
+                                  <dt i18n="transaction.receiver">接收者</dt>
+                                  <dd><a href="/account/detail?address=#(transaction.recipient)">#(transaction.recipient)</a>
+                                  </dd>
+                              </dl>
+                          </li>
+                          <li>
+                              <dl>
+                                  <dt i18n="transaction.amount">金额</dt>
+                                  <dd>#(transaction.amount)
+                                  </dd>
+                              </dl>
+                          </li>
+                          #elseif(transaction.type == 11)
+                          	<li>
+	                              <dl>
+	                                  <dt i18n="transaction.amount">金额</dt>
+	                                  <dd>#(transaction.amount)
+	                                  </dd>
+	                              </dl>
+	                          </li>
+	                          <li>
+	                              <dl>
+	                                  <dt i18n="transaction.frozenDuration">冻结天数</dt>
+	                                  <dd>#(transaction.frozenDuration)
+	                                  </dd>
+	                              </dl>
+                          		</li>
+                           #elseif(transaction.type == 6)
+                           		<li>
+		                              <dl>
+		                                  <dt i18n="asset.name">名称</dt>
+		                                  <dd>#(transaction.asset)
+		                                  </dd>
+		                              </dl>
+		                          </li>
+		                          <li>
+		                              <dl>
+		                                  <dt i18n="asset.totalSupply">总额</dt>
+		                                  <dd>#(transaction.amount)
+		                                  </dd>
+		                              </dl>
+		                          </li>
+		                          <li>
+		                              <dl>
+		                                  <dt i18n="asset.price">单价</dt>
+		                                  <dd>#(transaction.price)
+		                                  </dd>
+		                              </dl>
+		                          </li>
+		                          <li>
+		                              <dl>
+		                                  <dt i18n="asset.startTime">开始时间</dt>
+		                                  <dd>#(transaction.startTime)
+		                                  </dd>
+		                              </dl>
+		                          </li>
+		                          <li>
+		                              <dl>
+		                                  <dt i18n="asset.endTime">截止时间</dt>
+		                                  <dd>#(transaction.endTime)
+		                                  </dd>
+		                              </dl>
+		                          </li>
+		                  #elseif(transaction.type == 4)
+		                  		<li>
+		                              <dl>
+		                                  <dt i18n="account.voteHistory">投票记录</dt>
+		                                  <dd>&nbsp;</dd>
+		                              </dl>
+		                          </li>
+		                  		#for(vote : votes)
+		                  			<li>
+			                              <dl>
+			                                  <dt>#(vote.address)</dt>
+			                                  <dd>#(vote.count)
+			                                  </dd>
+			                              </dl>
+			                          </li>
+		                  		#end
+                          #end
+                          #if(transaction.type == 2)
+                          	<li>
+                              <dl>
+                                  <dt i18n="asset.name">名称</dt>
+                                  <dd>#(transaction.asset)
+                                  </dd>
+                              </dl>
+                          </li>
+                          #end
+                      </ul> 
+                  </div>
+				</div>
+			</div>	
+			#else
+				#@empty()	
+			#end
+        </div>
+    </div>
+	
+	#@foot()
+	
+</body>
+</html>
