@@ -35,5 +35,10 @@ public class NodeController extends Controller {
 		List<Node4Chart> node4ChartList = CacheKit.get("nodeList", "second");
 		renderJson(node4ChartList);
 	}
+	
+	public void google() throws TronException{
+		Nodes nodes = CacheKit.get("nodeList", "index");
+		renderJson(nodes.getNodes());
+	}
 }
  
