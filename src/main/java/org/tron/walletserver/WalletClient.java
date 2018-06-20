@@ -19,7 +19,6 @@ import org.tron.api.GrpcAPI.AccountNetMessage;
 import org.tron.api.GrpcAPI.AssetIssueList;
 import org.tron.api.GrpcAPI.BlockList;
 import org.tron.api.GrpcAPI.NodeList;
-import org.tron.api.GrpcAPI.TransactionList;
 import org.tron.api.GrpcAPI.WitnessList;
 import org.tron.common.crypto.ECKey;
 import org.tron.common.crypto.Hash;
@@ -344,6 +343,16 @@ public class WalletClient {
     }
     transaction = signTransaction(transaction);
     return rpcCli.broadcastTransaction(transaction);
+  }
+  
+  public static Contract.AssetIssueContract createAssetIssueContract(String fromAddress,String name, long supply, int amount, int trxNum, String url,String desc, long startTime, long endTime) {
+    Contract.AssetIssueContract.Builder builder = Contract.AssetIssueContract.newBuilder();
+    byte[] owner = WalletClient.decodeFromBase58Check(fromAddress);
+    ByteString basAddreess = ByteString.copyFrom(owner);
+    builder.setOwnerAddress(basAddreess).setName(ByteString.copyFrom(ByteArray.fromString(name))).setTotalSupply(supply).setNum(amount).setTrxNum(trxNum).setUrl(ByteString.copyFrom(ByteArray.fromString(url)))
+    .setDescription(ByteString.copyFrom(ByteArray.fromString(desc))).setStartTime(startTime).setEndTime(endTime);
+
+    return builder.build();
   }
 
   public boolean createWitness(byte[] url) {

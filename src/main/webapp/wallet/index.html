@@ -111,8 +111,28 @@
 			<script type="text/ng-template" id="mywallet.html">
     			<div class="section">
 					<div class="row">
+						<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="account.balance">余额</strong></div>
+							<div class="panel-body"><label>{{balance}}</label></div>
+						</div>
+						</div>
+						<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="account.bandwidth">带宽</strong></div>
+							<div class="panel-body"><label>{{bandwidth}}</label></div>
+						</div>
+						</div>
+						<div class="col-md-2">
+						<div class="panel panel-default hidden-sm hidden-xs">
+							<div class="panel-heading"><strong i18n="account.power">能量</strong></div>
+							<div class="panel-body"><label>{{power}}</label></div>
+						</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-12">
-							<header>资产列表<span class="title_label" ng-click="getFreeTRX()" id="getFreeTRX">获取测试TRX</span></header>
+							<header>资产列表</header>
 							<div class="form-body">
 								<div class="row">
 									<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
@@ -347,14 +367,35 @@
 
 		   <script type="text/ng-template" id="asset.html">
 		   <link href="http://apps.bdimg.com/libs/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+		   <link href="../css/walletInner.css" rel="stylesheet">
 			<div class="section">
 				<div class="row">
 					<div class="col-sm-12">
-						<header>资产列表</header>
+						<header>资产列表<span class="title_label" ng-click="createAsset()" id="createAsset">资产发行</span></header>
 						<div class="form-body">
 							<div class="row">
 								<div class="col-sm-12" class="form-group" ng-class="{'has-error': errors.recipient}">
-									<table class="table table-hover">
+									
+									<div class="freezenContainer" ng-show="assetIssueVisible">
+										<div class="alert alert-warning"><span>注意：发行资产需要消耗1024个TRX。</span></div>
+										<div>
+											<div class="asset_label"><span class="asset_miaoshu">名称:</span> <input name="issue_name" id="issue_name" type="text"  class="asset_btn" required></div>
+											<div class="asset_label"><span class="asset_miaoshu">总量: </span> <input name="issue_total" id="issue_total" type="number" value="100000" class="asset_btn" required ></div>
+											<div class="asset_label"><span class="asset_miaoshu">单价:</span>
+												<input type="number" id="issue_price" name="issue_price" step="0.00001" value="1" class="asset_btn">&nbsp;TRX
+											</div>
+											<div class="asset_label"><span class="asset_miaoshu">地址:</span> <input name="issue_url" id="issue_url" type="text"  class="asset_btn"></div>
+											<div class="asset_label"><span class="asset_miaoshu">描述:</span> <textarea name="issue_desc" id="issue_desc" type="text"  class="asset_btn"></textarea></div>
+											
+											<div class="asset_label"><span class="asset_miaoshu">开始时间:</span> <input id="startTime" type="text"  class="asset_btn"></div>
+											<div class="asset_label"><span class="asset_miaoshu">截止时间:</span> <input id="endTime" type="text"  class="asset_btn"></div>	
+											
+											<button ng-click="issueOk()" class="assetbtn col-md"><span id="issue_ok">确定</span></button>
+											<button ng-click="issueCancel()" class="assetbtn col-md"><span>取消</span></button>
+										</div>
+
+									</div>
+									<table class="table table-hover" ng-show="!assetIssueVisible">
 										<tr id="append2">
 										<th class="text-center">名称</th>
 										<th class="text-center" >发起人</th>
@@ -392,9 +433,9 @@
 				<h3 class="modal-title">资产购买</h3>
 			</div>
 			<div class="modal-body">
-				<div class="asset_label">名称: <b>{{ name }}</b></div>
-				<div class="asset_label">单价: <b>{{ price }} TRX</b></div>
-				<div class="asset_label">数量: <input type="number" value="0" class="asset_btn"  ng-model="assetBuyNum"></div>
+				<div class="asset_label"><span class="asset_miaoshu">名称:</span> <b>{{ name }}</b></div>
+				<div class="asset_label"><span class="asset_miaoshu">单价:</span> <b>{{ price }} TRX</b></div>
+				<div class="asset_label"><span class="asset_miaoshu">数量:</span> <input type="number" value="0" class="asset_btn"  ng-model="assetBuyNum"></div>
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
@@ -414,9 +455,13 @@
   <script src="../js/qrcode.js"></script>
   <script src="../js/qrcode_UTF8.js"></script>
   <script src="../js/angular-qrcode.min.js"></script>
+  <script src="../laydate/laydate.js"></script>
   <script>
    var mainApp = angular.module("walletApp", ['ngRoute','monospaced.qrcode','ui.bootstrap']);
    mainApp.constant("address","#(account.address)");
+   mainApp.constant("balance","#(account.balance)");
+   mainApp.constant("bandwidth","#(account.bandWidthRemain)");
+   mainApp.constant("power","#(account.frozenAmount)");
    mainApp.constant("qrData","http://tron123.top/wallet#/send?toAddress=");
    mainApp.constant("assetMap",#(assertJson));
    mainApp.config(['$routeProvider',
@@ -447,9 +492,12 @@
         });
      }]);
 
-	mainApp.controller('myCtrl', function($scope,$http,address,assetMap,qrData,$location) {
+	mainApp.controller('myCtrl', function($scope,$http,address,assetMap,qrData,$location,balance,bandwidth,power) {
 		$scope.qrData = qrData;
 		$scope.address = address;
+		$scope.balance = balance;
+		$scope.bandwidth = bandwidth;
+		$scope.power = power;
 		$scope.assetMap = assetMap;
 		$scope.selectedAsset = $location.search().asset;
 		$scope.recipient = $location.search().toAddress;
@@ -506,6 +554,10 @@
 					 document.getElementById("send_ok").innerHTML = "确定";
 					 $scope.isDisabled = false;
 				 }
+             }, function errorCallback(res){
+            	 sweetAlert("Oops...", "出错了~", "error");
+				 document.getElementById("send_ok").innerHTML = "确定";
+				 $scope.isDisabled = false;
              })
 			 
 		};
@@ -539,7 +591,11 @@
 					 $scope.canGetFreeTRX = true;
 					 document.getElementById("getFreeTRX").innerHTML = "获取测试TRX";
 				 }
-			});
+			}, function errorCallback(res){
+				sweetAlert("Oops...", "出错了~", "error");
+				 $scope.canGetFreeTRX = true;
+				 document.getElementById("getFreeTRX").innerHTML = "获取测试TRX";
+            });
 		};
 		$scope.refresh = function(){
 			location.href = "/wallet";
@@ -554,9 +610,11 @@
 						 swal("Success!", "","success");
 						 setTimeout(function(){location.href="/wallet";}, 1000);  
 					 }else{
-						 sweetAlert("Oops...", "出错了~", "error");
+						 sweetAlert("Oops...", "还未到解冻时间~", "error");
 					 }
-				});
+				}, function errorCallback(res){
+					sweetAlert("Oops...", "出错了~", "error");
+	             });
 			}
 		};
 		$scope.cancel = function(){
@@ -576,7 +634,10 @@
 					 sweetAlert("Oops...", "出错了~", "error");
 					 document.getElementById("freeze_ok").innerHTML = "确定";
 				 }
-         })
+         }, function errorCallback(res){
+        	 sweetAlert("Oops...", "出错了~", "error");
+			 document.getElementById("freeze_ok").innerHTML = "确定";
+           })
 			
 		};
 		
@@ -647,11 +708,14 @@
 				 sweetAlert("Oops...", "出错了~", "error");
 				 document.getElementById("vote_ok").innerHTML = "投票";
 			 }
-         })
+         }, function errorCallback(res){
+        	 sweetAlert("Oops...", "出错了~", "error");
+			 document.getElementById("vote_ok").innerHTML = "投票";
+           })
         	
 		}
 	});
-
+	
 	mainApp.controller('assetCtrl', function($scope,$http,$location,$uibModal) {
 		$http.get("/asset/list").then(function successFunction(res){
 			$scope.assets = res.data.assets;
@@ -684,10 +748,106 @@
 			  }
 		  });
 
-
 		};
+		$scope.assetIssueVisible = false;
+		$scope.createAsset = function () {
+			$scope.assetIssueVisible = !$scope.assetIssueVisible;		
+		};
+		$scope.issueCancel = function () {
+			$scope.assetIssueVisible = false;
+		};
+		$scope.issueOk = function () {
+			 var issue_name = document.getElementById("issue_name");
+			 issue_name.value = issue_name.value.trim();
+			 if(issue_name.value.length <= 0){
+				 issue_name.focus();
+				 return;
+			 }
+			 var issue_total = document.getElementById("issue_total");
+			 issue_total.value = parseInt(issue_total.value.trim());
+			 if(isNaN(issue_total.value) || issue_total.value <= 0){
+				 issue_total.focus();
+				 return;
+			 }
+			 var issue_price = document.getElementById("issue_price");
+			 issue_price.value = parseFloat(issue_price.value.trim());
+			 if(isNaN(issue_price.value) || issue_price.value <= 0){
+				 issue_price.focus();
+				 return;
+			 }
+			 var issue_url = document.getElementById("issue_url");
+			 issue_url.value = issue_url.value.trim();
+			 if(issue_url.value.length <= 0){
+				 issue_url.focus();
+				 return;
+			 }
+			 var issue_desc = document.getElementById("issue_desc");
+			 issue_desc.value = issue_desc.value.trim();
+			 if(issue_desc.value.length <= 0){
+				 issue_desc.focus();
+				 return;
+			 }
+			 var startTime = document.getElementById("startTime");
+			 var endTime = document.getElementById("endTime");
+			 if(startTime.value > endTime.value){
+				 startTime.focus();
+				 return;
+			 }
+			 document.getElementById("issue_ok").innerHTML = "发行中...";
+			 $http.post("/wallet/assetIssue",{ 
+				        "name":issue_name.value,
+				        "supply":issue_total.value,
+				        "price":issue_price.value,
+				        "url":issue_url.value,
+				        "desc":issue_desc.value,
+				        "startTime":startTime.value,
+				        "endTime":endTime.value
+				},{
+					    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					    transformRequest: function (obj) {
+					    	  var str = [];    
+					    	  for (var s in obj) {    
+					    	    str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));    
+					    	  }    
+					    	  return str.join("&");    
+					    	}
+					}).then(function successFunction(res){
+				 if(res.data && res.data.code && res.data.code == 1){
+					 swal("Success!", "","success");
+					 setTimeout(function(){location.href="/wallet";}, 1000);
+				 }else{
+					 sweetAlert("Oops...", "出错了~", "error");
+					 document.getElementById("issue_ok").innerHTML = "确定";
+				 }
+	         }, function errorCallback(res){
+	        	 sweetAlert("Oops...", "出错了~", "error");
+				 document.getElementById("issue_ok").innerHTML = "确定";
+	           })
+			 
+			 
+		};
+		
+		(function(){
+			var now = new Date();
+			laydate.render({
+			  elem: '#startTime',
+			  type: 'datetime',
+			  value: now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate() + " 00:00:00",
+			  min:0
+			});
+			laydate.render({
+			  elem: '#endTime',
+			  type: 'datetime',
+			  value: now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate() + " 23:59:59",
+			  min:0
+			});
+		})();
 	});
-
+	
+	function trim(x) {
+	    return x.replace(/^\s+|\s+$/gm,'');
+	}
+	
 	var ModalInstanceCtrl = function($scope, $uibModalInstance,name,decodename,price,assetaddress,$http) {
 		        $scope.name = name;
 		        $scope.decodename = decodename;
@@ -710,7 +870,9 @@
         			 }else{
         				 sweetAlert("Oops...", "出错了~", "error");
         			 }
-        			});
+        			}, function errorCallback(res){
+        					sweetAlert("Oops...", "出错了~", "error");
+        	           });
                 };  
                 $scope.cancel = function() {  
                     $uibModalInstance.dismiss();  

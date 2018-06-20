@@ -77,11 +77,7 @@ public class GrpcClient {
   public Account queryAccount(byte[] address) {
     ByteString addressBS = ByteString.copyFrom(address);
     Account request = Account.newBuilder().setAddress(addressBS).build();
-    if (blockingStubSolidity != null) {
-      return blockingStubSolidity.getAccount(request);
-    } else {
-      return blockingStubFull.getAccount(request);
-    }
+    return blockingStubFull.getAccount(request);
   }
 
   public Transaction createTransaction(Contract.AccountUpdateContract contract) {

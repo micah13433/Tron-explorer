@@ -8,6 +8,7 @@ import org.tron.common.crypto.ECKey;
 import org.tron.common.utils.ByteArray;
 import org.tron.common.utils.TransactionUtils;
 import org.tron.protos.Contract;
+import org.tron.protos.Contract.AssetIssueContract;
 import org.tron.protos.Contract.FreezeBalanceContract;
 import org.tron.protos.Contract.TransferContract;
 import org.tron.protos.Contract.UnfreezeBalanceContract;
@@ -42,6 +43,12 @@ public class WalletService extends BaseService{
 			transaction = WalletClient.createTransferAssetTransaction(toAddr,
 					ByteArray.fromString(asset), owner,amount);
 		}	
+		return signTransaction(transaction,password);
+	}
+	
+	public static boolean assetIssue(String fromAddress, String password, String name, long supply, int amount,int trxNum, String url,String desc, long startTime, long endTime) throws TronException {
+		AssetIssueContract contract = WalletClient.createAssetIssueContract(fromAddress, name,supply,amount,trxNum,url,desc,startTime,endTime);
+		Transaction transaction =  WalletClient.createAssetIssueTransaction(contract);
 		return signTransaction(transaction,password);
 	}
 

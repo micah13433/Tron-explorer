@@ -1,6 +1,9 @@
 package com.tron.explorer.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -60,7 +63,7 @@ public class WalletController extends Controller {
 		setAttr("voteList", account.getVotes());
 		setAttr("frozenList", account.getFrozens());
 		Map<String, Object> assetMap = new HashMap<String, Object>();
-		assetMap.put("TRX", account.getBalance());
+		//assetMap.put("TRX", account.getBalance());
 		JSONArray assetArray = new JSONArray();
 		JSONObject obj = new JSONObject();
 		 obj.put("name", "TRX 【" + account.getBalance() + "】");
@@ -241,6 +244,32 @@ public class WalletController extends Controller {
 		String fromAddress = (String) this.getSession().getAttribute("address");
 		String password = (String) this.getSession().getAttribute("password");
 		boolean result = WalletService.unfreeze(fromAddress,password);
+		if(result){
+			obj.put("code", 1);
+		}
+		renderJson(obj);		
+	}
+	
+	@Before(AuthInterceptor.class)
+	public void assetIssue() throws TronException, ParseException {
+		JSONObject obj = new JSONObject();
+		obj.put("code", 0);		
+		String fromAddress = (String) this.getSession().getAttribute("address");
+		String password = (String) this.getSession().getAttribute("password");
+		String assetname = getPara("name");
+		long supply = getParaToLong("supply");
+		String price = getPara("price");
+		String url = getPara("url");
+		String desc = getPara("desc");
+		String startTime = getPara("startTime");
+		String endTime = getPara("endTime");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		Date startDate = sdf.parse(startTime);   
+		Date endDate = sdf.parse(endTime); 
+		int assetNum = 1;
+		int trxNum = (int) (Float.parseFloat(price) * Constrain.ONE_TRX);
+		boolean result = WalletService.assetIssue(fromAddress,password,assetname,supply,assetNum,trxNum,url,desc,startDate.getTime(),endDate.getTime());
 		if(result){
 			obj.put("code", 1);
 		}

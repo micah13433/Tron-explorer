@@ -6,7 +6,9 @@ function initMap() {
 		url: '/node/google',
 		success:function(data){
 			var locations = [];
-			if(data.length > 0) {	        
+			if(data.length > 0) {
+				var map = document.getElementById('map');
+				map.setAttribute('style','height:400px;width: 100%');
 	        	for (i=0; i < data.length; i += 1) {
 	        		locations.push({
 	        			lat:parseFloat(data[i].latitude),

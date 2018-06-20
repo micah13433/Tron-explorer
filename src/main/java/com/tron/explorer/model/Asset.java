@@ -149,7 +149,7 @@ public class Asset {
 	}
 
 	public String getPrice() {
-		return price + " TRX";
+		return String.valueOf(price);
 	}
 
 	public void setPrice(float price) {
