@@ -49,8 +49,8 @@ public class HttpClient {
 
 	private static int connMaxTotal = 100;
 	private static int maxPerRoute = 20;
-	private static int conTimeOutMs = 8000;
-	private static int soTimeOutMs = 8000;
+	private static int conTimeOutMs = 6000;
+	private static int soTimeOutMs = 6000;
 	private static PoolingHttpClientConnectionManager cm;
 	private static HttpRequestRetryHandler httpRequestRetryHandler;
 	private final static Object syncLock = new Object();

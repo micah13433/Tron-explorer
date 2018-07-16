@@ -18,17 +18,20 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.ehcache.CacheKit;
 import com.tron.explorer.Constrain;
 import com.tron.explorer.encrypt.Base58;
 import com.tron.explorer.interceptor.AuthInterceptor;
 import com.tron.explorer.model.Account;
+import com.tron.explorer.model.Asset;
+import com.tron.explorer.model.Assets;
 import com.tron.explorer.model.BaseQuery;
 import com.tron.explorer.model.Delegates;
 import com.tron.explorer.model.Transaction;
 import com.tron.explorer.model.Transactions;
 import com.tron.explorer.model.TronException;
 import com.tron.explorer.service.AccountService;
+import com.tron.explorer.service.AssetService;
+import com.tron.explorer.service.DelegateService;
 import com.tron.explorer.service.MarketService;
 import com.tron.explorer.service.NewsService;
 import com.tron.explorer.service.WalletService;
@@ -102,11 +105,15 @@ public class WalletController extends Controller {
 		String password = getPara("password");
 		String address = getPara("address");
 		String from = getPara("from");
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
 		JSONObject obj = new JSONObject();
 		if(StringUtils.isBlank(password) || password.length() < 40){
 			obj.put("status", 0);
 		}
-		Account account = WalletService.getAccountByPassword(password);
+		Account account = WalletService.getAccountByPassword(password,isMainnet);
 		if(account == null){
 			obj.put("status", 0);
 		}else{
@@ -156,7 +163,11 @@ public class WalletController extends Controller {
 			renderJson(obj);
 			return;
 		}
-		boolean result = WalletService.send(asset,fromAddress, toAddress, amountToLong,password);
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
+		boolean result = WalletService.send(asset,fromAddress, toAddress, amountToLong,password,isMainnet);
 		if(result){
 			obj.put("code", 1);
 		}
@@ -191,7 +202,11 @@ public class WalletController extends Controller {
 		}
 		String fromAddress = (String) this.getSession().getAttribute("address");
 		String password = (String) this.getSession().getAttribute("password");
-		boolean result = WalletService.vote(fromAddress,password,witness);
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
+		boolean result = WalletService.vote(fromAddress,password,witness,isMainnet);
 		if(result){
 			obj.put("code", 1);
 		}
@@ -212,7 +227,11 @@ public class WalletController extends Controller {
 		}
 		String fromAddress = (String) this.getSession().getAttribute("address");
 		String password = (String) this.getSession().getAttribute("password");
-		boolean result = WalletService.assetBuy(assetname,fromAddress,toaddress,amount,password);
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
+		boolean result = WalletService.assetBuy(assetname,fromAddress,toaddress,amount,password,isMainnet);
 		if(result){
 			obj.put("code", 1);
 		}
@@ -230,7 +249,11 @@ public class WalletController extends Controller {
 		String password = (String) this.getSession().getAttribute("password");
 		long frozenDuration = 3L;
 		long frozen_balance = (long) ((Double.valueOf(frozenBalance) * Constrain.ONE_TRX));
-		boolean result = WalletService.freeze(fromAddress,frozen_balance,frozenDuration,password);
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
+		boolean result = WalletService.freeze(fromAddress,frozen_balance,frozenDuration,password,isMainnet);
 		if(result){
 			obj.put("code", 1);
 		}
@@ -243,7 +266,11 @@ public class WalletController extends Controller {
 		obj.put("code", 0);		
 		String fromAddress = (String) this.getSession().getAttribute("address");
 		String password = (String) this.getSession().getAttribute("password");
-		boolean result = WalletService.unfreeze(fromAddress,password);
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
+		boolean result = WalletService.unfreeze(fromAddress,password,isMainnet);
 		if(result){
 			obj.put("code", 1);
 		}
@@ -269,7 +296,11 @@ public class WalletController extends Controller {
 		Date endDate = sdf.parse(endTime); 
 		int assetNum = 1;
 		int trxNum = (int) (Float.parseFloat(price) * Constrain.ONE_TRX);
-		boolean result = WalletService.assetIssue(fromAddress,password,assetname,supply,assetNum,trxNum,url,desc,startDate.getTime(),endDate.getTime());
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
+		boolean result = WalletService.assetIssue(fromAddress,password,assetname,supply,assetNum,trxNum,url,desc,startDate.getTime(),endDate.getTime(),isMainnet);
 		if(result){
 			obj.put("code", 1);
 		}
@@ -284,7 +315,11 @@ public class WalletController extends Controller {
 		}else{
 			obj.put("code", 1);
 			String fromAddress = (String) this.getSession().getAttribute("address");
-			Account account = WalletService.getAccountByPassword(password);
+			boolean isMainnet = true;
+			if(!StringUtils.isBlank(getPara("isMainnet"))){
+				isMainnet = getParaToBoolean("isMainnet");
+			}
+			Account account = WalletService.getAccountByPassword(password,isMainnet);
 			obj.put("TRX", account.getBalance());
 			Iterator<Entry<String, Long>> entries = account.getAssets().entrySet().iterator();  				  
 			while (entries.hasNext()) {  				  
@@ -293,6 +328,7 @@ public class WalletController extends Controller {
 			}  
 			obj.put("price", WalletService.getCurrPrice());
 			obj.put("address", fromAddress);
+			obj.put("frozenAmount", account.getFrozenAmount());
 		}
 		
 		renderJson(obj);		
@@ -307,12 +343,20 @@ public class WalletController extends Controller {
 			obj.put("code", 1);
 			Long currPageIndex = PageUtil.getPage(getPara("page"));	
 			BaseQuery baseQuery = new BaseQuery();
+			String assetname = getPara("assetname");
 			int pageSize = 10;
+			if(!"TRX".equals(assetname)){
+				pageSize = 100;
+			}
 			baseQuery.setLimit(pageSize);
 			baseQuery.setOffset((currPageIndex-1)*pageSize);
 			baseQuery.setSort("-timestamp");
 			String address = (String) this.getSession().getAttribute("address");
-			Transactions transactions = AccountService.queryTransactionList(address,baseQuery);			
+			boolean isMainnet = true;
+			if(!StringUtils.isBlank(getPara("isMainnet"))){
+				isMainnet = getParaToBoolean("isMainnet");
+			}
+			Transactions transactions = AccountService.queryTransactionList(address,baseQuery,assetname,isMainnet);			
 			obj.put("list", JSON.toJSONString(transactions.getOrders()));
 			obj.put("address", address);
 		}
@@ -322,7 +366,8 @@ public class WalletController extends Controller {
 	
 	public void getNews() throws TronException{
 		JSONObject obj = new JSONObject();
-		obj.put("list", JSON.toJSONString(NewsService.queryNews()));
+		String lastId = getPara("id");
+		obj.put("list", JSON.toJSONString(NewsService.queryNews(lastId)));
 		renderJson(obj);		
 	}
 	
@@ -334,7 +379,11 @@ public class WalletController extends Controller {
 	
 	public void getWitness() throws TronException{
 		JSONObject obj = new JSONObject();
-		Delegates delegates = CacheKit.get("delegateList", "index");
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
+		Delegates delegates = DelegateService.queryDelegates(isMainnet);
 		if(delegates == null){
 			delegates = new Delegates();
 		}
@@ -342,11 +391,41 @@ public class WalletController extends Controller {
 		renderJson(obj);		
 	}
 	
+	public void getAssets() throws TronException{
+		JSONObject obj = new JSONObject();
+		boolean isMainnet = true;
+		if(!StringUtils.isBlank(getPara("isMainnet"))){
+			isMainnet = getParaToBoolean("isMainnet");
+		}
+		//测试网asset数据异常，先用api接口测试
+		Assets assets = null;
+		if(!isMainnet){
+			String address = (String) this.getSession().getAttribute("address");
+			assets = AssetService.queryTestAsserts(address);
+		}else{
+			assets = AssetService.queryAsserts(isMainnet);
+		}
+		if(assets == null){
+			assets = new Assets();
+		}
+		obj.put("list", JSON.toJSONString(assets.getAssets()));
+		renderJson(obj);		
+	}
+	
+	public void getAssetDetail() throws TronException {
+		JSONObject obj = new JSONObject();
+		String name = getPara("name");
+		Asset asset = AssetService.getTestAssetByName(name);
+		obj.put("asset", asset);		
+		renderJson(obj);
+	}
+	
 	public void checkUpdate() throws TronException{
 		String localVersion = getPara("version");
 		String latestVersion = Constrain.LASTEST_VERSION;
 		JSONObject obj = new JSONObject();
 		obj.put("code", 0);
+		obj.put("version",latestVersion);
 		if(!Utils.isNewVersion(localVersion, latestVersion)){
 			obj.put("code", 1);
 		}

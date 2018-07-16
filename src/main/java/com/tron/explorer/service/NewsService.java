@@ -3,6 +3,8 @@ package com.tron.explorer.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -12,11 +14,14 @@ import com.tron.explorer.model.TronException;
 
 public class NewsService extends BaseService {
 	
-	public static List<News> queryNews() throws TronException{
+	public static List<News> queryNews(String lastId) throws TronException{
 		client = new HttpClient();
 		List<News> result = new ArrayList<News>();
-		String html = client.get(
-				"https://api.jinse.com/v4/live/list?limit=20&reading=false&flag=down");
+		String url = "https://api.jinse.com/v4/live/list?limit=20&reading=false&flag=down";
+		if(StringUtils.isNotBlank(lastId)){
+			url = "https://api.jinse.com/v4/live/list?limit=20&reading=false&flag=down&id=" + lastId;
+		}
+		String html = client.get(url);
 		JSONObject root = JSON.parseObject(html);
 		JSONArray list = root.getJSONArray("list");
 		JSONObject innerObj = null;
@@ -35,6 +40,7 @@ public class NewsService extends BaseService {
 				String content = tinyObj.getString("content");
 				String title = content.substring(content.indexOf("【")+1,content.indexOf("】"));
 				content = content.substring(content.indexOf("】")+1);
+				news.setId(Long.valueOf(tinyObj.getString("id")));
 				news.setContent(content);
 				news.setTitle(title);
 				news.setTime(datePre + "  " + getTime(tinyObj.getLong("created_at")));

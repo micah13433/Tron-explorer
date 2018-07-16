@@ -19,7 +19,7 @@ private Logger log = LogManager.getLogger(FetchDelegateJob.class);
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		Delegates delegates;
 		try {
-			delegates = DelegateService.queryDelegates();
+			delegates = DelegateService.queryDelegates(true);
 			if(delegates == null || delegates.getTotalCount() <= 0){
 				return;
 			}

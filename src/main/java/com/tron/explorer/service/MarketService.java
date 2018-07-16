@@ -45,7 +45,6 @@ public class MarketService extends BaseService {
 	}
 
 	public static String queryChartData() throws TronException {
-		client = new HttpClient(12000,12000);
 		String html = client.get(
 				"https://block.cc/api/v1/marketKline/tron");		
 		return html;

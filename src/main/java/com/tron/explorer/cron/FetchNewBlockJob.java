@@ -47,6 +47,7 @@ public class FetchNewBlockJob implements Job{
 			}
 		     
 		} catch (TronException ex) {
+			ex.printStackTrace();
 			log.error("区块初始化=> [失败]:" + ex.getLocalizedMessage());
 			CacheKit.put("persistedList", "maxBlockHeight", currBlockHeightInCache + 1);
 		}

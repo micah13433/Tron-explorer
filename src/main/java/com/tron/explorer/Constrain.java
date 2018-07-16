@@ -33,5 +33,5 @@ public class Constrain {
 	public final static int BASE58CHECK_ADDRESS_SIZE = 34;
 	public final static int TRANSACTION_HASH_SIZE = 64;
 	
-	public final static String LASTEST_VERSION = "1.0.0";
+	public final static String LASTEST_VERSION = "0.0.3";
 }

@@ -386,7 +386,7 @@ public class Client {
 
   public Optional<WitnessList> listWitnesses() {
     try {
-      return WalletClient.listWitnesses();
+      return WalletClient.listWitnesses(true);
     } catch (Exception ex) {
       ex.printStackTrace();
       return Optional.empty();

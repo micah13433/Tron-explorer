@@ -36,11 +36,11 @@ public class Transactions  {
 		this.count = count;
 	}
 	
-	public Transactions(String res) throws TronException{
-		init(res);	
+	public Transactions(String res, String assetname) throws TronException{
+		init(res,assetname);	
 	}
 	
-	private void init(String inputString) throws TronException {
+	private void init(String inputString, String assetname) throws TronException {
 		transactions = new ArrayList<Transaction>();
 		if(StringUtils.isEmpty(inputString)){
 			return;
@@ -61,12 +61,25 @@ public class Transactions  {
 			transaction.setTime(FormatUtil.formatTimeInMillis(job.getLongValue("timestamp")));			
 			transaction.setSender(job.getString("transferFromAddress"));
 			transaction.setRecipient(job.getString("transferToAddress"));
-			if("TRX".equals(job.getString("tokenName"))){
-				transaction.setType(Constrain.TRANSFERCONTRACT);
-				transaction.setAmount(Utils.getStrictAmount(job.getLongValue("amount")));
+			if(assetname == null){
+				if("TRX".equals(job.getString("tokenName"))){
+					transaction.setType(Constrain.TRANSFERCONTRACT);
+					transaction.setAmount(Utils.getStrictAmount(job.getLongValue("amount")));
+				}else{
+					transaction.setType(Constrain.TRANSFERASSETCONTRACT);
+					transaction.setAmount(String.valueOf(job.getLongValue("amount")));
+				}
 			}else{
-				transaction.setType(Constrain.TRANSFERASSETCONTRACT);
-				transaction.setAmount(String.valueOf(job.getLongValue("amount")));
+				if(!assetname.equals(job.getString("tokenName"))){
+					continue;
+				}
+				if("TRX".equals(job.getString("tokenName"))){
+					transaction.setType(Constrain.TRANSFERCONTRACT);
+					transaction.setAmount(Utils.getStrictAmount(job.getLongValue("amount")));
+				}else{
+					transaction.setType(Constrain.TRANSFERASSETCONTRACT);
+					transaction.setAmount(String.valueOf(job.getLongValue("amount")));
+				}
 			}
 			transactions.add(transaction);
 		}

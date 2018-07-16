@@ -3,9 +3,13 @@ package com.tron.explorer.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.tron.api.GrpcAPI.AssetIssueList;
 import org.tron.protos.Contract.AssetIssueContract;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.tron.explorer.Constrain;
 import com.tron.explorer.encrypt.Base58;
 import com.tron.explorer.util.DecodeUtil;
@@ -65,6 +69,28 @@ public class Assets  {
 			assets.add(asset);
 		}		
 
+	}
+	public Assets(String res, String address) throws TronException {
+		assets = new ArrayList<Asset>();
+		if(StringUtils.isBlank(res)){
+			return;
+		}
+		JSONObject assetList = JSON.parseObject(res);
+		JSONArray array = assetList.getJSONArray("data");
+		Asset asset = null;
+		JSONObject innerObj = null;
+		for(int i=0; i< array.size();i++){
+			asset = new Asset();
+			innerObj = array.getJSONObject(i);
+			asset.setName(XssUtil.xssEncode(innerObj.getString("name")));
+			if(innerObj.getLongValue("remaining") <= 0 || (address != null && address.equals(innerObj.getString("ownerAddress")))){
+				asset.setFinised(true);
+			}
+			asset.setDescription(XssUtil.xssEncode(innerObj.getString("description")));
+			asset.setStartTime(FormatUtil.formatTimeInMillis(innerObj.getLongValue("startTime")));
+			asset.setEndTime(FormatUtil.formatTimeInMillis(innerObj.getLongValue("endTime")));
+			assets.add(asset);
+		}
 	}
 	
 }

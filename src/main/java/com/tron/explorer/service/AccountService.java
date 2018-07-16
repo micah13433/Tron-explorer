@@ -20,12 +20,16 @@ public class AccountService extends BaseService {
 					new PostParameter("sort", query.getSort())}));
 	}
 	
-	public static Account getAccountByAddress(String  address) throws TronException{
+	public static Account getAccountByAddress(String address) throws TronException{
+		return  getAccountByAddress(address,true);
+	}
+	
+	public static Account getAccountByAddress(String  address, boolean isMainnet) throws TronException{
 		byte[] baAddress = WalletClient.decodeFromBase58Check(address);
 	    if (baAddress == null) {
 	       return null;
 	    }
-	    org.tron.protos.Protocol.Account account = WalletClient.queryAccount(baAddress);
+	    org.tron.protos.Protocol.Account account = WalletClient.queryAccount(baAddress,isMainnet);
 		return new Account(account.toByteArray(),address);
 	}
 	
@@ -35,13 +39,21 @@ public class AccountService extends BaseService {
 	}
 	
 	public static Transactions queryTransactionList(String address,BaseQuery query) throws TronException{
+		return queryTransactionList(address,query,null,true);
+	}
+	
+	public static Transactions queryTransactionList(String address,BaseQuery query, String assetname, boolean isMainnet) throws TronException{
+		String baseUrl = PropUtil.getValue("baseNewURL");
+		if(!isMainnet){
+			baseUrl = PropUtil.getValue("baseNewTestURL");
+		}
 		return new Transactions(client.get(
-				PropUtil.getValue("baseNewURL") + "/api/transfer",
+				baseUrl + "/api/transfer",
 				new PostParameter[] { new PostParameter("address", address),
 					new PostParameter("start", query.getOffset()),
 					new PostParameter("count", "-true"),
 					new PostParameter("limit", query.getLimit()),
-					new PostParameter("sort", query.getSort())}));
+					new PostParameter("sort", query.getSort())}),assetname);
 	}
 	
 }

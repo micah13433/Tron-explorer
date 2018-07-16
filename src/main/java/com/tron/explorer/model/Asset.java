@@ -74,6 +74,7 @@ public class Asset {
 	private long holder;
 	private List<Transaction> trans;
 	private List<Top> tops;
+	private boolean finised = false;
 	
 	
 	public String getName() {
@@ -211,6 +212,14 @@ public class Asset {
 
 	public void setTops(List<Top> tops) {
 		this.tops = tops;
+	}
+
+	public boolean getFinised() {
+		return finised;
+	}
+
+	public void setFinised(boolean isFinised) {
+		this.finised = isFinised;
 	}
 
 	private void init(String inputString) throws TronException {
